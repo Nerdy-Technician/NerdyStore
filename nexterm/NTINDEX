@@ -1,10 +1,63 @@
 # Scripts
-scripts/000easteregg.sh@729547dd65ff0eaa389d8af888aadfcd
-scripts/10_largest_files.sh@416971fdb24f74464841958621d4940c
 scripts/Check - Docker Service.sh@40c3e75b941897a3f4ede52ab844d30d
 scripts/Collect - SSH Port.sh@6ae4dc18394f01318997ea75fa771268
+scripts/Docker-Cleanup-Interactive.sh@2e7b198c9e060b20fba6471cf9e02156
+scripts/Docker-Compose-Manager.sh@af385f3a57bdb499b6c585ecb5b58e0c
+scripts/Docker-Health-Check.sh@70ce032a2988255fafa6a50f0e51af0c
+scripts/Docker-Image-Updater.sh@f581779fcec01fc068e677e8e7d9f439
+scripts/Network-Connection-Monitor.sh@8b111a5493796dbbe496ca10c646b794
+scripts/Network-Port-Scanner.sh@1941cc766dc56e099e46782530853f5e
+scripts/Network-Speed-Test.sh@e20b777199e22e412105924dbee3ed5b
+scripts/Performance-Disk-IO-Check.sh@2f508a146ae5ed1ab6931f00248de555
+scripts/Performance-Service-Resource-Usage.sh@dd21dd7e0cf9c19e5a0eb584b499b291
+scripts/Performance-Snapshot.sh@e8939ff34cad3507597c823a4288d157
+scripts/Quick-Port-Forward.sh@878c2c75358969e9d8f7962fafe26065
+scripts/Quick-Reboot-Required-Check.sh@59b7dd03152ec7db0951dd5fc30e374f
+scripts/Quick-User-Add-With-Key.sh@89b1b6265d35fc639ef6194f12c5f37d
 scripts/Security - SSH Root Access.sh@20341165feb057dbaf2e48b67f2afcb4
 scripts/Security - UFW Status.sh@88bc06c3078f6c11d3b34cdc20cd37d1
+scripts/Security-Certificate-Expiry.sh@8e38d8e1502930f0f9f62c93ce9dbba0
+scripts/Security-Fail2Ban-Status.sh@3d47ec1faac88013b18893670c87992a
+scripts/Security-Full-Audit.sh@231e5f5492aa684744db6a7e505f9dbe
+scripts/Security-SSH-Hardening-Check.sh@ccdfe1f22fc6ddea64f43020d7880fdc
+scripts/System-Log-Rotation-Check.sh@95300139ddcd1122b0de118ab45789cc
+scripts/System-Weekly-Maintenance.sh@deb46ec93d77883086cbb12a7194738a
+scripts/System-Zombie-Process-Killer.sh@12492b11e14e6297b537d068fa564120
 
 # Snippets
-snippets/APT-Update.snippet@1d808c71bf56d77c1a30cde77a89b713
+snippets/APT-Autoremove.snippet@b7d1aaafc368b8e2483bc5c56c35e685
+snippets/APT-Clean.snippet@3e3d57a6a63a0b4c21932340a5b82cfe
+snippets/APT-Full-Upgrade.snippet@2b0465af959fe97ecbbbadc74748e87f
+snippets/APT-Hold-Package.snippet@07f4c7887afd955d55131a282ae154e6
+snippets/APT-List-Upgradable.snippet@d53ecdcb9e34f66826fe768c0a40a3ae
+snippets/APT-Unhold-Package.snippet@4d290626019cfcf09fed6ed6db01832e
+snippets/APT-Update.snippet@0c8a257421f301fe77017da69c5697a0
+snippets/Auth-Log-Inspect.snippet@192479998b56e88fe2d0a7450989dc90
+snippets/CPU-Top-Table.snippet@efd8dc84b9133c1256c822f12fceabbf
+snippets/Docker-List-Containers.snippet@33867d39f01df9f80c5a1ab50230874a
+snippets/Docker-List-Images.snippet@9be00e4631ecc3d96067a56f63b79323
+snippets/Firewall-UFW-Allow-SSH.snippet@b6b47ff8b37bf46b0a3337d26d005be8
+snippets/Firewall-UFW-Reload.snippet@6f505aea2d826ed5d0c59db58a3a7911
+snippets/Firewall-UFW-Status.snippet@ea027de67ef587b3f0c33dd52a60d511
+snippets/Logs-Auth-Tail.snippet@c6c152c53c45d1271bc334a9e8e8b908
+snippets/Maintenance-Chooser.snippet@4d4f07aff26bcc46bba0667fbb1be7f3
+snippets/Network-DNS-Lookup.snippet@6ad96ed32422b86a10f3d1fb6dd38eed
+snippets/Network-Interfaces.snippet@a1144611b52e6e7d52e08f709b6dc9e6
+snippets/Network-Open-Ports.snippet@445ec9ccab90d870da09a1e53b640e06
+snippets/Network-Ping-Check.snippet@f3cffe195689e76fd3d83a8923cb7e71
+snippets/Network-Public-IP.snippet@3cc27e0b540b74386743860b6b4bdf51
+snippets/Network-Quick-Diag.snippet@a78d8d0d47660aff2c09df15b4b56ac1
+snippets/Network-Tracepath.snippet@66ada00fd40d7feb23f906af1ecc9f4e
+snippets/Package-Hold-Interactive.snippet@667e8fb6bf8d7cb497b1f0a76c9ecd34
+snippets/System-Disk-Usage.snippet@53e2acc41fc0b31c871c92f16155a3bd
+snippets/System-Failed-Services.snippet@78dc5f8fc12ec15ae3c13328dcac3e28
+snippets/System-Inodes.snippet@4e1f6bccaa0277c5a307c2223807d8d5
+snippets/System-Journal-Errors.snippet@8eb504ba37cbb5a3e57efaa8b64909cc
+snippets/System-Kernel-Logs.snippet@a73f96e839070d1d32f83bdc2dd530a0
+snippets/System-Load.snippet@07411cadfba77f9766eb16d93262a437
+snippets/System-Memory-Usage.snippet@eb1507371ff7f143322d27d223c5f7f6
+snippets/System-Top-CPU-Processes.snippet@7b548fd8c78167e658fb5d788474c91c
+snippets/System-Top-Memory-Processes.snippet@2d9d41ef7d332bd782c1966e6d7988eb
+snippets/System-Uptime.snippet@d366255cffeaed481feb81ffdd497113
+snippets/Users-Recent-Logins.snippet@cc8ab8d25900913ce57f6c2492d8e3d0
+snippets/Users-Sudo-Sessions.snippet@cf85b42f0b39b9c41b45ae2c867f215b

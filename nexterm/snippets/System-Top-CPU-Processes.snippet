@@ -1,0 +1,3 @@
+@NEXTERM:STEP "Top CPU consumers"
+ps -eo pid,cmd,%cpu,%mem --sort=-%cpu | head -n 15
+@NEXTERM:INFO "Top CPU processes listed above"

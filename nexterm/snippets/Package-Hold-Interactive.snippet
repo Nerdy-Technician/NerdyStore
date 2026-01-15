@@ -1,0 +1,4 @@
+@NEXTERM:INPUT "Enter package to hold" "docker-ce"
+PKG=$NEXTERM_INPUT
+sudo apt-mark hold "$PKG"
+@NEXTERM:SUCCESS "Held $PKG"

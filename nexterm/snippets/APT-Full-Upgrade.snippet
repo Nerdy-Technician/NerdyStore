@@ -1,0 +1,5 @@
+@NEXTERM:STEP "Update package lists"
+sudo apt-get update -y
+@NEXTERM:STEP "Run full upgrade"
+sudo apt-get dist-upgrade -y
+@NEXTERM:SUMMARY "Upgrade Summary" "Action" "Full upgrade" "Status" "Requested"

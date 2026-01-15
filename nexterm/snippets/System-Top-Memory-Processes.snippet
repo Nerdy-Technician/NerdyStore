@@ -1,0 +1,3 @@
+@NEXTERM:STEP "Top memory consumers"
+ps -eo pid,cmd,%mem,%cpu --sort=-%mem | head -n 15
+@NEXTERM:INFO "Top memory processes listed above"

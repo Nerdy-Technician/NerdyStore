@@ -1,0 +1,4 @@
+@NEXTERM:INPUT "Domain to lookup" "example.com"
+DOMAIN=$NEXTERM_INPUT
+nslookup "$DOMAIN"
+@NEXTERM:INFO "DNS lookup completed"

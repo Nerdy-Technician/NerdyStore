@@ -1,0 +1,4 @@
+@NEXTERM:INPUT "Package to hold" "package-name"
+PKG=$NEXTERM_INPUT
+sudo apt-mark hold "$PKG"
+@NEXTERM:SUCCESS "Held $PKG"

@@ -1,0 +1,15 @@
+@NEXTERM:SELECT CHOICE "Select maintenance task" "Clean cache" "Autoremove" "List upgrades" "Full upgrade"
+CHOICE=$NEXTERM_CHOICE
+if [ "$CHOICE" = "Clean cache" ]; then
+  sudo apt-get clean && sudo apt-get autoclean
+  @NEXTERM:SUCCESS "Cache cleaned"
+elif [ "$CHOICE" = "Autoremove" ]; then
+  sudo apt-get autoremove -y
+  @NEXTERM:SUCCESS "Autoremove done"
+elif [ "$CHOICE" = "List upgrades" ]; then
+  apt list --upgradable
+  @NEXTERM:INFO "Upgradable packages listed"
+else
+  sudo apt-get update -y && sudo apt-get dist-upgrade -y
+  @NEXTERM:SUMMARY "Upgrade Summary" "Action" "Full upgrade" "Status" "Requested"
+fi

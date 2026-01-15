@@ -1,0 +1,8 @@
+@NEXTERM:STEP "Detect public IP"
+PUBIP="$(curl -s https://ipinfo.io/ip)"
+@NEXTERM:INFO "Public IP: $PUBIP"
+@NEXTERM:INPUT "Host to ping" "1.1.1.1"
+TARGET=$NEXTERM_INPUT
+ping -c 4 "$TARGET"
+tracepath -n "$TARGET" | head -n 10
+@NEXTERM:SUMMARY "Network Check" "Target" "$TARGET" "Public IP" "$PUBIP"

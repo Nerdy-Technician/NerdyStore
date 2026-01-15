@@ -1,1 +1,5 @@
-sudo apt-get update -y &&  sudo apt-get upgrade -y
+@NEXTERM:STEP "Update package lists"
+sudo apt-get update -y
+@NEXTERM:STEP "Upgrade packages"
+sudo apt-get upgrade -y
+@NEXTERM:SUCCESS "Update and upgrade completed"

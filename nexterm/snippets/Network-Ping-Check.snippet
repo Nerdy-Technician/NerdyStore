@@ -1,0 +1,4 @@
+@NEXTERM:INPUT "Host to ping" "1.1.1.1"
+TARGET=$NEXTERM_INPUT
+ping -c 4 "$TARGET"
+@NEXTERM:INFO "Ping results above"

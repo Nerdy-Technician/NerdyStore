@@ -1,0 +1,4 @@
+@NEXTERM:INPUT "Package to unhold" "package-name"
+PKG=$NEXTERM_INPUT
+sudo apt-mark unhold "$PKG"
+@NEXTERM:SUCCESS "Unheld $PKG"

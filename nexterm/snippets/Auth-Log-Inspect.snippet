@@ -1,0 +1,4 @@
+@NEXTERM:STEP "Tail auth.log"
+LOGTAIL="$(tail -n 40 /var/log/auth.log)"
+@NEXTERM:MSGBOX "Auth Log Tail" "$LOGTAIL"
+@NEXTERM:WARN "Review recent authentication events"

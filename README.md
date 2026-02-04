@@ -1,11 +1,13 @@
-# NerdyStore  
+![NerdyStore Logo](/Icons/Logo.png)
+
+
 Storefront for Nexploy apps and Nexterm scripts/snippets
 
 
 
 ## 🛍️ What is NerdyStore?
 
-**NerdyStore** is the official storefront of the **Nexploy ecosystem**, providing a centralized, user-friendly hub for discovering:
+**NerdyStore** is the official storefront of the **Nexterm RMM and the Nexploy Automation Platform**. It offers a curated selection of: 
 
 - 📦 **Nexploy Apps**  
 - 🧩 **Nexterm Scripts & Snippets**  

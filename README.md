@@ -3,6 +3,7 @@
 
 Storefront for Nexploy apps and Nexterm scripts/snippets
 
+>Will also be part of the NerdyDash tool coming soon!
 
 
 ## 🛍️ What is NerdyStore?

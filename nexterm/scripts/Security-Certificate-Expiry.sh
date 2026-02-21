@@ -2,6 +2,7 @@
 
 # @name:Security Certificate Expiry
 # @description:Check certificate expiry dates
+# @Category:Security
 # @Language:Bash
 # @OS:Linux
 

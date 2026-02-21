@@ -2,6 +2,7 @@
 
 # @name:Docker Image Updater
 # @description:Check for Docker image updates
+# @Category:Docker
 # @Language:Bash
 # @OS:Linux
 

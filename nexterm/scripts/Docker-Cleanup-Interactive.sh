@@ -2,6 +2,7 @@
 
 # @name:Docker Cleanup Interactive
 # @description:Docker cleanup: $CHOICE
+# @Category:Docker
 # @Language:Bash
 # @OS:Linux
 

@@ -3,6 +3,7 @@
 
 # @name:Check Docker Service
 # @description:Runs check docker service.
+# @Category:Check
 # @Language:Bash
 # @OS:Linux
 

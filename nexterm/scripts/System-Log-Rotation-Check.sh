@@ -2,6 +2,7 @@
 
 # @name:System Log Rotation Check
 # @description:Checking log rotation configuration
+# @Category:System
 # @Language:Bash
 # @OS:Linux
 

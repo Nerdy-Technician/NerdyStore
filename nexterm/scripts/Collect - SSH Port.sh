@@ -3,6 +3,7 @@
 
 # @name:Collect SSH Port
 # @description:Runs collect ssh port.
+# @Category:Collect
 # @Language:Bash
 # @OS:Linux
 

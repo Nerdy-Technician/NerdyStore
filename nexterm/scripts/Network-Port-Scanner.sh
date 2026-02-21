@@ -2,6 +2,7 @@
 
 # @name:Network Port Scanner
 # @description:Scanning common ports on $TARGET
+# @Category:Network
 # @Language:Bash
 # @OS:Linux
 

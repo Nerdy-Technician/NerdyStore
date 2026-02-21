@@ -2,6 +2,7 @@
 
 # @name:Quick Port Forward
 # @description:UFW port forwarding setup
+# @Category:Quick
 # @Language:Bash
 # @OS:Linux
 

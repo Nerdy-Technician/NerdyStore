@@ -2,6 +2,7 @@
 
 # @name:Quick Reboot Required Check
 # @description:Checking if reboot is required
+# @Category:Quick
 # @Language:Bash
 # @OS:Linux
 

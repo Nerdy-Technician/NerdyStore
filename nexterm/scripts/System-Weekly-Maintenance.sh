@@ -2,6 +2,7 @@
 
 # @name:System Weekly Maintenance
 # @description:Starting weekly system maintenance
+# @Category:System
 # @Language:Bash
 # @OS:Linux
 

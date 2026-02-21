@@ -2,6 +2,7 @@
 
 # @name:Docker Compose Manager
 # @description:Scanning for docker-compose projects
+# @Category:Docker
 # @Language:Bash
 # @OS:Linux
 

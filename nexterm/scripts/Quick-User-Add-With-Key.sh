@@ -2,6 +2,7 @@
 
 # @name:Quick User Add With Key
 # @description:Create new user with SSH key
+# @Category:Quick
 # @Language:Bash
 # @OS:Linux
 

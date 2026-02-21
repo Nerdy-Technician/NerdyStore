@@ -2,6 +2,7 @@
 
 # @name:Network Speed Test
 # @description:Check for speedtest tool
+# @Category:Network
 # @Language:Bash
 # @OS:Linux
 

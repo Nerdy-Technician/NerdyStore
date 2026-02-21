@@ -3,6 +3,7 @@
 
 # @name:Security UFW Status
 # @description:Runs security ufw status.
+# @Category:Security
 # @Language:Bash
 # @OS:Linux
 

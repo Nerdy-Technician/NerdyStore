@@ -2,6 +2,7 @@
 
 # @name:Network Connection Monitor
 # @description:Starting connection monitor
+# @Category:Network
 # @Language:Bash
 # @OS:Linux
 

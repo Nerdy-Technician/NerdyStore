@@ -2,6 +2,7 @@
 
 # @name:Docker Health Check
 # @description:Running Docker health check
+# @Category:Docker
 # @Language:Bash
 # @OS:Linux
 

@@ -2,6 +2,7 @@
 
 # @name:Performance Disk IO Check
 # @description:Analyzing disk I/O activity
+# @Category:Performance
 # @Language:Bash
 # @OS:Linux
 

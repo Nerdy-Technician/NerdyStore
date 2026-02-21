@@ -2,6 +2,7 @@
 
 # @name:Security Fail2Ban Status
 # @description:Check Fail2Ban installation
+# @Category:Security
 # @Language:Bash
 # @OS:Linux
 

@@ -2,6 +2,7 @@
 
 # @name:Security SSH Hardening Check
 # @description:Validating SSH configuration
+# @Category:Security
 # @Language:Bash
 # @OS:Linux
 

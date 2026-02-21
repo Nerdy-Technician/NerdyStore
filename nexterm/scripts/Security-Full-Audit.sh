@@ -2,6 +2,7 @@
 
 # @name:Security Full Audit
 # @description:Running comprehensive security audit
+# @Category:Security
 # @Language:Bash
 # @OS:Linux
 

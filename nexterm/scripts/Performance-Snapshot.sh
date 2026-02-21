@@ -2,6 +2,7 @@
 
 # @name:Performance Snapshot
 # @description:Capturing system performance snapshot
+# @Category:Performance
 # @Language:Bash
 # @OS:Linux
 

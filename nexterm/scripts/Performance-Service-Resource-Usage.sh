@@ -2,6 +2,7 @@
 
 # @name:Performance Service Resource Usage
 # @description:Analyzing systemd service resource usage
+# @Category:Performance
 # @Language:Bash
 # @OS:Linux
 

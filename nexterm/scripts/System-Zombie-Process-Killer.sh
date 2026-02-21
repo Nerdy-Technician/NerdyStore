@@ -2,6 +2,7 @@
 
 # @name:System Zombie Process Killer
 # @description:Scanning for zombie processes
+# @Category:System
 # @Language:Bash
 # @OS:Linux
 

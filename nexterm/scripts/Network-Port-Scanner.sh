@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# @name:Network Port Scanner
+# @description:Scanning common ports on $TARGET
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:INPUT "Enter target IP or hostname" "192.168.1.1"
 TARGET=$NEXTERM_INPUT
 

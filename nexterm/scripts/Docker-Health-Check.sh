@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# @name:Docker Health Check
+# @description:Running Docker health check
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:STEP "Running Docker health check"
 
 if ! command -v docker &> /dev/null; then

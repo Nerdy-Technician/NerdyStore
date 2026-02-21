@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# @name:System Zombie Process Killer
+# @description:Scanning for zombie processes
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:STEP "Scanning for zombie processes"
 
 ZOMBIES=$(ps aux | awk '$8=="Z" {print $2, $11}')

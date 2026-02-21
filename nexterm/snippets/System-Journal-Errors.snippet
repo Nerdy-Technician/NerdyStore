@@ -1,3 +1,8 @@
+# @name:System Journal Errors
+# @description:Tail journal errors (priority 3)
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:STEP "Tail journal errors (priority 3)"
 journalctl -p 3 -xb
 @NEXTERM:WARN "High-priority errors shown above"

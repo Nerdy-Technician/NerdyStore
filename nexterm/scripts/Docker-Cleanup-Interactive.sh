@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# @name:Docker Cleanup Interactive
+# @description:Docker cleanup: $CHOICE
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:SELECT CHOICE "Select cleanup operation" "Prune stopped containers" "Remove unused images" "Remove dangling volumes" "Full cleanup (all)" "Cancel"
 
 CHOICE=$NEXTERM_CHOICE

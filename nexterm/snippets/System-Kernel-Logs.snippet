@@ -1,3 +1,8 @@
+# @name:System Kernel Logs
+# @description:Recent kernel messages
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:STEP "Recent kernel messages"
 dmesg -T | tail -n 50
 @NEXTERM:INFO "Kernel log tail displayed above"

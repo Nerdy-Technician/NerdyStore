@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# @name:Quick Port Forward
+# @description:UFW port forwarding setup
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:STEP "UFW port forwarding setup"
 
 if ! command -v ufw &> /dev/null; then

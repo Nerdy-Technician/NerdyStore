@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# @name:Security Fail2Ban Status
+# @description:Check Fail2Ban installation
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:STEP "Check Fail2Ban installation"
 
 if ! command -v fail2ban-client &> /dev/null; then

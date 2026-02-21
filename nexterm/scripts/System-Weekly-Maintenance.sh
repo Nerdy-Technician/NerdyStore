@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# @name:System Weekly Maintenance
+# @description:Starting weekly system maintenance
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:STEP "Starting weekly system maintenance"
 
 LOG_FILE="/var/log/weekly-maintenance-$(date +%Y%m%d).log"

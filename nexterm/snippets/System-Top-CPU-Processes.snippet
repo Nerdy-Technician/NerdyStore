@@ -1,3 +1,8 @@
+# @name:System Top CPU Processes
+# @description:Top CPU consumers
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:STEP "Top CPU consumers"
 ps -eo pid,cmd,%cpu,%mem --sort=-%cpu | head -n 15
 @NEXTERM:INFO "Top CPU processes listed above"

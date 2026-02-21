@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# @name:Docker Compose Manager
+# @description:Scanning for docker-compose projects
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:STEP "Scanning for docker-compose projects"
 
 SEARCH_DIRS=("/opt" "/var/docker" "$HOME/docker" "/srv")

@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# @name:Quick User Add With Key
+# @description:Create new user with SSH key
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:STEP "Create new user with SSH key"
 
 @NEXTERM:INPUT "Enter username" "newuser"

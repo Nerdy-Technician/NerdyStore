@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# @name:Security SSH Hardening Check
+# @description:Validating SSH configuration
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:STEP "Validating SSH configuration"
 
 SSHD_CONFIG="/etc/ssh/sshd_config"

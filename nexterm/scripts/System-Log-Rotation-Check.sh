@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# @name:System Log Rotation Check
+# @description:Checking log rotation configuration
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:STEP "Checking log rotation configuration"
 
 ISSUES=0

@@ -1,3 +1,8 @@
+# @name:Package Hold Interactive
+# @description:Runs package hold interactive.
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:INPUT "Enter package to hold" "docker-ce"
 PKG=$NEXTERM_INPUT
 sudo apt-mark hold "$PKG"

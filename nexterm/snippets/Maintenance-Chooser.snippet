@@ -1,3 +1,8 @@
+# @name:Maintenance Chooser
+# @description:Runs maintenance chooser.
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:SELECT CHOICE "Select maintenance task" "Clean cache" "Autoremove" "List upgrades" "Full upgrade"
 CHOICE=$NEXTERM_CHOICE
 if [ "$CHOICE" = "Clean cache" ]; then

@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# @name:Network Speed Test
+# @description:Check for speedtest tool
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:STEP "Check for speedtest tool"
 
 if ! command -v speedtest-cli &> /dev/null && ! command -v speedtest &> /dev/null; then

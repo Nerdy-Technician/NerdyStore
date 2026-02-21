@@ -1,3 +1,8 @@
+# @name:APT Hold Package
+# @description:Runs apt hold package.
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:INPUT "Package to hold" "package-name"
 PKG=$NEXTERM_INPUT
 sudo apt-mark hold "$PKG"

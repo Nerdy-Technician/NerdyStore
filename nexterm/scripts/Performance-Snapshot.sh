@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# @name:Performance Snapshot
+# @description:Capturing system performance snapshot
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:STEP "Capturing system performance snapshot"
 
 TIMESTAMP=$(date '+%Y-%m-%d_%H-%M-%S')

@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# @name:Docker Image Updater
+# @description:Check for Docker image updates
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:STEP "Check for Docker image updates"
 
 if ! command -v docker &> /dev/null; then

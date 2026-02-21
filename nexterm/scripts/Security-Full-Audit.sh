@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# @name:Security Full Audit
+# @description:Running comprehensive security audit
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:STEP "Running comprehensive security audit"
 
 # UFW Status

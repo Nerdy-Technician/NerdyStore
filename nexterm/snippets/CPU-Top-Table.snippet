@@ -1,3 +1,8 @@
+# @name:CPU Top Table
+# @description:Collect top CPU processes
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:STEP "Collect top CPU processes"
 ps -eo pid,comm,%cpu,%mem --sort=-%cpu | head -n 6 | awk 'NR>1 {print $1","$2","$3","$4}' | {
   echo '@NEXTERM:TABLE "CPU Top 5" "PID,Cmd,%CPU,%MEM"'

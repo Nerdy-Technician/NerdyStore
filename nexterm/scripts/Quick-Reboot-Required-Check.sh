@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# @name:Quick Reboot Required Check
+# @description:Checking if reboot is required
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:STEP "Checking if reboot is required"
 
 REBOOT_REQUIRED=false

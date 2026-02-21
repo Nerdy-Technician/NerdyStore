@@ -1,3 +1,8 @@
+# @name:Network DNS Lookup
+# @description:Runs network dns lookup.
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:INPUT "Domain to lookup" "example.com"
 DOMAIN=$NEXTERM_INPUT
 nslookup "$DOMAIN"

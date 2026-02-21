@@ -1,3 +1,8 @@
+# @name:Network Tracepath
+# @description:Runs network tracepath.
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:INPUT "Host to trace" "1.1.1.1"
 TARGET=$NEXTERM_INPUT
 tracepath -n "$TARGET"

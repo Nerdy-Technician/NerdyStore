@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# @name:Security Certificate Expiry
+# @description:Check certificate expiry dates
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:STEP "Check certificate expiry dates"
 
 CERT_DIR="/etc/letsencrypt/live"

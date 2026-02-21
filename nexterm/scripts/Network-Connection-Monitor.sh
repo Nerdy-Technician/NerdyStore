@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# @name:Network Connection Monitor
+# @description:Starting connection monitor
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:INPUT "Enter critical hosts to monitor (space-separated)" "8.8.8.8 1.1.1.1"
 HOSTS=$NEXTERM_INPUT
 

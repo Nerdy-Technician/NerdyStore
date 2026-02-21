@@ -1,3 +1,8 @@
+# @name:APT Unhold Package
+# @description:Runs apt unhold package.
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:INPUT "Package to unhold" "package-name"
 PKG=$NEXTERM_INPUT
 sudo apt-mark unhold "$PKG"

@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# @name:Performance Disk IO Check
+# @description:Analyzing disk I/O activity
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:STEP "Analyzing disk I/O activity"
 
 if ! command -v iotop &> /dev/null; then

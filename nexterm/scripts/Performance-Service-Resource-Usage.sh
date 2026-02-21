@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# @name:Performance Service Resource Usage
+# @description:Analyzing systemd service resource usage
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:STEP "Analyzing systemd service resource usage"
 
 @NEXTERM:STEP "Collect CPU usage by service"

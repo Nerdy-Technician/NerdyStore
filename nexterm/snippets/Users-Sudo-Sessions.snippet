@@ -1,3 +1,8 @@
+# @name:Users Sudo Sessions
+# @description:Recent sudo sessions
+# @Language:Bash
+# @OS:Linux
+
 @NEXTERM:STEP "Recent sudo sessions"
 grep -i "session opened" /var/log/auth.log | tail -n 20
 @NEXTERM:INFO "Sudo sessions listed above"

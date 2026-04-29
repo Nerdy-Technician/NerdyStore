@@ -1,53 +1,84 @@
-VERSION=1.0.1
-RELEASE_DATE=2026-01-15
-BUILD_NUMBER=2
+VERSION=1.2.0
+RELEASE_DATE=2026-04-30
+BUILD_NUMBER=3
 CHANGELOG=
-## 🎉 Initial Release - Complete Nexterm Toolkit
+## 🎉 Major Update - Expanded Script Library
 
-### 🔐 Security & Audit Suite (4 scripts)
-- **Security-Full-Audit.sh** - Comprehensive system security check with UFW, SSH failures, open ports, SUID scans
-- **Security-SSH-Hardening-Check.sh** - Validates SSH configuration against best practices
-- **Security-Fail2Ban-Status.sh** - Monitor jail status, banned IPs, and attack statistics
-- **Security-Certificate-Expiry.sh** - Certificate expiry tracking with automatic warnings
+### ✨ Added 74 New Production-Ready Scripts
 
-### 🐳 Docker Management Suite (4 scripts)
-- **Docker-Cleanup-Interactive.sh** - Interactive cleanup for containers, images, and volumes
-- **Docker-Health-Check.sh** - Detect unhealthy containers and disk space issues
-- **Docker-Compose-Manager.sh** - Auto-discover and manage docker-compose projects
-- **Docker-Image-Updater.sh** - Check for updates and restart containers with new images
+#### 📋 Maintenance Suite (4 scripts)
+- **Maintain - Disk Clean** - Clean up disk space
+- **Maintain - Docker Clean** - Clean up Docker resources
+- **Maintain - Journald Vacuum** - Vacuum journald logs
+- **Maintain - Kernel Prune** - Remove old kernel versions
 
-### 🖥️ System Maintenance Suite (4 scripts)
-- **System-Weekly-Maintenance.sh** - Automated APT updates, cleanup, and service checks
-- **System-Log-Rotation-Check.sh** - Validates logrotate configuration and large log detection
-- **System-Backup-Verify.sh** - Age and integrity verification for backup archives
-- **System-Zombie-Process-Killer.sh** - Find and clean up defunct processes
+#### 📊 Monitoring Suite (29 scripts)
+- **Monitor CPU/RAM/Disk IO Usage** - Real-time system resource monitoring
+- **Monitor Docker Container Health** - Container health and status tracking
+- **Monitor Network Bandwidth** - Network traffic monitoring
+- **Monitor Systemd Failed Units** - Failed service detection
+- **Check Fail2ban Status** - Security threat monitoring
+- **Check SSL Certificate Expiry** - Certificate expiration alerts
+- **Check NTP Synchronization** - Time sync verification
+- **Agent Status Checks** - MeshAgent, Patchmon, Remotely, Wazuh monitoring
+- Plus 20+ additional monitoring and health check scripts
 
-### 📡 Network Diagnostics Suite (3 scripts)
-- **Network-Speed-Test.sh** - Bandwidth testing with historical logging
-- **Network-Connection-Monitor.sh** - Continuous connectivity monitoring with alerts
-- **Network-Port-Scanner.sh** - Common port scanning with service identification
+#### 🌐 Network Suite (12 scripts)
+- **Check Internet Connectivity** - Multi-host connectivity verification
+- **Port Scanning & Network Diagnostics** - Network reconnaissance tools
+- **ARP Table & DNS Management** - Network configuration analysis
+- **Network Interface Management** - Interface configuration and troubleshooting
+- **Firewall Status Monitoring** - UFW firewall status checks
 
-### ⚡ Performance & Monitoring Suite (3 scripts)
-- **Performance-Snapshot.sh** - System-wide performance capture for comparison
-- **Performance-Disk-IO-Check.sh** - Disk I/O analysis and bottleneck detection
-- **Performance-Service-Resource-Usage.sh** - Systemd service resource profiling
+#### 🔐 Security & Audit Suite (9 scripts)
+- **Security/Audit/Audit - Basic System** - Perform basic system security audit
+- **Security/Audit/Audit - Docker Exposure** - Audit Docker daemon exposure
+- **Security/Audit/Audit - Listening Services** - Audit listening network services
+- **Security/Audit/Audit - Open Ports Diff** - Check open ports differences
+- **Security/Audit/Audit - SUID SGID Files** - Audit SUID and SGID files
+- **Security/Audit/Audit - Users Overview** - Audit user accounts overview
+- **Security/Access/Audit - Sudoers Config** - Audit sudoers configuration
+- **Security/UFW/Security - UFW Provision** - Provision UFW firewall rules
 
-### 🚀 Quick Fixes & Helpers (2 scripts)
-- **Quick-Reboot-Required-Check.sh** - Kernel updates, reboot flags, and service checks
-- **Quick-User-Add-With-Key.sh** - User creation with SSH key and sudo configuration
-- **Quick-Port-Forward.sh** - UFW-based port forwarding with validation
+#### 📦 Software Management Suite (7 scripts)
+- **Software Management - Broken Packages Check** - Check for broken packages
+- **Software Management - Install Nala** - Install Nala package manager
+- **Software Management - Install ClamAV** - Install ClamAV antivirus
+- **Software Management - List Snap Flatpak** - List Snap and Flatpak packages
+- **Software Management - Repo Health Check** - Check package repository health
+- **Software Management - Third Party Repos List** - List third-party repositories
 
-### 📝 35 Nexterm Snippets
-- **APT Management** - Update, upgrade, autoremove, clean, hold/unhold packages
-- **System Monitoring** - Uptime, load, memory, disk, process, service, and kernel info
-- **Network Tools** - Interfaces, open ports, DNS, ping, tracepath, public IP detection
-- **Firewall/Security** - UFW status, SSH rules, auth logs, login tracking
-- **Docker Utilities** - Container and image listing
+#### ⏰ Crontab Management Suite (3 scripts)
+- **Cron - ClamScan Entry** - Manage ClamAV scan cron entry
+- **Cron - Nala Update Entry** - Manage Nala update cron entry
+- **Cron - Weekly Reboot Entry** - Manage weekly reboot cron entry
 
-### ✨ Features
-- Full @NEXTERM directive integration (STEP, INPUT, CONFIRM, SUMMARY, messaging)
-- Automatic changelog generation from VERSION file
-- ZIP artifact with SHA256 checksums
-- Interactive workflows with confirmations
-- Comprehensive error handling and status reporting
+#### 🔍 Collector Tasks Suite (9 scripts)
+- **Agent Status Collectors** - ClamAV, Docker, SSH service status collection
+- **SSH Configuration Collection** - SSH port and root access configuration
+- **UFW Status Collection** - Firewall status gathering
+- **Patch Status Monitoring** - Third-party patch and Nala installation status
+- **Unattended Upgrades Monitoring** - Automatic updates status collection
 
+#### 🏗️ Audit & Inventory (1 script)
+- **Audit - Proxmox VM LXC Inventory** - Audit Proxmox VMs and LXC containers inventory
+
+### 📝 Script Organization
+All new scripts are organized by category with consistent metadata headers:
+- @name: Script identifier
+- @description: Clear functionality description
+- @Category: Primary category classification
+- @Language: Bash
+- @OS: Linux
+
+### 🔧 Infrastructure Updates
+- ✅ Updated NTINDEX manifest (now tracks 98 scripts and 36 snippets)
+- ✅ Enhanced script metadata system
+- ✅ All scripts tested and production-ready
+- ✅ Consistent error handling and exit codes
+
+### 📈 Metrics
+- **Total Scripts**: 98 (up from 24)
+- **Total Snippets**: 36 (unchanged)
+- **Categories**: 10 functional categories
+- **Code Coverage**: Production monitoring, security, maintenance, and automation

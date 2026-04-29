@@ -23,6 +23,80 @@ scripts/Security-SSH-Hardening-Check.sh@afc7d15da71aadcffe5c3a987326f6bf
 scripts/System-Log-Rotation-Check.sh@cd96dd3328c51a10f3d531a342813b6e
 scripts/System-Weekly-Maintenance.sh@0f11f5f44d2cf8813dd6dbb0b2fe4dff
 scripts/System-Zombie-Process-Killer.sh@f19cf9d4bb4529fe2639461d1eedb03d
+scripts/Crontab/Cron - ClamScan Entry.sh@49dbfcb90d214bac80b3105cc5e4c817
+scripts/Crontab/Cron - Nala Update Entry.sh@ceae79689f2e9844f4eee94a466c34be
+scripts/Crontab/Cron - Weekly Reboot Entry.sh@577b99ee57456941ed128a89814d14cc
+scripts/Network/Check - Duplicate IPs.sh@86ab662303e6d8635088132f480c49ae
+scripts/Network/Check - Internet Connectivity.sh@6e0a4cc05622811d55eda7f28512d74b
+scripts/Network/Check - Speed Test.sh@0823b5331afb28386212aee6b0dd5238
+scripts/Network/Network - ARP Table.sh@dc467f07e618136df552a64ce0bbb103
+scripts/Network/Network - Disable IPv6.sh@851adce77f2f63f0ddaffc3664898ae6
+scripts/Network/Network - Docker Networks Inspect.sh@bed902dea6f36e58342209b0be972432
+scripts/Network/Network - Interfaces Summary.sh@cca7c6f2b55e4954ab12f790210d1952
+scripts/Network/Network - Port Scan.sh@6bf249e6b518a09eb8075db10443acd3
+scripts/Network/Network - Reset Interfaces.sh@3c2685ca1d6bd41125e82121d39f6cc6
+scripts/Network/Network - Routes.sh@1e722c473b27cef0e9b56733c01c5c44
+scripts/Network/Network - Show DNS.sh@a75d0e2097f329d0bf09994955b7ec30
+scripts/Network/Security - Firewall Status.sh@c93d3072e838ed3f1a4de81ac7d17859
+scripts/Collector-Tasks/Agent - ClamAV Status.sh@fd3c8f0c13e48d488451347a4690d7af
+scripts/Collector-Tasks/Check - Docker Service.sh@97fd43c9af3b35efa89f2ed118afd2fe
+scripts/Collector-Tasks/Check - SSH Service.sh@da5890fea9743fb376264526f6919bba
+scripts/Collector-Tasks/Check - Third Party Patch Status.sh@1d48cb1494b776d40d44e7f5e78b0d7d
+scripts/Collector-Tasks/Collect - SSH Port.sh@713252d278cdfdd7abfac428256f5480
+scripts/Collector-Tasks/Security - SSH Root Access.sh@f60b08dfda39bfb1b06d58ea31861d6d
+scripts/Collector-Tasks/Security - UFW Status.sh@447977120c73a45f75d49999a2a72dbe
+scripts/Collector-Tasks/Software Management - Nala Install Status.sh@f7eb5b6148fac7bffbe97868024fa5e8
+scripts/Collector-Tasks/Software Management - Unattended Upgrades Status.sh@82027e60801cbbdfaf4cc107f3fc329f
+scripts/Monitoring/Agent - MeshAgent Status.sh@b331538ce1502bafec118426974c1d4c
+scripts/Monitoring/Agent - Patchmon Status.sh@fdeb71c425f814b3cc7481548ea88904
+scripts/Monitoring/Agent - Remotely Status.sh@8c4242f8468dcc3c5a68e099f8900c3d
+scripts/Monitoring/Agent - Wazuh Status.sh@52396ab4ddeb1cce7373dc508f24065d
+scripts/Monitoring/Audit - Cron Integrity.sh@a3d5ee4886b5c1997d8422a3d64cbb7e
+scripts/Monitoring/Check - DNS Resolution Latency.sh@83e2c361d153ad2290ae7f0753d07f36
+scripts/Monitoring/Check - Disk Space.sh@367444cac5c267903a1d61b5f1b6b5a9
+scripts/Monitoring/Check - DiskSpace.sh@6263e1c614ba02429ee7767c9a1b6e27
+scripts/Monitoring/Check - Fail2ban Status.sh@1d5d15e8bb50c8362a03bc4a338d54e0
+scripts/Monitoring/Check - MeshAgent_is_running.sh@8c0c7d841b23e8dbd944384b22838e89
+scripts/Monitoring/Check - NTP Sync.sh@6f9afa91c51aeeabffaa07b80c53cc47
+scripts/Monitoring/Check - Orphan Zombie Processes.sh@9eb361944264c3b3eab5ecbd0ea20a2a
+scripts/Monitoring/Check - Patchmon Agent is installed.sh@0c6fab2d627660824847fec303f4c9f5
+scripts/Monitoring/Check - Remotely_is_running.sh@6d69db070228950fc78ee2d69e7ed030
+scripts/Monitoring/Check - SSL Cert Expiry.sh@1fa66a8c245463443b4735b8aa5f5d13
+scripts/Monitoring/Check - SwapSpace.sh@eefe6c255feaf746ab14525b9a336b0a
+scripts/Monitoring/Check - Wazuh_is_running.sh@e18fdf62d9ae135e712c44e0191b4637
+scripts/Monitoring/Image - Stale Images Report.sh@da7aa04b52a54106d3ed84be19ee0c80
+scripts/Monitoring/Monitor - CPU Usage.sh@cd452b7397ed40ae6ddb436243925152
+scripts/Monitoring/Monitor - Disk IO Activity.sh@cded9423c916a02e065683d84bd2bcf8
+scripts/Monitoring/Monitor - Docker Container Health.sh@4c43e3a60ca450e52a404c8cf3043d5e
+scripts/Monitoring/Monitor - Journald Error Rate.sh@42facac80f62b9db4d0f63a995a2e717
+scripts/Monitoring/Monitor - Network Bandwidth.sh@d573bd8b590780b2eed5756e33930b03
+scripts/Monitoring/Monitor - OOM Kill Events.sh@8c6832ec9bc4b2605564b5db929b9ca2
+scripts/Monitoring/Monitor - Process Snapshot.sh@f4825b204cf2f8e7d86e64763d206c12
+scripts/Monitoring/Monitor - RAM Usage.sh@6dc0fef878d6cd268d19abd23ca6fabc
+scripts/Monitoring/Monitor - Swap Usage.sh@844c9b61c9627b1d7927a8f1d54064ba
+scripts/Monitoring/Monitor - Systemd Failed Units.sh@b8176babafe3bb5542ecc1b86f20990a
+scripts/Monitoring/Monitor - Uptime Trend.sh@659582c5bb689b4bd098aae5073c7615
+scripts/Audit/Audit - Proxmox VM LXC Inventory.sh@b2501ec3e6a971fc9568279a385742c2
+scripts/Security/Access/Audit - Sudo Users.sh@565bb71a7906c858929afd660c7ca36d
+scripts/Security/Access/Audit - Sudoers Config.sh@42d305fb8e8feae5a737c7b26a55b909
+scripts/Security/UFW/Security - UFW Provision.sh@78c489d6429f93f28836fd0b2a0d791e
+scripts/Security/Audit/Audit - Basic System.sh@e01d2147f9bda1306962db270fa92b96
+scripts/Security/Audit/Audit - Docker Exposure.sh@23788aa2bd24d725c69a6f5932a8dfea
+scripts/Security/Audit/Audit - Listening Services.sh@b0a617b272a1c0e3dcaeacb3047442ae
+scripts/Security/Audit/Audit - Open Ports Diff.sh@398a08e76600fd7c744c346a10c2aa1c
+scripts/Security/Audit/Audit - SUID SGID Files.sh@d1cc125cb1ac20f036010357bb6a7b5c
+scripts/Security/Audit/Audit - Users Overview.sh@170a40017751d700ea8513bc4c100b39
+scripts/Software-Management/Install ClamAV.sh@be7e875076cd29c77a70106e2d0dcf00
+scripts/Software-Management/Software Management - Broken Packages Check.sh@f56084c3efd18072f7822c191f5cb65f
+scripts/Software-Management/Software Management - Install ClamAV.sh@5419780e065720b40d2b7f1794a84b72
+scripts/Software-Management/Software Management - Install Nala.sh@bd73bed2ca64b2649b996e9b5c241d08
+scripts/Software-Management/Software Management - List Snap Flatpak.sh@29f815eb721dd675528a8f43c428c8b3
+scripts/Software-Management/Software Management - Repo Health Check.sh@24f7fb24994ccd67e3cf8cc66e82aabd
+scripts/Software-Management/Software Management - Third Party Repos List.sh@43ce441850324bbb6a2ea8ebb1cf9c7f
+scripts/Maintenance/Maintain - Disk Clean.sh@c28c63f74e2c29d52c25a699041322e8
+scripts/Maintenance/Maintain - Docker Clean.sh@251449ea11d76db6cf20ff469c20cddc
+scripts/Maintenance/Maintain - Journald Vacuum.sh@1216b5fc2ea3ad72e0643a5714c3fc14
+scripts/Maintenance/Maintain - Kernel Prune.sh@49f92e6eb31f051c7fea9fd5752b43f9
 
 # Snippets
 snippets/APT-Autoremove.snippet@153e5c0766b62a9dfb62385b756cd998

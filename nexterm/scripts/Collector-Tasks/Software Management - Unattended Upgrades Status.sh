@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# @name:Software Management - Unattended Upgrades Status
+# @description:Check unattended upgrades status
+# @Category:Collector
+# @Language:Bash
+# @OS:Linux
+
+# Software Management - Unattended Upgrades Status (from Unattended Upgrades.sh)
+if dpkg -s unattended-upgrades >/dev/null 2>&1; then echo "unattended-upgrades installed"; exit 0; else echo "Installing unattended-upgrades"; apt-get install -y unattended-upgrades >/dev/null 2>&1; if dpkg -s unattended-upgrades >/dev/null 2>&1; then echo "unattended-upgrades installed (post-install)"; exit 0; else echo "unattended-upgrades install failed"; exit 10; fi; fi

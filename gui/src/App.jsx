@@ -11,7 +11,7 @@ import Loader from "./components/Loader";
 import ServerUrlDialog from "./components/ServerUrlDialog";
 import { loadCategoriesIndex, loadCategoryApps, loadNextermData, loadSourceName } from "./utils/api";
 
-const CATEGORY_ICONS = { scripts: mdiScriptText, networking: mdiLan, media: mdiPlayCircle, cloud: mdiCloud, development: mdiCodeBraces, utilities: mdiWrench, gaming: mdiGamepadVariant, all: mdiApps, other: mdiDotsHorizontal, containermanagement: mdiDocker, web: mdiWeb, ads: mdiAdvertisements };
+const CATEGORY_ICONS = { scripts: mdiScriptText, networking: mdiLan, media: mdiPlayCircle, cloud: mdiCloud, development: mdiCodeBraces, utilities: mdiWrench, gaming: mdiGamepadVariant, all: mdiApps, other: mdiDotsHorizontal, "container-management": mdiDocker, web: mdiWeb, "ad-blockers": mdiAdvertisements };
 const NEXTERM_ICONS = { scripts: mdiScriptText, snippets: mdiCodeBraces, themes: mdiPalette };
 const getCategoryIcon = (slug) => CATEGORY_ICONS[slug?.toLowerCase()] || mdiApps;
 const getNextermIcon = (slug) => NEXTERM_ICONS[slug?.toLowerCase()] || mdiScriptText;

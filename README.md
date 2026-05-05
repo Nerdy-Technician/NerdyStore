@@ -29,13 +29,6 @@ A clean, open-source marketplace designed to expand your Nexterm and Nexploy wor
 
 ---
 
-## 🧪 Preview
-
-A public preview will be available soon.  
-Follow releases and community channels for updates.
-
----
-
 ## 🤝 Contributing
 
 Contributions are welcome!

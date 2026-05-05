@@ -1,0 +1,9 @@
+services:
+  nexterm:
+    image: germannewsmaker/nexterm:1.2.0-BETA
+    network_mode: host
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data

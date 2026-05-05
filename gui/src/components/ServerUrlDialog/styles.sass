@@ -1,0 +1,56 @@
+@use "../../styles/colors"
+
+.server-url-dialog
+  min-width: 400px
+  max-width: 500px
+
+  @media (max-width: 768px)
+    min-width: auto
+    width: 100%
+
+.dialog-header
+  margin-bottom: 1rem
+  padding-right: 2rem
+
+.app-info
+  display: flex
+  align-items: center
+  gap: 1rem
+
+.app-logo
+  width: 48px
+  height: 48px
+  border-radius: 0.5rem
+  object-fit: contain
+
+.app-details
+  display: flex
+  flex-direction: column
+  gap: 0.25rem
+
+  h2
+    margin: 0
+    font-size: 1.25rem
+    font-weight: 600
+    color: colors.$white
+
+  .app-version
+    font-size: 0.85rem
+    color: colors.$subtext
+
+.dialog-description
+  color: colors.$subtext
+  font-size: 0.95rem
+  margin: 0 0 1.25rem 0
+  line-height: 1.5
+
+.input-wrapper
+  margin-bottom: 1.5rem
+
+.dialog-actions
+  display: flex
+  justify-content: flex-end
+  gap: 0.75rem
+
+  @media (max-width: 480px)
+    flex-direction: column-reverse

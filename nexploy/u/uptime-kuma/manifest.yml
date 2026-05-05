@@ -1,0 +1,8 @@
+type: docker
+name: Uptime Kuma
+version: 2.2.1
+description: Uptime Kuma is an easy-to-use self-hosted monitoring tool
+category: Networking
+mainService: uptime-kuma
+gallery:
+  - gallery/main.jpg

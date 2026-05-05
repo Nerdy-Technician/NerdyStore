@@ -1,0 +1,101 @@
+@use "../../styles/colors"
+
+.loading-container
+  display: flex
+  justify-content: center
+  align-items: center
+
+  &.loading-large
+    .loading-logo-wrapper
+      width: 180px
+      height: 180px
+
+  &.loading-medium
+    .loading-logo-wrapper
+      width: 120px
+      height: 120px
+
+  &.loading-small
+    .loading-logo-wrapper
+      width: 60px
+      height: 60px
+
+.loading-content
+  display: flex
+  justify-content: center
+  align-items: center
+
+.loading-logo-wrapper
+  position: relative
+  display: flex
+  justify-content: center
+  align-items: center
+
+.loading-logo
+  width: 100%
+  height: 100%
+  filter: drop-shadow(0 0 20px rgba(147, 51, 234, 0.3))
+
+  .hex-layer-1
+    animation: hexPulse 3s ease-in-out infinite, hexRotate 12s linear infinite
+    transform-origin: center
+    transform-box: fill-box
+
+  .hex-layer-2
+    animation: hexPulse 3s ease-in-out infinite 0.3s, hexRotate 9s linear infinite reverse
+    transform-origin: center
+    transform-box: fill-box
+
+  .hex-layer-3
+    animation: hexPulse 3s ease-in-out infinite 0.6s, hexRotate 10s linear infinite
+    transform-origin: center
+    transform-box: fill-box
+
+  .hex-layer-4
+    animation: hexPulse 3s ease-in-out infinite 0.9s, hexFloat 4s ease-in-out infinite
+    transform-origin: center
+    transform-box: fill-box
+
+@keyframes hexPulse
+  0%, 100%
+    opacity: 1
+    transform: scale(1)
+  50%
+    opacity: 0.7
+    transform: scale(0.95)
+
+@keyframes hexRotate
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
+
+@keyframes hexFloat
+  0%, 100%
+    transform: translateY(0px) scale(1)
+  50%
+    transform: translateY(-5px) scale(1.05)
+
+@media (max-width: 768px)
+  .loading-container
+    &.loading-large
+      .loading-logo-wrapper
+        width: 100px
+        height: 100px
+
+    &.loading-medium
+      .loading-logo-wrapper
+        width: 80px
+        height: 80px
+
+@media (max-width: 480px)
+  .loading-container
+    &.loading-large
+      .loading-logo-wrapper
+        width: 80px
+        height: 80px
+
+    &.loading-medium
+      .loading-logo-wrapper
+        width: 60px
+        height: 60px

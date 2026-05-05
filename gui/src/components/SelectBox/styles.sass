@@ -1,0 +1,75 @@
+@use "../../styles/colors"
+
+.select-box
+  position: relative
+  min-width: 180px
+
+  @media (max-width: 768px)
+    min-width: 100%
+
+.select-trigger
+  display: flex
+  align-items: center
+  justify-content: space-between
+  padding: 0.8rem 1rem
+  background-color: colors.$lighter-background
+  border: 1px solid colors.$gray
+  border-radius: 0.7rem
+  cursor: pointer
+  transition: all 0.2s
+
+  @media (max-width: 768px)
+    padding: 0.7rem 0.75rem
+
+  span
+    font-size: 0.95rem
+    color: colors.$white
+
+    @media (max-width: 768px)
+      font-size: 0.9rem
+
+  .select-arrow
+    width: 1.25rem
+    height: 1.25rem
+    color: colors.$subtext
+    transition: transform 0.2s
+
+  &.open
+    border-color: colors.$primary
+
+    .select-arrow
+      transform: rotate(180deg)
+
+  &:hover
+    border-color: colors.$gray
+
+.select-dropdown
+  position: absolute
+  top: calc(100% + 0.5rem)
+  left: 0
+  right: 0
+  background-color: colors.$lighter-background
+  border: 1px solid colors.$gray
+  border-radius: 0.7rem
+  z-index: 100
+  overflow: hidden
+  max-height: 250px
+  overflow-y: auto
+
+.select-option
+  padding: 0.75rem 1rem
+  font-size: 0.95rem
+  color: colors.$white
+  cursor: pointer
+  transition: background-color 0.15s
+
+  @media (max-width: 768px)
+    padding: 0.65rem 0.75rem
+    font-size: 0.9rem
+
+  &:hover
+    background-color: colors.$gray
+
+  &.selected
+    background-color: colors.$primary-opacity
+    color: colors.$primary

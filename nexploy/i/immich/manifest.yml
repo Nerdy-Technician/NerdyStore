@@ -1,0 +1,8 @@
+type: docker
+name: Immich
+version: 2.7.5
+description: High-performance self-hosted photo and video backup solution
+category: Cloud
+mainService: server
+gallery:
+  - gallery/main.jpg

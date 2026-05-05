@@ -1,0 +1,188 @@
+@use "../../styles/colors"
+
+.tab-switcher
+  flex-shrink: 0
+
+  .tab-switcher-desktop
+    @media (max-width: 768px)
+      display: none
+
+  .tab-switcher-mobile
+    display: none
+    position: relative
+
+    @media (max-width: 768px)
+      display: block
+      width: 100%
+
+  .tab-switcher-container
+    position: relative
+    display: flex
+    gap: 0.25rem
+    background-color: colors.$lighter-background
+    border: 1px solid colors.$dark-gray
+    border-radius: 0.75rem
+    padding: 0.375rem
+
+    .tab-switcher-indicator
+      position: absolute
+      background-color: colors.$primary-opacity
+      border-radius: 0.625rem
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1)
+      height: calc(100% - 0.75rem)
+      top: 0.375rem
+      z-index: 0
+      pointer-events: none
+
+    .tab-switcher-tab
+      position: relative
+      z-index: 1
+      padding: 0.625rem 1.25rem
+      cursor: pointer
+      font-size: 0.9rem
+      font-weight: 600
+      color: colors.$subtext
+      background-color: transparent
+      border: none
+      border-radius: 0.625rem
+      transition: color 0.15s
+      display: flex
+      align-items: center
+      justify-content: center
+      gap: 0.5rem
+      white-space: nowrap
+
+      svg
+        width: 1.125rem
+        height: 1.125rem
+        opacity: 0.7
+        transition: opacity 0.15s
+
+      .tab-count
+        background-color: colors.$gray
+        padding: 0.1rem 0.4rem
+        border-radius: 0.3rem
+        font-size: 0.75rem
+        font-weight: 700
+
+      &:hover
+        color: colors.$white
+
+        svg
+          opacity: 1
+
+      &.active
+        color: colors.$white
+
+        svg
+          opacity: 1
+
+        .tab-count
+          background-color: colors.$primary-opacity
+          color: colors.$primary
+
+  .tab-dropdown-trigger
+    width: 100%
+    display: flex
+    align-items: center
+    justify-content: space-between
+    gap: 0.75rem
+    padding: 0.75rem 1rem
+    background-color: colors.$lighter-background
+    border: 1px solid colors.$dark-gray
+    border-radius: 0.75rem
+    cursor: pointer
+    transition: border-color 0.2s, background-color 0.2s
+
+    .trigger-label
+      font-size: 0.95rem
+      font-weight: 600
+      color: colors.$white
+
+    .trigger-count
+      background-color: colors.$primary-opacity
+      color: colors.$primary
+      padding: 0.15rem 0.5rem
+      border-radius: 0.3rem
+      font-size: 0.8rem
+      font-weight: 700
+
+    .trigger-icon
+      width: 1.25rem
+      height: 1.25rem
+      color: colors.$subtext
+      transition: transform 0.2s
+      flex-shrink: 0
+
+    &:hover
+      border-color: colors.$gray
+
+    &.open
+      border-color: colors.$primary
+      background-color: colors.$background
+
+      .trigger-icon
+        transform: rotate(180deg)
+
+  .tab-dropdown-menu
+    position: absolute
+    top: calc(100% + 0.5rem)
+    left: 0
+    right: 0
+    background-color: colors.$lighter-background
+    border: 1px solid colors.$dark-gray
+    border-radius: 0.75rem
+    padding: 0.5rem
+    z-index: 100
+    max-height: 300px
+    overflow-y: auto
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3)
+    animation: dropdownFadeIn 0.15s ease-out
+
+    .tab-dropdown-item
+      display: flex
+      align-items: center
+      gap: 0.75rem
+      padding: 0.75rem 1rem
+      border-radius: 0.5rem
+      cursor: pointer
+      font-size: 0.9rem
+      font-weight: 500
+      color: colors.$subtext
+      transition: background-color 0.15s, color 0.15s
+
+      svg
+        width: 1.125rem
+        height: 1.125rem
+        opacity: 0.7
+
+      .item-count
+        margin-left: auto
+        background-color: colors.$gray
+        padding: 0.1rem 0.4rem
+        border-radius: 0.3rem
+        font-size: 0.75rem
+        font-weight: 700
+
+      &:hover
+        background-color: colors.$background
+        color: colors.$white
+
+      &.active
+        background-color: colors.$primary-opacity
+        color: colors.$white
+
+        svg
+          opacity: 1
+
+        .item-count
+          background-color: rgba(255, 255, 255, 0.15)
+          color: colors.$white
+
+@keyframes dropdownFadeIn
+  from
+    opacity: 0
+    transform: translateY(-0.5rem)
+  to
+    opacity: 1
+    transform: translateY(0)

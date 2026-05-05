@@ -1,0 +1,6 @@
+node_modules/
+nexploy/dist/
+gui/dist/
+.DS_Store
+*.local
+ADD_APP.md

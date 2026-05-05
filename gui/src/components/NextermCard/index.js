@@ -1,0 +1,1 @@
+export { NextermCard as default} from "./NextermCard";

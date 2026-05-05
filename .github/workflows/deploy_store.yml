@@ -1,0 +1,81 @@
+name: Build and Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build apps index
+        run: node scripts/build_store.js
+
+      - name: Install gui dependencies
+        run: |
+          cd gui
+          npm install
+
+      - name: Build gui
+        run: |
+          cd gui
+          npm run build
+
+      - name: Prepare deployment
+        run: |
+          mkdir -p deploy
+          touch deploy/.nojekyll
+          cp -r gui/dist/* deploy/
+          cp -r nexploy/dist/* deploy/
+          mkdir -p deploy/logos
+          
+          for letter in nexploy/*/; do
+            if [ -d "$letter" ] && [ "$(basename $letter)" != "dist" ]; then
+              for app in "$letter"*/; do
+                if [ -d "$app" ]; then
+                  appname=$(basename "$app")
+                  if [ -f "$app/logo.png" ]; then
+                    cp "$app/logo.png" "deploy/logos/$appname.png"
+                  fi
+                fi
+              done
+            fi
+          done
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: deploy
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

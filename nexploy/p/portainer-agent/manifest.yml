@@ -1,0 +1,6 @@
+type: docker
+name: Portainer Agent
+version: 2.39.1
+description: Portainer Agent is a lightweight service that allows you to manage your Docker environment remotely using Portainer.
+category: Container Management
+mainService: portainer_agent

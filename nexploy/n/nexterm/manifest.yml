@@ -1,0 +1,26 @@
+type: docker
+name: Nexterm
+version: 1.2.0
+description: Connect to your servers via TELNMET, SSH, VNC & RDP.
+category: Networking
+mainService: nexterm
+gallery:
+  - gallery/connections.png
+  - gallery/servers.png
+  - gallery/settings.png
+inputs:
+  - id: encryption_key
+    label: Encryption Key
+    description: A 64-character hex string used for encrypting credentials. Leave blank to auto-generate.
+    type: text
+    placeholder: e.g. e0ddadbecd3f64937ce7b879cf26d66ae62fdd1b4d...
+    required: false
+  - id: port
+    label: Web Port
+    description: Port to access the Nexterm web interface.
+    type: number
+    default: "6989"
+    required: true
+hooks:
+  postInstall: postInstall.js
+  onConfigure: onConfigure.js

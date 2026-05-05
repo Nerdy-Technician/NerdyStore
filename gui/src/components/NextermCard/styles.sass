@@ -1,0 +1,93 @@
+@use "../../styles/colors"
+
+.nexterm-card
+  background-color: colors.$lighter-background
+  border: 1px solid colors.$dark-gray
+  border-radius: 0.75rem
+  padding: 1rem
+  transition: all 0.2s
+  display: flex
+  flex-direction: column
+
+  &:hover
+    border-color: colors.$gray
+    transform: translateY(-2px)
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2)
+
+  .card-header
+    margin-bottom: 0.75rem
+    display: flex
+    align-items: flex-start
+    gap: 0.75rem
+
+    .nexterm-icon-wrapper
+      width: 3rem
+      height: 3rem
+      border-radius: 0.5rem
+      flex-shrink: 0
+      border: 1px solid colors.$dark-gray
+      background-color: colors.$primary-opacity
+      display: flex
+      align-items: center
+      justify-content: center
+
+      svg
+        width: 1.5rem
+        height: 1.5rem
+        color: colors.$primary
+
+    .card-title
+      flex: 1
+      min-width: 0
+
+      h3
+        margin: 0 0 0.375rem 0
+        font-size: 1rem
+        color: colors.$white
+        font-weight: 600
+        line-height: 1.2
+        white-space: nowrap
+        overflow: hidden
+        text-overflow: ellipsis
+
+      .nexterm-meta
+        display: flex
+        align-items: center
+        gap: 0.5rem
+        flex-wrap: wrap
+
+        .nexterm-type
+          display: inline-block
+          padding: 0.15rem 0.4rem
+          background-color: colors.$primary-opacity
+          color: colors.$primary
+          border-radius: 0.3rem
+          font-size: 0.65rem
+          font-weight: 700
+          text-transform: uppercase
+          letter-spacing: 0.3px
+
+        .nexterm-file
+          font-size: 0.7rem
+          color: colors.$subtext
+          font-weight: 500
+          font-family: 'SF Mono', 'Fira Code', monospace
+          overflow: hidden
+          text-overflow: ellipsis
+          white-space: nowrap
+
+  .card-content
+    flex: 1
+    display: flex
+    flex-direction: column
+
+    .nexterm-description
+      margin: 0
+      color: colors.$subtext
+      font-size: 0.85rem
+      font-weight: 500
+      line-height: 1.4
+      display: -webkit-box
+      -webkit-line-clamp: 3
+      -webkit-box-orient: vertical
+      overflow: hidden

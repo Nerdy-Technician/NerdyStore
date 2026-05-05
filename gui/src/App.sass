@@ -1,0 +1,505 @@
+@use "./styles/colors"
+
+.app-loading, .app-error
+  display: flex
+  align-items: center
+  justify-content: center
+  height: 100%
+  width: 100%
+
+.app-error
+  color: colors.$error
+
+.store-layout
+  display: flex
+  height: 100%
+  width: 100%
+  overflow: hidden
+
+.store-sidebar
+  width: 260px
+  flex-shrink: 0
+  background-color: colors.$lighter-background
+  border-right: 1px solid colors.$dark-gray
+  display: flex
+  flex-direction: column
+  overflow: hidden
+
+  @media (max-width: 900px)
+    display: none
+
+  .sidebar-header
+    padding: 1.25rem
+    display: flex
+    align-items: center
+    gap: 0.875rem
+    border-bottom: 1px solid colors.$dark-gray
+
+    .sidebar-logo
+      width: 2.5rem
+      height: 2.5rem
+      background-color: colors.$primary-opacity
+      border-radius: 0.625rem
+      display: flex
+      align-items: center
+      justify-content: center
+      flex-shrink: 0
+
+      svg
+        width: 1.5rem
+        height: 1.5rem
+        color: colors.$primary
+
+    .sidebar-title
+      h1
+        margin: 0
+        font-size: 1.125rem
+        font-weight: 700
+        color: colors.$white
+        line-height: 1.2
+
+      p
+        margin: 0
+        font-size: 0.75rem
+        color: colors.$subtext
+        font-weight: 500
+
+  .sidebar-sections
+    display: flex
+    gap: 0.375rem
+    padding: 0.75rem
+    border-bottom: 1px solid colors.$dark-gray
+
+    .section-btn
+      flex: 1
+      display: flex
+      align-items: center
+      justify-content: center
+      gap: 0.5rem
+      padding: 0.5rem 0.75rem
+      border: 1px solid colors.$dark-gray
+      border-radius: 0.5rem
+      background: transparent
+      cursor: pointer
+      transition: all 0.15s
+      font-size: 0.8rem
+      font-weight: 600
+      color: colors.$subtext
+
+      .section-icon
+        width: 1.125rem
+        height: 1.125rem
+
+      &:hover
+        background-color: colors.$background
+        color: colors.$white
+
+      &.active
+        background-color: colors.$primary-opacity
+        border-color: colors.$primary
+        color: colors.$white
+
+        .section-icon
+          color: colors.$primary
+
+  .sidebar-nav
+    flex: 1
+    overflow-y: auto
+    padding: 1rem 0.75rem
+
+    .nav-label
+      padding: 0.5rem 0.75rem 0.75rem
+      font-size: 0.7rem
+      font-weight: 600
+      text-transform: uppercase
+      letter-spacing: 0.05em
+      color: colors.$subtext
+
+    .nav-item
+      width: 100%
+      display: flex
+      align-items: center
+      gap: 0.75rem
+      padding: 0.625rem 0.75rem
+      margin-bottom: 0.25rem
+      border: none
+      border-radius: 0.5rem
+      background: transparent
+      cursor: pointer
+      transition: background-color 0.15s, color 0.15s
+      text-align: left
+
+      .nav-icon
+        width: 1.25rem
+        height: 1.25rem
+        color: colors.$subtext
+        flex-shrink: 0
+        transition: color 0.15s
+
+      .nav-text
+        flex: 1
+        font-size: 0.875rem
+        font-weight: 500
+        color: colors.$subtext
+        transition: color 0.15s
+
+      .nav-count
+        font-size: 0.75rem
+        font-weight: 600
+        color: colors.$subtext
+        background-color: colors.$gray
+        padding: 0.125rem 0.5rem
+        border-radius: 0.375rem
+        transition: background-color 0.15s, color 0.15s
+
+      &:hover
+        background-color: colors.$background
+
+        .nav-icon, .nav-text
+          color: colors.$white
+
+      &.active
+        background-color: colors.$primary-opacity
+
+        .nav-icon
+          color: colors.$primary
+
+        .nav-text
+          color: colors.$white
+
+        .nav-count
+          background-color: rgba(255, 255, 255, 0.15)
+          color: colors.$white
+
+.store-main
+  flex: 1
+  display: flex
+  flex-direction: column
+  overflow: hidden
+  min-width: 0
+
+.mobile-header
+  display: none
+  padding: 1rem
+  background-color: colors.$lighter-background
+  border-bottom: 1px solid colors.$dark-gray
+  align-items: center
+  justify-content: space-between
+  gap: 1rem
+  flex-wrap: wrap
+
+  @media (max-width: 900px)
+    display: flex
+
+  .mobile-brand
+    display: flex
+    align-items: center
+    gap: 0.5rem
+    color: colors.$white
+    font-weight: 700
+    font-size: 1.125rem
+
+    svg
+      width: 1.5rem
+      height: 1.5rem
+      color: colors.$primary
+
+  .mobile-sections
+    display: flex
+    gap: 0.25rem
+
+    .mobile-section-btn
+      display: flex
+      align-items: center
+      gap: 0.375rem
+      padding: 0.375rem 0.625rem
+      border: 1px solid colors.$dark-gray
+      border-radius: 0.375rem
+      background: transparent
+      cursor: pointer
+      font-size: 0.75rem
+      font-weight: 600
+      color: colors.$subtext
+      transition: all 0.15s
+
+      svg
+        width: 1rem
+        height: 1rem
+
+      &:hover
+        color: colors.$white
+
+      &.active
+        background-color: colors.$primary-opacity
+        border-color: colors.$primary
+        color: colors.$white
+
+        svg
+          color: colors.$primary
+
+  .category-dropdown
+    position: relative
+
+    .dropdown-trigger
+      display: flex
+      align-items: center
+      gap: 0.5rem
+      padding: 0.5rem 0.75rem
+      background-color: colors.$background
+      border: 1px solid colors.$dark-gray
+      border-radius: 0.5rem
+      cursor: pointer
+      transition: border-color 0.2s
+
+      .trigger-icon
+        width: 1.125rem
+        height: 1.125rem
+        color: colors.$primary
+
+      span
+        font-size: 0.875rem
+        font-weight: 600
+        color: colors.$white
+
+      .chevron
+        width: 1.125rem
+        height: 1.125rem
+        color: colors.$subtext
+        transition: transform 0.2s
+
+      &:hover
+        border-color: colors.$gray
+
+      &.open
+        border-color: colors.$primary
+
+        .chevron
+          transform: rotate(180deg)
+
+    .dropdown-menu
+      position: absolute
+      top: calc(100% + 0.5rem)
+      right: 0
+      min-width: 200px
+      background-color: colors.$lighter-background
+      border: 1px solid colors.$dark-gray
+      border-radius: 0.75rem
+      padding: 0.5rem
+      z-index: 100
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3)
+      animation: dropdownIn 0.15s ease-out
+
+      .dropdown-item
+        width: 100%
+        display: flex
+        align-items: center
+        gap: 0.625rem
+        padding: 0.625rem 0.75rem
+        border: none
+        border-radius: 0.5rem
+        background: transparent
+        cursor: pointer
+        text-align: left
+        transition: background-color 0.15s
+
+        svg
+          width: 1.125rem
+          height: 1.125rem
+          color: colors.$subtext
+          flex-shrink: 0
+
+        .item-text
+          flex: 1
+          font-size: 0.875rem
+          font-weight: 500
+          color: colors.$subtext
+
+        .item-count
+          font-size: 0.75rem
+          font-weight: 600
+          color: colors.$subtext
+          background-color: colors.$gray
+          padding: 0.125rem 0.5rem
+          border-radius: 0.375rem
+
+        &:hover
+          background-color: colors.$background
+
+          svg, .item-text
+            color: colors.$white
+
+        &.active
+          background-color: colors.$primary-opacity
+
+          svg
+            color: colors.$primary
+
+          .item-text
+            color: colors.$white
+
+          .item-count
+            background-color: rgba(255, 255, 255, 0.15)
+            color: colors.$white
+
+@keyframes dropdownIn
+  from
+    opacity: 0
+    transform: translateY(-0.5rem)
+  to
+    opacity: 1
+    transform: translateY(0)
+
+.store-content
+  flex: 1
+  overflow-y: auto
+  padding: 1.5rem 2rem
+
+  @media (max-width: 768px)
+    padding: 1rem
+
+  .content-header
+    display: flex
+    align-items: center
+    justify-content: space-between
+    margin-bottom: 1.25rem
+
+    h2
+      margin: 0
+      font-size: 1.5rem
+      font-weight: 700
+      color: colors.$white
+
+      @media (max-width: 768px)
+        font-size: 1.25rem
+
+    .app-count
+      font-size: 0.875rem
+      color: colors.$subtext
+      font-weight: 500
+
+  .store-filters
+    display: flex
+    gap: 1rem
+    margin-bottom: 1.5rem
+
+    @media (max-width: 600px)
+      flex-direction: column
+
+    .search-wrapper
+      flex: 1
+      min-width: 200px
+
+    .sort-wrapper
+      min-width: 160px
+
+      @media (max-width: 600px)
+        min-width: 100%
+
+  .store-results
+    .loading-container
+      display: flex
+      justify-content: center
+      padding: 3rem
+
+    .apps-grid
+      display: grid
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr))
+      gap: 1rem
+
+      @media (max-width: 768px)
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr))
+
+      @media (max-width: 500px)
+        grid-template-columns: 1fr
+
+    .no-results
+      display: flex
+      flex-direction: column
+      align-items: center
+      justify-content: center
+      padding: 4rem 2rem
+      text-align: center
+      background-color: colors.$lighter-background
+      border: 1px solid colors.$dark-gray
+      border-radius: 0.75rem
+
+      svg
+        width: 3.5rem
+        height: 3.5rem
+        color: colors.$subtext
+        opacity: 0.5
+        margin-bottom: 1rem
+
+      h3
+        margin: 0 0 0.375rem 0
+        font-size: 1.125rem
+        font-weight: 600
+        color: colors.$white
+
+      p
+        margin: 0
+        font-size: 0.875rem
+        color: colors.$subtext
+
+.store-footer
+  flex-shrink: 0
+  padding: 0.75rem 2rem
+  background-color: colors.$lighter-background
+  border-top: 1px solid colors.$dark-gray
+  display: flex
+  align-items: center
+  justify-content: space-between
+  gap: 1rem
+  font-size: 0.8rem
+  color: colors.$subtext
+
+  @media (max-width: 768px)
+    flex-direction: column-reverse
+    padding: 0.75rem 1rem
+    gap: 0.5rem
+    text-align: center
+
+  .footer-links
+    display: flex
+    align-items: center
+    gap: 0.5rem
+
+    a
+      color: colors.$subtext
+      text-decoration: none
+      transition: color 0.2s ease
+
+      &:hover
+        color: colors.$primary
+
+    .footer-separator
+      color: colors.$dark-gray
+
+  .footer-info
+    display: flex
+    align-items: center
+    gap: 0.5rem
+
+    @media (max-width: 768px)
+      flex-direction: column
+      gap: 0.25rem
+
+    .footer-generated
+      opacity: 0.7
+
+    .footer-copyright
+      a
+        color: colors.$subtext
+        text-decoration: none
+        transition: color 0.2s ease
+
+        &:hover
+          color: colors.$primary
+
+      &::after
+        content: "•"
+        margin-left: 0.5rem
+        color: colors.$dark-gray
+
+        @media (max-width: 768px)
+          display: none

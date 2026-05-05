@@ -44,7 +44,7 @@ const buildApp = (appDir, appId, letter) => {
 const npindexPath = join(APPS_DIR, "NPINDEX");
 const npindexContent = existsSync(npindexPath) ? readFileSync(npindexPath, "utf8") : "";
 const npindexHeader = npindexContent.match(/^#!NPINDEX1\s+(\S+)/);
-const sourceName = npindexHeader ? npindexHeader[1] : "official";
+const sourceName = npindexHeader ? npindexHeader[1] : "NerdyStore";
 
 console.log(`Building apps (source: ${sourceName})...\n`);
 if (!existsSync(DIST_DIR)) mkdirSync(DIST_DIR);

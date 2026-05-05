@@ -1,0 +1,10 @@
+services:
+    dockhand:
+        container_name: Dockhand
+        ports:
+            - 3866:3000
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - /volume1/docker/dockhand:/app/data:rw
+        restart: always
+        image: fnsys/dockhand:latest

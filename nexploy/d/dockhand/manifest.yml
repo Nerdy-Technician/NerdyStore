@@ -1,0 +1,8 @@
+type: docker
+name: Dockhand
+version: 0.3.0
+description: Docker container management web interface
+category: ContainerManagement
+mainService: dockhand
+gallery:
+  - gallery/main.jpg

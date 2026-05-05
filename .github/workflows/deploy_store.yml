@@ -30,6 +30,15 @@ jobs:
       - name: Build apps index
         run: node scripts/build_store.js
 
+      - name: Populate gui/public from nexploy dist
+        run: |
+          rm -f gui/public/NPINDEX gui/public/categories.json gui/public/nexterm.json
+          rm -rf gui/public/categories
+          cp nexploy/dist/NPINDEX gui/public/NPINDEX
+          cp nexploy/dist/categories.json gui/public/categories.json
+          cp nexploy/dist/nexterm.json gui/public/nexterm.json
+          cp -r nexploy/dist/categories gui/public/categories
+
       - name: Install gui dependencies
         run: |
           cd gui

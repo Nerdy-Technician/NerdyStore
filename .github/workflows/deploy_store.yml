@@ -38,6 +38,14 @@ jobs:
           cp nexploy/dist/categories.json gui/public/categories.json
           cp nexploy/dist/nexterm.json gui/public/nexterm.json
           cp -r nexploy/dist/categories gui/public/categories
+          find gui/public/logos -type l -delete
+          for letter in nexploy/dist/*/; do
+            name=$(basename "$letter")
+            [ ${#name} -eq 1 ] || continue
+            for app in "$letter"*/; do
+              [ -f "$app/logo.png" ] && cp "$app/logo.png" "gui/public/logos/$(basename $app).png"
+            done
+          done
 
       - name: Install gui dependencies
         run: |

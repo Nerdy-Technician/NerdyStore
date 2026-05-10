@@ -63,38 +63,46 @@ const isValidPng = dest => {
         if (!fs.statSync(letterPath).isDirectory()) continue;
         for (const id of fs.readdirSync(letterPath)) {
             const manifestPath = path.join(letterPath, id, "manifest.yml");
-            if (fs.existsSync(manifestPath)) apps.push(id);
+            if (fs.existsSync(manifestPath)) apps.push({ id, dir: path.join(letterPath, id) });
         }
     }
 
-    const unique = [...new Set(apps)];
-    let fetched = 0, skipped = 0, failed = 0;
+    let fetched = 0, skipped = 0, failed = 0, copied = 0;
 
-    for (const id of unique) {
+    for (const { id, dir } of apps) {
         const dest = path.join(LOGOS_DIR, `${id}.png`);
-        if (fs.existsSync(dest) && isValidPng(dest)) {
+        if (!fs.existsSync(dest) || !isValidPng(dest)) {
+            const iconName = ALIASES[id] || id;
+            const url = `${CDN_BASE}/${iconName}.png`;
+
+            process.stdout.write(`  Fetching ${id}... `);
+            try {
+                await download(url, dest);
+                if (isValidPng(dest)) {
+                    console.log("OK");
+                    fetched++;
+                } else {
+                    fs.unlinkSync(dest);
+                    throw new Error("not a PNG");
+                }
+            } catch (err) {
+                console.log(`MISS (${err.message})`);
+                failed++;
+            }
+        } else {
             skipped++;
-            continue;
         }
 
-        const iconName = ALIASES[id] || id;
-        const url = `${CDN_BASE}/${iconName}.png`;
-
-        process.stdout.write(`  Fetching ${id}... `);
-        try {
-            await download(url, dest);
-            if (isValidPng(dest)) {
-                console.log("OK");
-                fetched++;
-            } else {
-                fs.unlinkSync(dest);
-                throw new Error("not a PNG");
+        if (fs.existsSync(dest) && isValidPng(dest)) {
+            const manifestLogo = path.join(dir, "logo.png");
+            try {
+                fs.copyFileSync(dest, manifestLogo);
+                copied++;
+            } catch (err) {
+                console.warn(`  WARN: could not copy logo for ${id}: ${err.message}`);
             }
-        } catch (err) {
-            console.log(`MISS (${err.message})`);
-            failed++;
         }
     }
 
-    console.log(`\nLogos: ${fetched} fetched, ${skipped} already exist, ${failed} not found`);
+    console.log(`\nLogos: ${fetched} fetched, ${skipped} already exist, ${failed} not found, ${copied} copied to manifest dirs`);
 })();

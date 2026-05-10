@@ -12,7 +12,7 @@ import ServerUrlDialog from "./components/ServerUrlDialog";
 import { loadCategoriesIndex, loadCategoryApps, loadNextermData, loadSourceName } from "./utils/api";
 import HomePage from "./components/HomePage";
 
-const CATEGORY_ICONS = { scripts: mdiScriptText, networking: mdiLan, media: mdiPlayCircle, cloud: mdiCloud, development: mdiCodeBraces, utilities: mdiWrench, gaming: mdiGamepadVariant, all: mdiApps, other: mdiDotsHorizontal, containermanagement: mdiDocker, web: mdiWeb, ads: mdiAdvertisements, home: mdiHomeAutomation, monitoring: mdiChartLine, dashboard: mdiViewDashboard, inventory: mdiClipboardList, productivity: mdiBriefcase };
+const CATEGORY_ICONS = { scripts: mdiScriptText, networking: mdiLan, "media-servers": mdiPlayCircle, cloud: mdiCloud, development: mdiCodeBraces, utilities: mdiWrench, gaming: mdiGamepadVariant, all: mdiApps, other: mdiDotsHorizontal, "container-management": mdiDocker, "web-tools": mdiWeb, "ad-blockers": mdiAdvertisements, "home-automation": mdiHomeAutomation, monitoring: mdiChartLine, dashboard: mdiViewDashboard, inventory: mdiClipboardList, productivity: mdiBriefcase };
 const NEXTERM_ICONS = { scripts: mdiScriptText, snippets: mdiCodeBraces, themes: mdiPalette };
 const getCategoryIcon = (slug) => CATEGORY_ICONS[slug?.toLowerCase()] || mdiApps;
 const getNextermIcon = (slug) => NEXTERM_ICONS[slug?.toLowerCase()] || mdiScriptText;

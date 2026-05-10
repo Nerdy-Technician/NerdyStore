@@ -32,20 +32,14 @@ jobs:
 
       - name: Populate gui/public from nexploy dist
         run: |
-          rm -f gui/public/NPINDEX gui/public/categories.json gui/public/nexterm.json
-          rm -rf gui/public/categories
+          rm -f gui/public/NPINDEX gui/public/categories.json gui/public/nexterm.json || true
+          rm -rf gui/public/categories || true
           cp nexploy/dist/NPINDEX gui/public/NPINDEX
           cp nexploy/dist/categories.json gui/public/categories.json
           cp nexploy/dist/nexterm.json gui/public/nexterm.json
           cp -r nexploy/dist/categories gui/public/categories
-          find gui/public/logos -type l -delete
-          for letter in nexploy/dist/*/; do
-            name=$(basename "$letter")
-            [ ${#name} -eq 1 ] || continue
-            for app in "$letter"*/; do
-              [ -f "$app/logo.png" ] && cp "$app/logo.png" "gui/public/logos/$(basename $app).png"
-            done
-          done
+          mkdir -p gui/public/logos
+          find gui/public/logos -type l -delete 2>/dev/null || true
 
       - name: Install gui dependencies
         run: |
@@ -59,24 +53,11 @@ jobs:
 
       - name: Prepare deployment
         run: |
-          mkdir -p deploy
+          mkdir -p deploy/logos
           touch deploy/.nojekyll
           cp -r gui/dist/* deploy/
           cp -r nexploy/dist/* deploy/
-          mkdir -p deploy/logos
-          
-          for letter in nexploy/*/; do
-            if [ -d "$letter" ] && [ "$(basename $letter)" != "dist" ]; then
-              for app in "$letter"*/; do
-                if [ -d "$app" ]; then
-                  appname=$(basename "$app")
-                  if [ -f "$app/logo.png" ]; then
-                    cp "$app/logo.png" "deploy/logos/$appname.png"
-                  fi
-                fi
-              done
-            fi
-          done
+          [ -d gui/public/logos ] && cp gui/public/logos/*.png deploy/logos/ 2>/dev/null || true
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

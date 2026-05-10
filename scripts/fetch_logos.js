@@ -4,8 +4,9 @@ const fs = require("fs");
 const path = require("path");
 
 const LOGOS_DIR = path.join(__dirname, "..", "gui", "public", "logos");
-const CATEGORIES_DIR = path.join(__dirname, "..", "nexploy", "dist", "categories");
+const NEXPLOY_DIR = path.join(__dirname, "..", "nexploy");
 const CDN_BASE = "https://cdn.jsdelivr.net/gh/selfhst/icons@main/png";
+const IGNORE = new Set(["dist", ".git", ".DS_Store", "NPINDEX"]);
 
 const ALIASES = {
     "hassio-supervisor": "home-assistant",
@@ -55,13 +56,14 @@ const isValidPng = dest => {
 (async () => {
     fs.mkdirSync(LOGOS_DIR, { recursive: true });
 
-    const files = fs.readdirSync(CATEGORIES_DIR).filter(f => f.endsWith(".json"));
     const apps = [];
-
-    for (const file of files) {
-        const data = JSON.parse(fs.readFileSync(path.join(CATEGORIES_DIR, file), "utf8"));
-        for (const app of data.apps || []) {
-            if (app.hasLogo) apps.push(app.id);
+    for (const letter of fs.readdirSync(NEXPLOY_DIR)) {
+        if (IGNORE.has(letter) || letter.length !== 1) continue;
+        const letterPath = path.join(NEXPLOY_DIR, letter);
+        if (!fs.statSync(letterPath).isDirectory()) continue;
+        for (const id of fs.readdirSync(letterPath)) {
+            const manifestPath = path.join(letterPath, id, "manifest.yml");
+            if (fs.existsSync(manifestPath)) apps.push(id);
         }
     }
 

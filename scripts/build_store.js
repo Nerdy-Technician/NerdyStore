@@ -6,6 +6,7 @@ const { execSync } = require("child_process");
 const APPS_DIR = join(__dirname, "..", "nexploy");
 const NEXTERM_DIR = join(__dirname, "..", "nexterm");
 const DIST_DIR = join(APPS_DIR, "dist");
+const LOGOS_DIR = join(__dirname, "..", "gui", "public", "logos");
 const IGNORE = ["build.js", "auto-update.js", "update.js.template", "dist", "npindex", ".git", ".DS_Store", "NPINDEX"];
 
 const parseManifest = content => Object.fromEntries(
@@ -39,7 +40,7 @@ const buildApp = (appDir, appId, letter) => {
     mkdirSync(destDir, { recursive: true });
     cpSync(appDir, destDir, { recursive: true });
     console.log(`  → ${letter}/${appId}@${version}`);
-    return { id: appId, letter, version, name: manifest.name || appId, description: manifest.description || "", category: manifest.category || "Other", type: manifest.type || "unknown", hasLogo: existsSync(join(appDir, "logo.png")) };
+    return { id: appId, letter, version, name: manifest.name || appId, description: manifest.description || "", category: manifest.category || "Other", type: manifest.type || "unknown", hasLogo: existsSync(join(LOGOS_DIR, `${appId}.png`)) };
 };
 
 const npindexPath = join(APPS_DIR, "NPINDEX");
@@ -47,7 +48,10 @@ const npindexContent = existsSync(npindexPath) ? readFileSync(npindexPath, "utf8
 const npindexHeader = npindexContent.match(/^#!NPINDEX1\s+(\S+)/);
 const sourceName = npindexHeader ? npindexHeader[1] : "NerdyStore";
 
-console.log(`Building apps (source: ${sourceName})...\n`);
+console.log("Fetching logos...");
+execSync(`node ${join(__dirname, "fetch_logos.js")}`, { stdio: "inherit" });
+
+console.log(`\nBuilding apps (source: ${sourceName})...\n`);
 if (!existsSync(DIST_DIR)) mkdirSync(DIST_DIR);
 if (!existsSync(join(DIST_DIR, "categories"))) mkdirSync(join(DIST_DIR, "categories"));
 
@@ -108,6 +112,3 @@ writeFileSync(join(DIST_DIR, "nexterm.json"), JSON.stringify({
 
 const totalNexterm = nextermCategories.reduce((s, c) => s + c.count, 0);
 console.log(`\nNexterm: ${totalNexterm} items | ${nextermCategories.length} categories`);
-
-console.log("\nFetching logos...");
-execSync(`node ${join(__dirname, "fetch_logos.js")}`, { stdio: "inherit" });

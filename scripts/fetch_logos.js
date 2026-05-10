@@ -11,24 +11,29 @@ const ALIASES = {
     "hassio-supervisor": "home-assistant",
 };
 
+const tryUnlink = f => { try { fs.unlinkSync(f); } catch {} };
+
 const download = (url, dest) => new Promise((resolve, reject) => {
-    const file = fs.createWriteStream(dest);
+    let file;
+    try {
+        file = fs.createWriteStream(dest);
+    } catch (err) {
+        return reject(err);
+    }
+    file.on("error", err => { tryUnlink(dest); reject(err); });
     https.get(url, res => {
-        if (res.statusCode === 302 || res.statusCode === 301) {
-            file.close();
-            return download(res.headers.location, dest).then(resolve).catch(reject);
+        if (res.statusCode === 301 || res.statusCode === 302) {
+            file.close(() => download(res.headers.location, dest).then(resolve).catch(reject));
+            return;
         }
         if (res.statusCode !== 200) {
-            file.close();
-            fs.unlinkSync(dest);
-            return reject(new Error(`HTTP ${res.statusCode}`));
+            file.close(() => { tryUnlink(dest); reject(new Error(`HTTP ${res.statusCode}`)); });
+            res.resume();
+            return;
         }
         res.pipe(file);
         file.on("finish", () => file.close(resolve));
-    }).on("error", err => {
-        fs.unlinkSync(dest);
-        reject(err);
-    });
+    }).on("error", err => { file.close(() => { tryUnlink(dest); reject(err); }); });
 });
 
 const isValidPng = dest => {
@@ -41,7 +46,7 @@ const isValidPng = dest => {
 };
 
 (async () => {
-    if (!fs.existsSync(LOGOS_DIR)) fs.mkdirSync(LOGOS_DIR, { recursive: true });
+    fs.mkdirSync(LOGOS_DIR, { recursive: true });
 
     const files = fs.readdirSync(CATEGORIES_DIR).filter(f => f.endsWith(".json"));
     const apps = [];

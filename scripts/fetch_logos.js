@@ -11,29 +11,36 @@ const ALIASES = {
     "hassio-supervisor": "home-assistant",
 };
 
+const TIMEOUT_MS = 15000;
+
 const tryUnlink = f => { try { fs.unlinkSync(f); } catch {} };
 
 const download = (url, dest) => new Promise((resolve, reject) => {
-    let file;
-    try {
-        file = fs.createWriteStream(dest);
-    } catch (err) {
-        return reject(err);
-    }
+    fs.mkdirSync(path.dirname(dest), { recursive: true });
+
+    const file = fs.createWriteStream(dest);
     file.on("error", err => { tryUnlink(dest); reject(err); });
-    https.get(url, res => {
+
+    const req = https.get(url, res => {
         if (res.statusCode === 301 || res.statusCode === 302) {
+            res.resume();
             file.close(() => download(res.headers.location, dest).then(resolve).catch(reject));
             return;
         }
         if (res.statusCode !== 200) {
-            file.close(() => { tryUnlink(dest); reject(new Error(`HTTP ${res.statusCode}`)); });
             res.resume();
+            file.close(() => { tryUnlink(dest); reject(new Error(`HTTP ${res.statusCode}`)); });
             return;
         }
         res.pipe(file);
         file.on("finish", () => file.close(resolve));
-    }).on("error", err => { file.close(() => { tryUnlink(dest); reject(err); }); });
+    });
+
+    req.setTimeout(TIMEOUT_MS, () => {
+        req.destroy(new Error(`timeout after ${TIMEOUT_MS}ms`));
+    });
+
+    req.on("error", err => { file.close(() => { tryUnlink(dest); reject(err); }); });
 });
 
 const isValidPng = dest => {

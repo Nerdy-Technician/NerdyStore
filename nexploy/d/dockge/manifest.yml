@@ -1,0 +1,8 @@
+type: docker
+name: Dockge
+version: 1.0.0
+description: Web-based Docker management tool
+category: ContainerManagement
+mainService: dockge
+gallery:
+  - gallery/main.jpg

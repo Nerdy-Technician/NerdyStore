@@ -1,0 +1,14 @@
+services:
+  sonarr:
+    image: ghcr.io/linuxserver/sonarr
+    container_name: sonarr
+    restart: always
+    ports:
+      - "8989:8989"
+    volumes:
+      - ./config:/config
+      - ./tv:/tv
+      - ./downloads:/downloads
+    environment:
+      - PUID=1026
+      - PGID=100

@@ -1,0 +1,21 @@
+services:
+  reclaimerr:
+    image: ghcr.io/jessielw/reclaimerr:latest
+    container_name: Reclaimerr
+    restart: on-failure:5
+    ports:
+      - "7565:8000"
+    volumes:
+      - ./data:/app/data:rw
+    environment:
+      - DATA_DIR=./data
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - CORS_ORIGINS=http://localhost:3000
+      - COOKIE_SECURE=false
+    healthcheck:
+      test: timeout 10s bash -c ':> /dev/tcp/127.0.0.1/8000' || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 90s

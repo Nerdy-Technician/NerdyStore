@@ -1,0 +1,6 @@
+type: docker
+name: Favicon Downloader
+version: latest
+description: Self-hosted favicon downloader and proxy service
+category: Web Tools
+mainService: favicon

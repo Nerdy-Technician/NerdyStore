@@ -1,0 +1,6 @@
+type: docker
+name: Lidarr
+version: latest
+description: Automated music collection manager and downloader
+category: Media Servers
+mainService: lidarr

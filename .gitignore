@@ -4,3 +4,4 @@ gui/dist/
 .DS_Store
 *.local
 ADD_APP.md
+start.sh

@@ -1,0 +1,15 @@
+services:
+  bazarr:
+    image: ghcr.io/linuxserver/bazarr
+    container_name: bazarr
+    restart: always
+    ports:
+      - "6767:6767"
+    volumes:
+      - ./config:/config
+      - ./movies:/movies
+      - ./tv:/tv
+      - ./anime:/anime
+    environment:
+      - PUID=1026
+      - PGID=100

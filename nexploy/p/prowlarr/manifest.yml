@@ -1,0 +1,6 @@
+type: docker
+name: Prowlarr
+version: latest
+description: Indexer manager and proxy for Sonarr, Radarr, Lidarr, and more
+category: Media Servers
+mainService: prowlarr

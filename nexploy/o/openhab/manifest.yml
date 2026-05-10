@@ -1,0 +1,6 @@
+type: docker
+name: openHAB
+version: latest
+description: Vendor and technology agnostic open source home automation platform
+category: Home Automation
+mainService: openhab

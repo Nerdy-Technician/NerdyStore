@@ -1,0 +1,6 @@
+type: docker
+name: Gaps
+version: latest
+description: Finds missing movies in your Plex library using The Movie Database
+category: Media Servers
+mainService: gaps

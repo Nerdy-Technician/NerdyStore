@@ -1,0 +1,13 @@
+services:
+  nginx-proxy-manager:
+    image: jc21/nginx-proxy-manager
+    container_name: nginx_proxy_manager
+    restart: always
+    ports:
+      - "8341:80"
+      - "81:81"
+      - "8766:443"
+    volumes:
+      - ./config.json:/app/config/production.json
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt

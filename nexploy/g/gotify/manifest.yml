@@ -1,0 +1,6 @@
+type: docker
+name: Gotify
+version: latest
+description: Self-hosted push notification server. Default credentials are admin / admin.
+category: Monitoring
+mainService: gotify

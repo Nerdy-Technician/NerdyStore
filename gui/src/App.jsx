@@ -2,7 +2,7 @@ import "./styles/main.sass";
 import "./App.sass";
 import { useEffect, useState, useCallback, useMemo } from "react";
 import Icon from "@mdi/react";
-import { mdiPackageVariant, mdiAdvertisements, mdiWeb, mdiMagnify, mdiScriptText, mdiLan, mdiPlayCircle, mdiCloud, mdiCodeBraces, mdiWrench, mdiApps, mdiDotsHorizontal, mdiChevronDown, mdiGamepadVariant, mdiConsoleLine, mdiPalette, mdiDocker } from "@mdi/js";
+import { mdiPackageVariant, mdiAdvertisements, mdiWeb, mdiMagnify, mdiScriptText, mdiLan, mdiPlayCircle, mdiCloud, mdiCodeBraces, mdiWrench, mdiApps, mdiDotsHorizontal, mdiChevronDown, mdiGamepadVariant, mdiConsoleLine, mdiPalette, mdiDocker, mdiStore, mdiHomeAutomation, mdiChartLine, mdiViewDashboard, mdiClipboardList, mdiBriefcase } from "@mdi/js";
 import IconInput from "./components/IconInput";
 import SelectBox from "./components/SelectBox";
 import AppCard from "./components/AppCard";
@@ -10,8 +10,9 @@ import NextermCard from "./components/NextermCard";
 import Loader from "./components/Loader";
 import ServerUrlDialog from "./components/ServerUrlDialog";
 import { loadCategoriesIndex, loadCategoryApps, loadNextermData, loadSourceName } from "./utils/api";
+import HomePage from "./components/HomePage";
 
-const CATEGORY_ICONS = { scripts: mdiScriptText, networking: mdiLan, media: mdiPlayCircle, cloud: mdiCloud, development: mdiCodeBraces, utilities: mdiWrench, gaming: mdiGamepadVariant, all: mdiApps, other: mdiDotsHorizontal, "container-management": mdiDocker, web: mdiWeb, "ad-blockers": mdiAdvertisements };
+const CATEGORY_ICONS = { scripts: mdiScriptText, networking: mdiLan, media: mdiPlayCircle, cloud: mdiCloud, development: mdiCodeBraces, utilities: mdiWrench, gaming: mdiGamepadVariant, all: mdiApps, other: mdiDotsHorizontal, containermanagement: mdiDocker, web: mdiWeb, ads: mdiAdvertisements, home: mdiHomeAutomation, monitoring: mdiChartLine, dashboard: mdiViewDashboard, inventory: mdiClipboardList, productivity: mdiBriefcase };
 const NEXTERM_ICONS = { scripts: mdiScriptText, snippets: mdiCodeBraces, themes: mdiPalette };
 const getCategoryIcon = (slug) => CATEGORY_ICONS[slug?.toLowerCase()] || mdiApps;
 const getNextermIcon = (slug) => NEXTERM_ICONS[slug?.toLowerCase()] || mdiScriptText;
@@ -22,6 +23,7 @@ const SECTIONS = [
 ];
 
 const App = () => {
+    const [activeView, setActiveView] = useState("home");
     const [activeSection, setActiveSection] = useState("nexploy");
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(null);
@@ -81,7 +83,8 @@ const App = () => {
         return () => document.removeEventListener('mousedown', handleClick);
     }, [mobileMenuOpen]);
 
-    const handleCategoryChange = (category) => { setSelectedCategory(category); setMobileMenuOpen(false); };
+    const handleBrowse = (section) => { if (section) setActiveSection(section); setActiveView("store"); };
+    const handleCategoryChange = (category) => { setSelectedCategory(category); setMobileMenuOpen(false); setActiveView("store"); };
     const sortOptions = [{ label: "Name (A-Z)", value: "name" }, { label: "Name (Z-A)", value: "name-desc" }, { label: "Version", value: "version" }];
 
     const filteredAndSortedApps = useMemo(() => {
@@ -110,14 +113,14 @@ const App = () => {
     return (
         <div className="store-layout">
             <aside className="store-sidebar">
-                <div className="sidebar-header">
-                    <div className="sidebar-logo"><Icon path={mdiPackageVariant} /></div>
+                <div className="sidebar-header" onClick={() => setActiveView("home")} style={{ cursor: "pointer" }}>
+                    <div className="sidebar-logo"><Icon path={mdiStore} /></div>
                     <div className="sidebar-title"><h1>NerdyStore</h1><p>3rd party source</p></div>
                 </div>
 
                 <div className="sidebar-sections">
                     {SECTIONS.map((section) => (
-                        <button key={section.key} className={`section-btn${activeSection === section.key ? ' active' : ''}`} onClick={() => setActiveSection(section.key)}>
+                        <button key={section.key} className={`section-btn${activeSection === section.key ? ' active' : ''}`} onClick={() => { setActiveSection(section.key); setActiveView("store"); }}>
                             <Icon path={section.icon} className="section-icon" />
                             <span>{section.label}</span>
                         </button>
@@ -139,7 +142,7 @@ const App = () => {
                     <nav className="sidebar-nav">
                         <div className="nav-label">Categories</div>
                         {nextermData?.categories.map((cat) => (
-                            <button key={cat.slug} className={`nav-item${nextermCategory === cat.slug ? ' active' : ''}`} onClick={() => setNextermCategory(cat.slug)}>
+                            <button key={cat.slug} className={`nav-item${nextermCategory === cat.slug ? ' active' : ''}`} onClick={() => { setNextermCategory(cat.slug); setActiveView("store"); }}>
                                 <Icon path={getNextermIcon(cat.slug)} className="nav-icon" />
                                 <span className="nav-text">{cat.name}</span>
                                 <span className="nav-count">{cat.count}</span>
@@ -153,7 +156,7 @@ const App = () => {
                     <div className="mobile-brand"><Icon path={mdiPackageVariant} /><span>NerdyStore</span></div>
                     <div className="mobile-sections">
                         {SECTIONS.map((section) => (
-                            <button key={section.key} className={`mobile-section-btn${activeSection === section.key ? ' active' : ''}`} onClick={() => setActiveSection(section.key)}>
+                            <button key={section.key} className={`mobile-section-btn${activeSection === section.key ? ' active' : ''}`} onClick={() => { setActiveSection(section.key); setActiveView("store"); }}>
                                 <Icon path={section.icon} /><span>{section.label}</span>
                             </button>
                         ))}
@@ -201,7 +204,9 @@ const App = () => {
                     </div>
                 </header>
 
-                {activeSection === "nexploy" ? (
+                {activeView === "home" ? (
+                    <HomePage categories={categories} onBrowse={handleBrowse} />
+                ) : activeSection === "nexploy" ? (
                     <div className="store-content">
                         <div className="content-header">
                             <h2>{selectedCategory?.name || "Apps"}</h2>

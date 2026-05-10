@@ -1,0 +1,8 @@
+type: docker
+name: Heimdall
+version: 2.0.0
+description: Application dashboard and launcher
+category: Dashboard
+mainService: heimdall
+gallery:
+  - gallery/main.jpg

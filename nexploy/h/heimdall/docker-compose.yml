@@ -1,0 +1,13 @@
+services:
+  heimdall:
+    image: ghcr.io/linuxserver/heimdall
+    container_name: heimdall
+    restart: always
+    ports:
+      - "8056:80"
+      - "7543:443"
+    volumes:
+      - ./config:/config
+    environment:
+      - PUID=1000
+      - PGID=1000

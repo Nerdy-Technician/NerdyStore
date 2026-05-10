@@ -1,0 +1,6 @@
+type: docker
+name: Home Assistant
+version: latest
+description: Open source home automation platform that puts local control first
+category: Home Automation
+mainService: home-assistant

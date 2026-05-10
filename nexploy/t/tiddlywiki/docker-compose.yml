@@ -1,0 +1,12 @@
+services:
+  tiddlywiki:
+    image: jbardi/tiddlywiki5-lazy-images
+    container_name: tiddlywiki
+    restart: always
+    ports:
+      - "5645:8080"
+    volumes:
+      - ./data:/var/lib/tiddlywiki
+    environment:
+      - USERNAME=admin
+      - PASSWORD=admin

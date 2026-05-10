@@ -1,0 +1,6 @@
+type: docker
+name: Ombi
+version: latest
+description: Self-hosted media request and user management for Plex, Emby, and Jellyfin
+category: Media Servers
+mainService: ombi

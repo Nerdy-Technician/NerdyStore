@@ -1,0 +1,6 @@
+type: docker
+name: Web Check
+version: latest
+description: All-in-one OSINT tool for analysing any website
+category: Web Tools
+mainService: webcheck

@@ -1,0 +1,6 @@
+type: docker
+name: MySpeed
+version: latest
+description: Self-hosted internet speed test tracking and history
+category: Monitoring
+mainService: myspeed

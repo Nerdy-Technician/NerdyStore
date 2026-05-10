@@ -1,0 +1,11 @@
+services:
+  tautulli:
+    image: ghcr.io/linuxserver/tautulli:latest
+    container_name: tautulli
+    restart: always
+    network_mode: host
+    volumes:
+      - ./config:/config
+    environment:
+      - PUID=1026
+      - PGID=100

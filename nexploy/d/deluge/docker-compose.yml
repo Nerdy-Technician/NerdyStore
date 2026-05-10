@@ -1,0 +1,15 @@
+services:
+  deluge:
+    image: ghcr.io/linuxserver/deluge
+    container_name: deluge
+    restart: always
+    ports:
+      - "8112:8112"
+      - "6881:6881"
+      - "6881:6881/udp"
+    volumes:
+      - ./config:/config
+      - ./downloads:/downloads
+    environment:
+      - PUID=1026
+      - PGID=100

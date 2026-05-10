@@ -1,0 +1,6 @@
+type: docker
+name: Deluge
+version: latest
+description: Lightweight self-hosted BitTorrent client with a web UI
+category: Media Servers
+mainService: deluge

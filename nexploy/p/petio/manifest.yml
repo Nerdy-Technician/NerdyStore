@@ -1,0 +1,6 @@
+type: docker
+name: Petio
+version: latest
+description: Media request and discovery manager for Plex
+category: Media Servers
+mainService: petio

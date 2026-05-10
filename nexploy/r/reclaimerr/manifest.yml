@@ -1,0 +1,6 @@
+type: docker
+name: Reclaimerr
+version: latest
+description: Automated media cleanup tool for Plex, Radarr, and Sonarr
+category: Media Servers
+mainService: reclaimerr

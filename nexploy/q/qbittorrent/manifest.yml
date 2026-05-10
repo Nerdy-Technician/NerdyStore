@@ -1,0 +1,6 @@
+type: docker
+name: qBittorrent
+version: latest
+description: Self-hosted BitTorrent client with a web UI
+category: Media Servers
+mainService: qbittorrent

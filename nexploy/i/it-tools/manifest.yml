@@ -1,0 +1,6 @@
+type: docker
+name: IT Tools
+version: latest
+description: Collection of handy online tools for developers
+category: Web Tools
+mainService: it-tools

@@ -1,0 +1,18 @@
+services:
+  transmission:
+    image: ghcr.io/linuxserver/transmission
+    container_name: transmission
+    restart: always
+    ports:
+      - "9091:9091"
+      - "51413:51413"
+      - "51413:51413/udp"
+    volumes:
+      - ./config:/config
+      - ./downloads:/downloads
+      - ./watch:/watch
+    environment:
+      - PUID=1026
+      - PGID=100
+      - USER=admin
+      - PASS=admin

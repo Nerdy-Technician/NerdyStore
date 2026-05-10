@@ -1,0 +1,7 @@
+services:
+  drawio:
+    image: jgraph/drawio
+    container_name: drawio
+    restart: always
+    ports:
+      - "5022:8080"

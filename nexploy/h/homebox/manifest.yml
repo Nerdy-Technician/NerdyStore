@@ -1,0 +1,6 @@
+type: docker
+name: Homebox
+version: latest
+description: Home inventory and asset management for the self-hosted
+category: Inventory
+mainService: homebox

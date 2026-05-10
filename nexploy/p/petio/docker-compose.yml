@@ -1,0 +1,31 @@
+services:
+  petio:
+    image: ghcr.io/petio-team/petio:latest
+    container_name: Petio
+    hostname: petio
+    restart: always
+    ports:
+      - "7778:7777"
+    networks:
+      - petio-network
+    user: "1026:100"
+    depends_on:
+      - mongo
+    volumes:
+      - ./config:/app/api/config
+      - ./logs:/app/logs
+
+  mongo:
+    image: mongo:4.4
+    container_name: Petio-DB
+    hostname: mongo
+    restart: always
+    networks:
+      - petio-network
+    user: "1026:100"
+    volumes:
+      - ./db:/data/db
+
+networks:
+  petio-network:
+    driver: bridge

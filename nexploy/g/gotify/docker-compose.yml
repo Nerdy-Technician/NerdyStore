@@ -1,0 +1,18 @@
+services:
+  gotify:
+    image: ghcr.io/gotify/server:latest
+    container_name: Gotify
+    restart: on-failure:5
+    ports:
+      - "6742:80"
+    volumes:
+      - ./data:/app/data:rw
+    environment:
+      - GOTIFY_DEFAULTUSER_NAME=admin
+      - GOTIFY_DEFAULTUSER_PASS=admin
+    healthcheck:
+      test: timeout 10s bash -c ':> /dev/tcp/127.0.0.1/80' || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 90s

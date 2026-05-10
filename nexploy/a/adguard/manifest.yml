@@ -1,0 +1,6 @@
+type: docker
+name: AdGuard Home
+version: latest
+description: Network-wide ad and tracker blocking DNS server
+category: Ad Blockers
+mainService: adguard

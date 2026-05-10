@@ -1,0 +1,6 @@
+type: docker
+name: Transmission
+version: latest
+description: Lightweight self-hosted BitTorrent client with a web UI. Default credentials are admin / admin.
+category: Media Servers
+mainService: transmission

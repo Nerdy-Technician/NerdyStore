@@ -1,0 +1,14 @@
+services:
+  homebox:
+    image: ghcr.io/sysadminsmedia/homebox:latest
+    container_name: homebox
+    restart: always
+    ports:
+      - "3100:7745"
+    volumes:
+      - ./data:/data
+    environment:
+      - HBOX_LOG_LEVEL=info
+      - HBOX_LOG_FORMAT=text
+      - HBOX_WEB_MAX_UPLOAD_SIZE=5000
+      - TZ=Europe/Bucharest

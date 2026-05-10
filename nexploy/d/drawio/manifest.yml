@@ -1,0 +1,6 @@
+type: docker
+name: Draw.io
+version: latest
+description: Diagramming and whiteboarding web application
+category: Web Tools
+mainService: drawio

@@ -1,0 +1,6 @@
+type: docker
+name: Jackett
+version: latest
+description: Torrent indexer proxy and aggregator for Sonarr, Radarr, and more
+category: Media Servers
+mainService: jackett

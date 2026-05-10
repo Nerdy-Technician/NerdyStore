@@ -1,0 +1,11 @@
+services:
+  webcheck:
+    image: lissy93/web-check
+    container_name: Web-Check
+    restart: on-failure:5
+    mem_limit: 4g
+    cpu_shares: 768
+    ports:
+      - "6160:3000"
+    security_opt:
+      - no-new-privileges:true

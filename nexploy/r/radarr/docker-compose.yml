@@ -1,0 +1,14 @@
+services:
+  radarr:
+    image: ghcr.io/linuxserver/radarr
+    container_name: radarr
+    restart: always
+    ports:
+      - "7878:7878"
+    volumes:
+      - ./config:/config
+      - ./movies:/movies
+      - ./downloads:/downloads
+    environment:
+      - PUID=1026
+      - PGID=100

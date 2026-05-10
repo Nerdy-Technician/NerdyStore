@@ -1,0 +1,6 @@
+type: docker
+name: Hassio Supervisor
+version: 2026.04.2
+description: Home Assistant Supervised installer and supervisor daemon
+category: Home Automation
+mainService: hassio-supervisor

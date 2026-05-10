@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const { readdirSync, statSync, readFileSync, writeFileSync, existsSync, mkdirSync, cpSync } = require("fs");
 const { join, extname } = require("path");
+const { execSync } = require("child_process");
 
 const APPS_DIR = join(__dirname, "..", "nexploy");
 const NEXTERM_DIR = join(__dirname, "..", "nexterm");
@@ -107,3 +108,6 @@ writeFileSync(join(DIST_DIR, "nexterm.json"), JSON.stringify({
 
 const totalNexterm = nextermCategories.reduce((s, c) => s + c.count, 0);
 console.log(`\nNexterm: ${totalNexterm} items | ${nextermCategories.length} categories`);
+
+console.log("\nFetching logos...");
+execSync(`node ${join(__dirname, "fetch_logos.js")}`, { stdio: "inherit" });

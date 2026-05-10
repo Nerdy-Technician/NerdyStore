@@ -1,0 +1,6 @@
+type: docker
+name: Memos
+version: stable
+description: Lightweight self-hosted memo and note-taking service
+category: Productivity
+mainService: memos

@@ -1,0 +1,12 @@
+services:
+  prowlarr:
+    image: ghcr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    restart: always
+    ports:
+      - "9696:9696"
+    volumes:
+      - ./config:/config
+    environment:
+      - PUID=1026
+      - PGID=100

@@ -1,0 +1,16 @@
+services:
+  qbittorrent:
+    image: ghcr.io/linuxserver/qbittorrent
+    container_name: qbittorrent
+    restart: always
+    ports:
+      - "6881:6881"
+      - "6881:6881/udp"
+      - "9865:9865"
+    volumes:
+      - ./config:/config
+      - ./downloads:/downloads
+    environment:
+      - WEBUI_PORT=9865
+      - PUID=1026
+      - PGID=100

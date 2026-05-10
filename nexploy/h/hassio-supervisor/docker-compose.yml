@@ -1,0 +1,16 @@
+services:
+  hassio-supervisor:
+    image: ghcr.io/home-assistant/amd64-hassio-supervisor:2026.04.2
+    container_name: hassio_supervisor
+    restart: always
+    privileged: true
+    security_opt:
+      - seccomp=unconfined
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/dbus:/var/run/dbus
+      - ./data:/data
+    environment:
+      - SUPERVISOR_SHARE=/data
+      - SUPERVISOR_NAME=hassio_supervisor
+      - HOMEASSISTANT_REPOSITORY=homeassistant/qemux86-64-homeassistant

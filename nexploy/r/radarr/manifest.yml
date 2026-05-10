@@ -1,0 +1,6 @@
+type: docker
+name: Radarr
+version: latest
+description: Automated movie collection manager and downloader
+category: Media Servers
+mainService: radarr

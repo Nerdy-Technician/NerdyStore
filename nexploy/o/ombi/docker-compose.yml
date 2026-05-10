@@ -1,0 +1,12 @@
+services:
+  ombi:
+    image: ghcr.io/linuxserver/ombi
+    container_name: ombi
+    restart: always
+    ports:
+      - "3579:3579"
+    volumes:
+      - ./config:/config
+    environment:
+      - PUID=1026
+      - PGID=100

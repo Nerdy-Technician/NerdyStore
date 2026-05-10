@@ -1,0 +1,9 @@
+services:
+  gaps:
+    image: housewrecker/gaps
+    container_name: gaps
+    restart: always
+    ports:
+      - "5211:8484"
+    volumes:
+      - ./data:/usr/data

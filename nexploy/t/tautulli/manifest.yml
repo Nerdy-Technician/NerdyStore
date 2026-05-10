@@ -1,0 +1,6 @@
+type: docker
+name: Tautulli
+version: latest
+description: Monitoring and analytics tool for Plex Media Server activity
+category: Media Servers
+mainService: tautulli

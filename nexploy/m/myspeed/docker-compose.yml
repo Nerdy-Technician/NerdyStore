@@ -1,0 +1,15 @@
+services:
+  myspeed:
+    image: germannewsmaker/myspeed:latest
+    container_name: MySpeed
+    restart: on-failure:5
+    mem_limit: 4g
+    cpu_shares: 1024
+    ports:
+      - "5216:5216"
+    volumes:
+      - ./data:/myspeed/data:rw
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - NODE_ENV=production

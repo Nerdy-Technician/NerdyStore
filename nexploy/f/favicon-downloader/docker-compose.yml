@@ -1,0 +1,13 @@
+services:
+  favicon:
+    image: seadfeng/favicon-downloader:latest
+    container_name: Favicon-Downloader
+    restart: on-failure:5
+    mem_limit: 4g
+    cpu_shares: 768
+    ports:
+      - "3501:3000"
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - NODE_ENV=production

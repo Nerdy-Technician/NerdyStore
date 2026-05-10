@@ -1,0 +1,11 @@
+services:
+  openhab:
+    image: openhab/openhab:latest
+    container_name: openhab
+    restart: always
+    ports:
+      - "7100:8080"
+    volumes:
+      - ./conf:/openhab/conf
+      - ./addons:/openhab/addons
+      - ./userdata:/openhab/userdata

@@ -1,0 +1,9 @@
+services:
+  memos:
+    image: ghcr.io/usememos/memos:stable
+    container_name: Memos
+    restart: always
+    ports:
+      - "5235:5230"
+    volumes:
+      - ./data:/var/opt/memos

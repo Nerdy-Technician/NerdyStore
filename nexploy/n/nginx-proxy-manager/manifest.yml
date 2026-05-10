@@ -1,0 +1,6 @@
+type: docker
+name: Nginx Proxy Manager
+version: latest
+description: Reverse proxy manager with SSL, access lists, and a clean web UI
+category: Networking
+mainService: nginx-proxy-manager

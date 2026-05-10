@@ -1,0 +1,6 @@
+type: docker
+name: Sonarr
+version: latest
+description: Automated TV series manager and downloader
+category: Media Servers
+mainService: sonarr

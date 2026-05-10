@@ -1,0 +1,8 @@
+type: docker
+name: FreshRSS
+version: 1.18.0
+description: Self-hosted RSS feed aggregator
+category: Cloud
+mainService: freshrss
+gallery:
+  - gallery/main.jpg

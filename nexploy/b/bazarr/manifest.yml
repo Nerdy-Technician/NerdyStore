@@ -1,0 +1,6 @@
+type: docker
+name: Bazarr
+version: latest
+description: Automatic subtitle manager and downloader for Radarr and Sonarr
+category: Media Servers
+mainService: bazarr

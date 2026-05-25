@@ -1,0 +1,7 @@
+# @name:Running Services
+# @description:List all active systemd services
+# @Category:System
+# @Language:Bash
+# @OS:Linux
+
+systemctl list-units --type=service --state=active --no-pager --no-legend | awk '{print $1, $3, $4}'

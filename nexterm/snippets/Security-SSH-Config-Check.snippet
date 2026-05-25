@@ -1,0 +1,7 @@
+# @name:SSH Config Quick Check
+# @description:Show key security settings from sshd_config
+# @Category:Security
+# @Language:Bash
+# @OS:Linux
+
+grep -E "^(PermitRootLogin|PasswordAuthentication|PermitEmptyPasswords|X11Forwarding|Port|MaxAuthTries)" /etc/ssh/sshd_config 2>/dev/null

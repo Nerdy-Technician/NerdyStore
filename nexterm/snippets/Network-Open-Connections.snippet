@@ -1,0 +1,9 @@
+# @name:Open TCP Connections
+# @description:List established TCP connections with process info
+# @Category:Network
+# @Language:Bash
+# @OS:Linux
+
+ss -tnp state established
+echo "---"
+echo "Total: $(ss -tnp state established | grep -c ESTAB)"

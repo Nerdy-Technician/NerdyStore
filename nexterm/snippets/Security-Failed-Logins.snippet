@@ -1,0 +1,9 @@
+# @name:Failed Login Attempts
+# @description:Count and list failed SSH login attempts from auth log
+# @Category:Security
+# @Language:Bash
+# @OS:Linux
+
+grep "Failed password\|Invalid user" /var/log/auth.log 2>/dev/null | tail -50
+echo "---"
+echo "Total: $(grep -c 'Failed password\|Invalid user' /var/log/auth.log 2>/dev/null)"

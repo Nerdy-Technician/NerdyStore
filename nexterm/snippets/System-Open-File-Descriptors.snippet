@@ -1,0 +1,7 @@
+# @name:Open File Descriptors
+# @description:Show system-wide open FD count vs kernel limit
+# @Category:System
+# @Language:Bash
+# @OS:Linux
+
+awk '{printf "Open FDs: %s / %s\n", $1, $3}' /proc/sys/fs/file-nr

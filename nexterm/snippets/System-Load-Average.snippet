@@ -1,0 +1,8 @@
+# @name:System Load Average
+# @description:Show 1/5/15 minute load averages with CPU count context
+# @Category:System
+# @Language:Bash
+# @OS:Linux
+
+echo "Load: $(cat /proc/loadavg | cut -d' ' -f1-3) ($(nproc) CPUs)"
+uptime

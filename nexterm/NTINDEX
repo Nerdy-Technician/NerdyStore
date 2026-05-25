@@ -97,6 +97,20 @@ scripts/Software-Management/Software Management - Third Party Repos List.sh@43ce
 scripts/System-Log-Rotation-Check.sh@cd96dd3328c51a10f3d531a342813b6e
 scripts/System-Weekly-Maintenance.sh@0f11f5f44d2cf8813dd6dbb0b2fe4dff
 scripts/System-Zombie-Process-Killer.sh@f19cf9d4bb4529fe2639461d1eedb03d
+scripts/Maintenance/Maintain - Clear User Cache.sh@d3e674ec49592b4070301f20d0f54972
+scripts/Maintenance/Maintain - Rotate Old Logs.sh@062e023b39edfdd7a1bd773fdc2e5736
+scripts/Maintenance/Maintain - Trim SSD.sh@66816b244b097a0822a9bbee8681bed8
+scripts/Monitoring/Check - Last Reboot.sh@b2ccebc197f137ae7f5470af8991f74a
+scripts/Monitoring/Check - Root Filesystem Usage.sh@323c946ae56db71ad39a5b4530b920fd
+scripts/Monitoring/Monitor - CPU Temperature.sh@a3cb4d4a590e5aa58eaa9bc71ececba7
+scripts/Monitoring/Monitor - Load Average.sh@6c9d3f8a8120d67a7598a43da80c0c94
+scripts/Monitoring/Monitor - Open File Descriptors.sh@24af3dcb3d5ed80d1b652c679505a1ff
+scripts/Network/Check - Gateway Reachability.sh@0684fba78fa14a9c2ecc1e93af55d5c6
+scripts/Network/Network - Show Open Connections.sh@831799ab9244f9f348b29c927dc6924a
+scripts/Security/Audit/Audit - Failed Login Attempts.sh@8af4bfbab20b1dd69b6e73beab700e57
+scripts/Security/Audit/Audit - Passwd Shadow Permissions.sh@45980c6d92f2ac82ef0d23ca897f3166
+scripts/Security/Audit/Audit - SSH Config.sh@28e2cd8d1d9bc591fec4aaacad2f047f
+scripts/Security/Audit/Audit - World Writable Files.sh@9f61d961f7509dc03ec9f0b6dce27e10
 
 # Snippets
 snippets/APT-Autoremove.snippet@153e5c0766b62a9dfb62385b756cd998
@@ -135,6 +149,18 @@ snippets/System-Top-Memory-Processes.snippet@4c9944257d4275148daedfb20b281291
 snippets/System-Uptime.snippet@0f55f70bf219a2a9c430cbb087ce2ead
 snippets/Users-Recent-Logins.snippet@848c050f5b48f75ad5e3c1f91eb4fc59
 snippets/Users-Sudo-Sessions.snippet@3f93224370bb6ed108cf594aaaa2a30e
+snippets/Disk-Layout.snippet@4a11786457dfc78c5e73c4dec3c3518f
+snippets/Disk-Trim-SSD.snippet@ac030dddb822925a7f3ab045c4d2a180
+snippets/Network-Gateway-Check.snippet@07004b566d66fb892a01d6cf59b3b81e
+snippets/Network-Listening-UDP.snippet@0fcdf0c82de100ab83bc0297a5abc3f9
+snippets/Network-Open-Connections.snippet@d1e0a62ffff23ea5f02c25aacb959790
+snippets/Security-Failed-Logins.snippet@dd894c4a053b4e4e4561a66c0e783214
+snippets/Security-SSH-Config-Check.snippet@02747c9087ae4b1b48a6be440e081a13
+snippets/Security-World-Writable-Files.snippet@5087eac6cd55cef4c3495fc50ef6d064
+snippets/System-Kernel-Version.snippet@1a0d1153133b9f0704883380951fbf14
+snippets/System-Load-Average.snippet@d4ba7920ffb307768adac61e82ab5370
+snippets/System-Open-File-Descriptors.snippet@61e02ea695e65622dc02d9f4883cab39
+snippets/System-Running-Services.snippet@dd19fc94f906d6168bfe871c26a8a149
 
 # Themes
 themes/aquamarine.theme.css@679a479119adc4a86d8de824303e5965

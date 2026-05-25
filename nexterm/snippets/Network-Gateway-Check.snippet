@@ -1,0 +1,9 @@
+# @name:Ping Default Gateway
+# @description:Ping the default gateway to verify local routing
+# @Category:Network
+# @Language:Bash
+# @OS:Linux
+
+gw=$(ip route | awk '/default/{print $3; exit}')
+echo "Gateway: $gw"
+ping -c 4 -W 2 "$gw"

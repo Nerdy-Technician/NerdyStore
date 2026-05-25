@@ -1,0 +1,9 @@
+# @name:Disk Layout
+# @description:Show block device tree and mounted filesystem usage
+# @Category:System
+# @Language:Bash
+# @OS:Linux
+
+lsblk -o NAME,SIZE,TYPE,FSTYPE,MOUNTPOINT
+echo "---"
+df -hT --exclude-type=tmpfs --exclude-type=devtmpfs

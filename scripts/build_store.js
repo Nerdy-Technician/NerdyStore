@@ -78,27 +78,36 @@ console.log(`\nNPINDEX: ${index.length} apps | categories.json: ${categories.len
 console.log("\nBuilding Nexterm catalog...\n");
 const nextermItems = {};
 
+const collectFiles = (dir, baseDir, extensions) => {
+    const results = [];
+    for (const entry of readdirSync(dir)) {
+        const fullPath = join(dir, entry);
+        if (statSync(fullPath).isDirectory()) {
+            results.push(...collectFiles(fullPath, baseDir, extensions));
+        } else if (extensions.some(ext => entry.endsWith(ext))) {
+            results.push({ file: entry, filePath: fullPath, relPath: fullPath.slice(baseDir.length + 1) });
+        }
+    }
+    return results;
+};
+
 for (const [dirName, catInfo] of Object.entries(NEXTERM_CATEGORIES)) {
     const dirPath = join(NEXTERM_DIR, dirName);
     if (!existsSync(dirPath)) continue;
     const items = [];
-    for (const file of readdirSync(dirPath)) {
-        const filePath = join(dirPath, file);
-        if (!statSync(filePath).isFile()) continue;
-        const matchesExt = catInfo.extensions.some(ext => file.endsWith(ext));
-        if (!matchesExt) continue;
+    for (const { file, filePath, relPath } of collectFiles(dirPath, dirPath, catInfo.extensions)) {
         const content = readFileSync(filePath, "utf8");
         const ext = catInfo.extensions.find(ext => file.endsWith(ext));
         const meta = parseCommentMeta(content, ext);
         const item = {
-            id: file,
+            id: relPath,
             name: meta.name || file,
             description: meta.description || "",
             category: dirName,
-            file: `${dirName}/${file}`,
+            file: `${dirName}/${relPath}`,
         };
         items.push(item);
-        console.log(`  → ${dirName}/${file} (${item.name})`);
+        console.log(`  → ${dirName}/${relPath} (${item.name})`);
     }
     nextermItems[dirName] = { name: catInfo.name, items: items.sort((a, b) => a.name.localeCompare(b.name)) };
 }

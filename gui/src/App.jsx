@@ -24,9 +24,20 @@ const SECTIONS = [
     { key: "tools", label: "Tools", icon: mdiPencilRuler },
 ];
 
+const TOOLS = [
+    { key: "theme-creator", label: "Theme Creator", icon: mdiPalette },
+];
+
+const parsePath = () => {
+    const parts = window.location.pathname.replace(/^\//, "").split("/").filter(Boolean);
+    return { section: parts[0] || null, sub: parts[1] || null };
+};
+
 const App = () => {
-    const [activeView, setActiveView] = useState("home");
-    const [activeSection, setActiveSection] = useState("nexploy");
+    const initialPath = parsePath();
+    const [activeView, setActiveView] = useState(initialPath.section ? "store" : "home");
+    const [activeSection, setActiveSection] = useState(initialPath.section || "nexploy");
+    const [activeTool, setActiveTool] = useState(initialPath.sub || "theme-creator");
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [apps, setApps] = useState([]);
@@ -48,20 +59,24 @@ const App = () => {
     const [nextermSearch, setNextermSearch] = useState("");
     const [nextermSubcat, setNextermSubcat] = useState(null);
 
-    const baseUrl = "./";
+    const baseUrl = "/";
 
     useEffect(() => {
         loadSourceName(baseUrl).then(setSourceName).catch(() => {});
         loadCategoriesIndex(baseUrl).then((data) => {
             setCategories(data.categories);
             setGeneratedAt(data.generatedAt);
-            if (data.categories.length > 0) setSelectedCategory(data.categories[0]);
+            const { section, sub } = parsePath();
+            const match = sub && data.categories.find(c => c.slug === sub);
+            setSelectedCategory(match || data.categories[0]);
             setLoadingCategories(false);
         }).catch((err) => { setError(err.message); setLoadingCategories(false); });
 
         loadNextermData(baseUrl).then((data) => {
             setNextermData(data);
-            if (data.categories.length > 0) setNextermCategory(data.categories[0].slug);
+            const { section, sub } = parsePath();
+            const match = section === "nexterm" && sub && data.categories.find(c => c.slug === sub);
+            setNextermCategory(match ? match.slug : data.categories[0]?.slug);
             setLoadingNexterm(false);
         }).catch(() => { setLoadingNexterm(false); });
     }, [baseUrl]);
@@ -86,8 +101,31 @@ const App = () => {
         return () => document.removeEventListener('mousedown', handleClick);
     }, [mobileMenuOpen]);
 
-    const handleBrowse = (section) => { if (section) setActiveSection(section); setActiveView("store"); };
-    const handleCategoryChange = (category) => { setSelectedCategory(category); setMobileMenuOpen(false); setActiveView("store"); };
+    const navigate = useCallback((section, sub) => {
+        const path = sub ? `/${section}/${sub}` : `/${section}`;
+        window.history.pushState(null, "", path);
+    }, []);
+
+    const handleBrowse = (section) => {
+        if (section) { setActiveSection(section); navigate(section); }
+        setActiveView("store");
+    };
+    const handleCategoryChange = (category) => {
+        setSelectedCategory(category);
+        setMobileMenuOpen(false);
+        setActiveView("store");
+        navigate("nexploy", category.slug);
+    };
+
+    useEffect(() => {
+        const onPop = () => {
+            const { section, sub } = parsePath();
+            if (section) { setActiveSection(section); setActiveView("store"); if (sub) setActiveTool(sub); }
+            else setActiveView("home");
+        };
+        window.addEventListener("popstate", onPop);
+        return () => window.removeEventListener("popstate", onPop);
+    }, []);
     const sortOptions = [{ label: "Name (A-Z)", value: "name" }, { label: "Name (Z-A)", value: "name-desc" }, { label: "Version", value: "version" }];
 
     const filteredAndSortedApps = useMemo(() => {
@@ -135,7 +173,7 @@ const App = () => {
 
                 <div className="sidebar-sections">
                     {SECTIONS.map((section) => (
-                        <button key={section.key} className={`section-btn${activeSection === section.key ? ' active' : ''}`} onClick={() => { setActiveSection(section.key); setActiveView("store"); }}>
+                        <button key={section.key} className={`section-btn${activeSection === section.key ? ' active' : ''}`} onClick={() => { setActiveSection(section.key); setActiveView("store"); navigate(section.key); }}>
                             <Icon path={section.icon} className="section-icon" />
                             <span>{section.label}</span>
                         </button>
@@ -153,18 +191,28 @@ const App = () => {
                             </button>
                         ))}
                     </nav>
-                ) : (
+                ) : activeSection === "nexterm" ? (
                     <nav className="sidebar-nav">
                         <div className="nav-label">Categories</div>
                         {nextermData?.categories.map((cat) => (
-                            <button key={cat.slug} className={`nav-item${nextermCategory === cat.slug ? ' active' : ''}`} onClick={() => { setNextermCategory(cat.slug); setNextermSubcat(null); setActiveView("store"); }}>
+                            <button key={cat.slug} className={`nav-item${nextermCategory === cat.slug ? ' active' : ''}`} onClick={() => { setNextermCategory(cat.slug); setNextermSubcat(null); setActiveView("store"); navigate("nexterm", cat.slug); }}>
                                 <Icon path={getNextermIcon(cat.slug)} className="nav-icon" />
                                 <span className="nav-text">{cat.name}</span>
                                 <span className="nav-count">{cat.count}</span>
                             </button>
                         ))}
                     </nav>
-                )}
+                ) : activeSection === "tools" ? (
+                    <nav className="sidebar-nav">
+                        <div className="nav-label">Tools</div>
+                        {TOOLS.map((tool) => (
+                            <button key={tool.key} className={`nav-item${activeTool === tool.key ? ' active' : ''}`} onClick={() => { setActiveTool(tool.key); setActiveView("store"); navigate("tools", tool.key); }}>
+                                <Icon path={tool.icon} className="nav-icon" />
+                                <span className="nav-text">{tool.label}</span>
+                            </button>
+                        ))}
+                    </nav>
+                ) : null}
 
                 <a className="sidebar-github" href="https://github.com/Nerdy-Technician/NerdyStore" target="_blank" rel="noopener noreferrer">
                     <svg className="github-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -233,7 +281,10 @@ const App = () => {
                 {activeView === "home" ? (
                     <HomePage categories={categories} nextermData={nextermData} onBrowse={handleBrowse} />
                 ) : activeSection === "tools" ? (
-                    <ThemeCreator />
+                    <div className="store-content">
+                        <div className="content-header"><h2>{TOOLS.find(t => t.key === activeTool)?.label || "Tools"}</h2></div>
+                        {activeTool === "theme-creator" && <ThemeCreator />}
+                    </div>
                 ) : activeSection === "nexploy" ? (
                     <div className="store-content">
                         <div className="content-header">

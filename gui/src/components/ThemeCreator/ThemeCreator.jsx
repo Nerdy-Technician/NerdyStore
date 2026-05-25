@@ -166,7 +166,6 @@ export const ThemeCreator = () => {
     return (
         <div className="theme-creator">
             <div className="creator-header">
-                <h2>Theme Creator</h2>
                 <p>Design a custom Nexterm theme using the colour pickers below. Pick your core colours and everything else — backgrounds, opacities, OLED and light variants — is derived automatically. The live preview updates in real time so you can see exactly how your theme will look inside Nexterm before you export it.</p>
                 <div className="creator-steps">
                     <div className="creator-step"><span className="step-num">1</span><span>Pick your background and accent colour</span></div>

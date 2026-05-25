@@ -205,7 +205,7 @@ const App = () => {
                 </header>
 
                 {activeView === "home" ? (
-                    <HomePage categories={categories} onBrowse={handleBrowse} />
+                    <HomePage categories={categories} nextermData={nextermData} onBrowse={handleBrowse} />
                 ) : activeSection === "nexploy" ? (
                     <div className="store-content">
                         <div className="content-header">

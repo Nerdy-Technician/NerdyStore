@@ -1,8 +1,10 @@
 import Icon from "@mdi/react";
-import { mdiStore, mdiPackageVariant, mdiConsoleLine, mdiArrowRight, mdiLayersTriple, mdiCubeOutline } from "@mdi/js";
+import { mdiStore, mdiPackageVariant, mdiConsoleLine, mdiArrowRight, mdiLayersTriple, mdiCubeOutline, mdiScriptText, mdiCodeBraces, mdiPalette } from "@mdi/js";
 import "./styles.sass";
 
-const HomePage = ({ categories, onBrowse }) => {
+const NEXTERM_ICONS = { scripts: mdiScriptText, snippets: mdiCodeBraces, themes: mdiPalette };
+
+const HomePage = ({ categories, nextermData, onBrowse }) => {
     const totalApps = categories.reduce((sum, cat) => sum + cat.count, 0);
 
     return (
@@ -27,6 +29,13 @@ const HomePage = ({ categories, onBrowse }) => {
                     <span className="stat-value">{totalApps}</span>
                     <span className="stat-label">Apps</span>
                 </div>
+                {nextermData?.categories.map((cat) => (
+                    <div className="stat-card" key={cat.slug}>
+                        <Icon path={NEXTERM_ICONS[cat.slug] || mdiScriptText} />
+                        <span className="stat-value">{cat.count}</span>
+                        <span className="stat-label">{cat.name}</span>
+                    </div>
+                ))}
                 <div className="stat-card">
                     <Icon path={mdiLayersTriple} />
                     <span className="stat-value">{categories.length}</span>

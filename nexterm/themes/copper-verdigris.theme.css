@@ -1,0 +1,68 @@
+/* @name: Copper & Verdigris */
+/* @description: Aged copper patina and oxidized teal on dark bronze */
+:root[data-theme="dark"] {
+    --background: #0A1010;
+    --terminal: #060C0A;
+    --lighter-background: #101818;
+    --dialog-background: rgba(10, 16, 16, 0.6);
+    --gray-full: #182420;
+    --darker-gray: rgba(24, 36, 32, 0.7);
+    --dark-gray: rgba(60, 180, 150, 0.06);
+    --gray: rgba(60, 180, 150, 0.12);
+    --light-gray: #C8F0E8;
+    --primary: #3CB496;
+    --primary-opacity: rgba(60, 180, 150, 0.25);
+    --error: #D05040;
+    --error-opacity: rgba(208, 80, 64, 0.25);
+    --success: #70C880;
+    --success-opacity: rgba(112, 200, 128, 0.25);
+    --warning: #C89040;
+    --warning-opacity: rgba(200, 144, 64, 0.25);
+    --white: #C8F0E8;
+    --subtext: #286858;
+    --text: #C8F0E8;
+}
+:root[data-theme="oled"] {
+    --background: #040808;
+    --terminal: #060B0A;
+    --lighter-background: #0A1010;
+    --dialog-background: rgba(4, 8, 8, 0.7);
+    --gray-full: #0A1010;
+    --darker-gray: rgba(10, 16, 16, 0.7);
+    --dark-gray: rgba(60, 180, 150, 0.05);
+    --gray: rgba(60, 180, 150, 0.1);
+    --light-gray: #C8F0E8;
+    --primary: #3CB496;
+    --primary-opacity: rgba(60, 180, 150, 0.25);
+    --error: #D05040;
+    --error-opacity: rgba(208, 80, 64, 0.25);
+    --success: #70C880;
+    --success-opacity: rgba(112, 200, 128, 0.25);
+    --warning: #C89040;
+    --warning-opacity: rgba(200, 144, 64, 0.25);
+    --white: #C8F0E8;
+    --subtext: #103828;
+    --text: #C8F0E8;
+}
+:root[data-theme="light"] {
+    --background: #EDFAF6;
+    --terminal: #D8F4EE;
+    --lighter-background: #D8F4EE;
+    --dialog-background: rgba(237, 250, 246, 0.5);
+    --gray-full: #BCEADE;
+    --darker-gray: rgba(188, 234, 222, 0.85);
+    --dark-gray: rgba(10, 90, 70, 0.05);
+    --gray: rgba(10, 90, 70, 0.1);
+    --light-gray: #001A14;
+    --primary: #0A6850;
+    --primary-opacity: rgba(10, 104, 80, 0.18);
+    --error: #882818;
+    --error-opacity: rgba(136, 40, 24, 0.15);
+    --success: #1A6840;
+    --success-opacity: rgba(26, 104, 64, 0.15);
+    --warning: #6A5000;
+    --warning-opacity: rgba(106, 80, 0, 0.15);
+    --white: #001A14;
+    --subtext: #185848;
+    --text: #001A14;
+}

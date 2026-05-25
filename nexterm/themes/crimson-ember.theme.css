@@ -1,0 +1,68 @@
+/* @name: Crimson Ember */
+/* @description: Blood red embers on a deep black void */
+:root[data-theme="dark"] {
+    --background: #1E1E1E;
+    --terminal: #141414;
+    --lighter-background: #242424;
+    --dialog-background: rgba(30, 20, 20, 0.6);
+    --gray-full: #3C1A1A;
+    --darker-gray: rgba(60, 26, 26, 0.7);
+    --dark-gray: rgba(201, 0, 0, 0.06);
+    --gray: rgba(201, 0, 0, 0.12);
+    --light-gray: #E8D4D4;
+    --primary: #C90000;
+    --primary-opacity: rgba(201, 0, 0, 0.25);
+    --error: #CC5555;
+    --error-opacity: rgba(204, 85, 85, 0.25);
+    --success: #A05050;
+    --success-opacity: rgba(160, 80, 80, 0.25);
+    --warning: #C06030;
+    --warning-opacity: rgba(192, 96, 48, 0.25);
+    --white: #E8D4D4;
+    --subtext: #8A5050;
+    --text: #E8D4D4;
+}
+:root[data-theme="oled"] {
+    --background: #0A0A0A;
+    --terminal: #111111;
+    --lighter-background: #141414;
+    --dialog-background: rgba(10, 10, 10, 0.7);
+    --gray-full: #1E1E1E;
+    --darker-gray: rgba(30, 20, 20, 0.7);
+    --dark-gray: rgba(201, 0, 0, 0.05);
+    --gray: rgba(201, 0, 0, 0.1);
+    --light-gray: #E8D4D4;
+    --primary: #C90000;
+    --primary-opacity: rgba(201, 0, 0, 0.25);
+    --error: #CC5555;
+    --error-opacity: rgba(204, 85, 85, 0.25);
+    --success: #A05050;
+    --success-opacity: rgba(160, 80, 80, 0.25);
+    --warning: #C06030;
+    --warning-opacity: rgba(192, 96, 48, 0.25);
+    --white: #E8D4D4;
+    --subtext: #6B3030;
+    --text: #E8D4D4;
+}
+:root[data-theme="light"] {
+    --background: #F5EDED;
+    --terminal: #EDE0E0;
+    --lighter-background: #EDE0E0;
+    --dialog-background: rgba(245, 237, 237, 0.5);
+    --gray-full: #E0CCCC;
+    --darker-gray: rgba(224, 204, 204, 0.85);
+    --dark-gray: rgba(120, 40, 40, 0.05);
+    --gray: rgba(120, 40, 40, 0.1);
+    --light-gray: #4A1A1A;
+    --primary: #C90000;
+    --primary-opacity: rgba(201, 0, 0, 0.18);
+    --error: #B00000;
+    --error-opacity: rgba(176, 0, 0, 0.15);
+    --success: #7A3030;
+    --success-opacity: rgba(122, 48, 48, 0.15);
+    --warning: #A04020;
+    --warning-opacity: rgba(160, 64, 32, 0.15);
+    --white: #4A1A1A;
+    --subtext: #7A4040;
+    --text: #4A1A1A;
+}

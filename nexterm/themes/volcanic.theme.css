@@ -1,0 +1,68 @@
+/* @name: Volcanic */
+/* @description: Obsidian black cracked with rivers of molten lava */
+:root[data-theme="dark"] {
+    --background: #100808;
+    --terminal: #080404;
+    --lighter-background: #180C0C;
+    --dialog-background: rgba(16, 8, 8, 0.6);
+    --gray-full: #281010;
+    --darker-gray: rgba(40, 16, 16, 0.7);
+    --dark-gray: rgba(255, 80, 0, 0.06);
+    --gray: rgba(255, 80, 0, 0.12);
+    --light-gray: #FFE8D0;
+    --primary: #FF5000;
+    --primary-opacity: rgba(255, 80, 0, 0.25);
+    --error: #FF2020;
+    --error-opacity: rgba(255, 32, 32, 0.25);
+    --success: #80A840;
+    --success-opacity: rgba(128, 168, 64, 0.25);
+    --warning: #FFB020;
+    --warning-opacity: rgba(255, 176, 32, 0.25);
+    --white: #FFE8D0;
+    --subtext: #804020;
+    --text: #FFE8D0;
+}
+:root[data-theme="oled"] {
+    --background: #060202;
+    --terminal: #080404;
+    --lighter-background: #100808;
+    --dialog-background: rgba(6, 2, 2, 0.7);
+    --gray-full: #100808;
+    --darker-gray: rgba(16, 8, 8, 0.7);
+    --dark-gray: rgba(255, 80, 0, 0.05);
+    --gray: rgba(255, 80, 0, 0.1);
+    --light-gray: #FFE8D0;
+    --primary: #FF5000;
+    --primary-opacity: rgba(255, 80, 0, 0.25);
+    --error: #FF2020;
+    --error-opacity: rgba(255, 32, 32, 0.25);
+    --success: #80A840;
+    --success-opacity: rgba(128, 168, 64, 0.25);
+    --warning: #FFB020;
+    --warning-opacity: rgba(255, 176, 32, 0.25);
+    --white: #FFE8D0;
+    --subtext: #401808;
+    --text: #FFE8D0;
+}
+:root[data-theme="light"] {
+    --background: #FFF2EC;
+    --terminal: #FFE4D8;
+    --lighter-background: #FFE4D8;
+    --dialog-background: rgba(255, 242, 236, 0.5);
+    --gray-full: #FFCEB8;
+    --darker-gray: rgba(255, 206, 184, 0.85);
+    --dark-gray: rgba(160, 40, 0, 0.05);
+    --gray: rgba(160, 40, 0, 0.1);
+    --light-gray: #200800;
+    --primary: #C03400;
+    --primary-opacity: rgba(192, 52, 0, 0.18);
+    --error: #A00000;
+    --error-opacity: rgba(160, 0, 0, 0.15);
+    --success: #3A6010;
+    --success-opacity: rgba(58, 96, 16, 0.15);
+    --warning: #904800;
+    --warning-opacity: rgba(144, 72, 0, 0.15);
+    --white: #200800;
+    --subtext: #703010;
+    --text: #200800;
+}

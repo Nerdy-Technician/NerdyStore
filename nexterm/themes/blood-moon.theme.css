@@ -1,0 +1,68 @@
+/* @name: Blood Moon */
+/* @description: Deep crimson lunar eclipse with blackened skies */
+:root[data-theme="dark"] {
+    --background: #180808;
+    --terminal: #100404;
+    --lighter-background: #200C0C;
+    --dialog-background: rgba(24, 8, 8, 0.6);
+    --gray-full: #301010;
+    --darker-gray: rgba(48, 16, 16, 0.7);
+    --dark-gray: rgba(220, 30, 30, 0.06);
+    --gray: rgba(220, 30, 30, 0.12);
+    --light-gray: #FFD8D8;
+    --primary: #DC1E1E;
+    --primary-opacity: rgba(220, 30, 30, 0.25);
+    --error: #FF4444;
+    --error-opacity: rgba(255, 68, 68, 0.25);
+    --success: #70A060;
+    --success-opacity: rgba(112, 160, 96, 0.25);
+    --warning: #D08020;
+    --warning-opacity: rgba(208, 128, 32, 0.25);
+    --white: #FFD8D8;
+    --subtext: #7A2020;
+    --text: #FFD8D8;
+}
+:root[data-theme="oled"] {
+    --background: #0C0202;
+    --terminal: #0F0303;
+    --lighter-background: #180808;
+    --dialog-background: rgba(12, 2, 2, 0.7);
+    --gray-full: #180808;
+    --darker-gray: rgba(24, 8, 8, 0.7);
+    --dark-gray: rgba(220, 30, 30, 0.05);
+    --gray: rgba(220, 30, 30, 0.1);
+    --light-gray: #FFD8D8;
+    --primary: #DC1E1E;
+    --primary-opacity: rgba(220, 30, 30, 0.25);
+    --error: #FF4444;
+    --error-opacity: rgba(255, 68, 68, 0.25);
+    --success: #70A060;
+    --success-opacity: rgba(112, 160, 96, 0.25);
+    --warning: #D08020;
+    --warning-opacity: rgba(208, 128, 32, 0.25);
+    --white: #FFD8D8;
+    --subtext: #4A1010;
+    --text: #FFD8D8;
+}
+:root[data-theme="light"] {
+    --background: #FFF0F0;
+    --terminal: #FFE0E0;
+    --lighter-background: #FFE0E0;
+    --dialog-background: rgba(255, 240, 240, 0.5);
+    --gray-full: #F8C8C8;
+    --darker-gray: rgba(248, 200, 200, 0.85);
+    --dark-gray: rgba(140, 0, 0, 0.05);
+    --gray: rgba(140, 0, 0, 0.1);
+    --light-gray: #200000;
+    --primary: #A00000;
+    --primary-opacity: rgba(160, 0, 0, 0.18);
+    --error: #C01010;
+    --error-opacity: rgba(192, 16, 16, 0.15);
+    --success: #306020;
+    --success-opacity: rgba(48, 96, 32, 0.15);
+    --warning: #804000;
+    --warning-opacity: rgba(128, 64, 0, 0.15);
+    --white: #200000;
+    --subtext: #6A1818;
+    --text: #200000;
+}

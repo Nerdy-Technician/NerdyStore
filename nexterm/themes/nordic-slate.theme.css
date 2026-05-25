@@ -1,0 +1,68 @@
+/* @name: Nordic Slate */
+/* @description: Cold grey fjords with icy blue clarity */
+:root[data-theme="dark"] {
+    --background: #0E1218;
+    --terminal: #090C12;
+    --lighter-background: #141A22;
+    --dialog-background: rgba(14, 18, 24, 0.6);
+    --gray-full: #1E2630;
+    --darker-gray: rgba(30, 38, 48, 0.7);
+    --dark-gray: rgba(90, 160, 220, 0.06);
+    --gray: rgba(90, 160, 220, 0.12);
+    --light-gray: #D8E8F5;
+    --primary: #5AA0DC;
+    --primary-opacity: rgba(90, 160, 220, 0.25);
+    --error: #E05060;
+    --error-opacity: rgba(224, 80, 96, 0.25);
+    --success: #60B880;
+    --success-opacity: rgba(96, 184, 128, 0.25);
+    --warning: #D0A040;
+    --warning-opacity: rgba(208, 160, 64, 0.25);
+    --white: #D8E8F5;
+    --subtext: #4A6880;
+    --text: #D8E8F5;
+}
+:root[data-theme="oled"] {
+    --background: #060810;
+    --terminal: #080B14;
+    --lighter-background: #0E1218;
+    --dialog-background: rgba(6, 8, 16, 0.7);
+    --gray-full: #0E1218;
+    --darker-gray: rgba(14, 18, 24, 0.7);
+    --dark-gray: rgba(90, 160, 220, 0.05);
+    --gray: rgba(90, 160, 220, 0.1);
+    --light-gray: #D8E8F5;
+    --primary: #5AA0DC;
+    --primary-opacity: rgba(90, 160, 220, 0.25);
+    --error: #E05060;
+    --error-opacity: rgba(224, 80, 96, 0.25);
+    --success: #60B880;
+    --success-opacity: rgba(96, 184, 128, 0.25);
+    --warning: #D0A040;
+    --warning-opacity: rgba(208, 160, 64, 0.25);
+    --white: #D8E8F5;
+    --subtext: #283848;
+    --text: #D8E8F5;
+}
+:root[data-theme="light"] {
+    --background: #EEF3F8;
+    --terminal: #DDE8F2;
+    --lighter-background: #DDE8F2;
+    --dialog-background: rgba(238, 243, 248, 0.5);
+    --gray-full: #C8D8E8;
+    --darker-gray: rgba(200, 216, 232, 0.85);
+    --dark-gray: rgba(30, 80, 130, 0.05);
+    --gray: rgba(30, 80, 130, 0.1);
+    --light-gray: #081828;
+    --primary: #2A6AAA;
+    --primary-opacity: rgba(42, 106, 170, 0.18);
+    --error: #902030;
+    --error-opacity: rgba(144, 32, 48, 0.15);
+    --success: #207050;
+    --success-opacity: rgba(32, 112, 80, 0.15);
+    --warning: #806020;
+    --warning-opacity: rgba(128, 96, 32, 0.15);
+    --white: #081828;
+    --subtext: #3A5870;
+    --text: #081828;
+}

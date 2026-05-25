@@ -3,7 +3,7 @@ name: Generate NTINDEX
 on:
   push:
     branches: [main]
-    paths: ['nexterm/scripts/**', 'nexterm/snippets/**']
+    paths: ['nexterm/scripts/**', 'nexterm/snippets/**', 'nexterm/themes/**']
   workflow_dispatch:
 
 permissions:
@@ -20,19 +20,21 @@ jobs:
         run: |
           cd nexterm
           echo "# Scripts" > NTINDEX
-          for file in scripts/*; do
-            if [ -f "$file" ]; then
-              hash=$(md5sum "$file" | cut -d' ' -f1)
-              echo "${file}@${hash}" >> NTINDEX
-            fi
+          find scripts -type f -name "*.sh" | sort | while read file; do
+            hash=$(md5sum "$file" | cut -d' ' -f1)
+            echo "${file}@${hash}" >> NTINDEX
           done
           echo "" >> NTINDEX
           echo "# Snippets" >> NTINDEX
-          for file in snippets/*; do
-            if [ -f "$file" ]; then
-              hash=$(md5sum "$file" | cut -d' ' -f1)
-              echo "${file}@${hash}" >> NTINDEX
-            fi
+          find snippets -type f -name "*.snippet" | sort | while read file; do
+            hash=$(md5sum "$file" | cut -d' ' -f1)
+            echo "${file}@${hash}" >> NTINDEX
+          done
+          echo "" >> NTINDEX
+          echo "# Themes" >> NTINDEX
+          find themes -type f -name "*.theme.css" | sort | while read file; do
+            hash=$(md5sum "$file" | cut -d' ' -f1)
+            echo "${file}@${hash}" >> NTINDEX
           done
 
       - name: Commit NTINDEX

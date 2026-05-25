@@ -53,11 +53,14 @@ jobs:
 
       - name: Prepare deployment
         run: |
-          mkdir -p deploy/logos
+          mkdir -p deploy/logos deploy/nexterm/scripts deploy/nexterm/snippets deploy/nexterm/themes
           touch deploy/.nojekyll
           cp -r gui/dist/* deploy/
           cp -r nexploy/dist/* deploy/
           [ -d gui/public/logos ] && cp gui/public/logos/*.png deploy/logos/ 2>/dev/null || true
+          cp -r nexterm/scripts/. deploy/nexterm/scripts/
+          cp -r nexterm/snippets/. deploy/nexterm/snippets/
+          cp -r nexterm/themes/. deploy/nexterm/themes/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

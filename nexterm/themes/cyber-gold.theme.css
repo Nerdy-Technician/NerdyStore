@@ -1,0 +1,68 @@
+/* @name: Cyber Gold */
+/* @description: Dark carbon with molten gold circuitry */
+:root[data-theme="dark"] {
+    --background: #0E0C08;
+    --terminal: #090700;
+    --lighter-background: #161210;
+    --dialog-background: rgba(14, 12, 8, 0.6);
+    --gray-full: #221E10;
+    --darker-gray: rgba(34, 30, 16, 0.7);
+    --dark-gray: rgba(220, 170, 20, 0.06);
+    --gray: rgba(220, 170, 20, 0.12);
+    --light-gray: #FFF4C0;
+    --primary: #DCAA14;
+    --primary-opacity: rgba(220, 170, 20, 0.25);
+    --error: #E04020;
+    --error-opacity: rgba(224, 64, 32, 0.25);
+    --success: #80C060;
+    --success-opacity: rgba(128, 192, 96, 0.25);
+    --warning: #E08020;
+    --warning-opacity: rgba(224, 128, 32, 0.25);
+    --white: #FFF4C0;
+    --subtext: #706030;
+    --text: #FFF4C0;
+}
+:root[data-theme="oled"] {
+    --background: #050400;
+    --terminal: #080600;
+    --lighter-background: #0E0C08;
+    --dialog-background: rgba(5, 4, 0, 0.7);
+    --gray-full: #0E0C08;
+    --darker-gray: rgba(14, 12, 8, 0.7);
+    --dark-gray: rgba(220, 170, 20, 0.05);
+    --gray: rgba(220, 170, 20, 0.1);
+    --light-gray: #FFF4C0;
+    --primary: #DCAA14;
+    --primary-opacity: rgba(220, 170, 20, 0.25);
+    --error: #E04020;
+    --error-opacity: rgba(224, 64, 32, 0.25);
+    --success: #80C060;
+    --success-opacity: rgba(128, 192, 96, 0.25);
+    --warning: #E08020;
+    --warning-opacity: rgba(224, 128, 32, 0.25);
+    --white: #FFF4C0;
+    --subtext: #402E08;
+    --text: #FFF4C0;
+}
+:root[data-theme="light"] {
+    --background: #FAF6E8;
+    --terminal: #F2EAC8;
+    --lighter-background: #F2EAC8;
+    --dialog-background: rgba(250, 246, 232, 0.5);
+    --gray-full: #E8DCA0;
+    --darker-gray: rgba(232, 220, 160, 0.85);
+    --dark-gray: rgba(120, 80, 0, 0.05);
+    --gray: rgba(120, 80, 0, 0.1);
+    --light-gray: #1A1400;
+    --primary: #906800;
+    --primary-opacity: rgba(144, 104, 0, 0.18);
+    --error: #8A2800;
+    --error-opacity: rgba(138, 40, 0, 0.15);
+    --success: #3A6820;
+    --success-opacity: rgba(58, 104, 32, 0.15);
+    --warning: #805800;
+    --warning-opacity: rgba(128, 88, 0, 0.15);
+    --white: #1A1400;
+    --subtext: #6A5010;
+    --text: #1A1400;
+}

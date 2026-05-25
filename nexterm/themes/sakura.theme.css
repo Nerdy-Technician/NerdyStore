@@ -1,0 +1,68 @@
+/* @name: Sakura */
+/* @description: Cherry blossom pink on deep twilight plum */
+:root[data-theme="dark"] {
+    --background: #180E16;
+    --terminal: #100910;
+    --lighter-background: #20121E;
+    --dialog-background: rgba(24, 14, 22, 0.6);
+    --gray-full: #321830;
+    --darker-gray: rgba(50, 24, 48, 0.7);
+    --dark-gray: rgba(230, 100, 160, 0.06);
+    --gray: rgba(230, 100, 160, 0.12);
+    --light-gray: #FFE0F0;
+    --primary: #E664A0;
+    --primary-opacity: rgba(230, 100, 160, 0.25);
+    --error: #E04060;
+    --error-opacity: rgba(224, 64, 96, 0.25);
+    --success: #80C080;
+    --success-opacity: rgba(128, 192, 128, 0.25);
+    --warning: #E0A840;
+    --warning-opacity: rgba(224, 168, 64, 0.25);
+    --white: #FFE0F0;
+    --subtext: #885070;
+    --text: #FFE0F0;
+}
+:root[data-theme="oled"] {
+    --background: #0C060C;
+    --terminal: #0F080F;
+    --lighter-background: #180E16;
+    --dialog-background: rgba(12, 6, 12, 0.7);
+    --gray-full: #180E16;
+    --darker-gray: rgba(24, 14, 22, 0.7);
+    --dark-gray: rgba(230, 100, 160, 0.05);
+    --gray: rgba(230, 100, 160, 0.1);
+    --light-gray: #FFE0F0;
+    --primary: #E664A0;
+    --primary-opacity: rgba(230, 100, 160, 0.25);
+    --error: #E04060;
+    --error-opacity: rgba(224, 64, 96, 0.25);
+    --success: #80C080;
+    --success-opacity: rgba(128, 192, 128, 0.25);
+    --warning: #E0A840;
+    --warning-opacity: rgba(224, 168, 64, 0.25);
+    --white: #FFE0F0;
+    --subtext: #4A2040;
+    --text: #FFE0F0;
+}
+:root[data-theme="light"] {
+    --background: #FDF0F7;
+    --terminal: #F8E0F0;
+    --lighter-background: #F8E0F0;
+    --dialog-background: rgba(253, 240, 247, 0.5);
+    --gray-full: #F0CCE4;
+    --darker-gray: rgba(240, 204, 228, 0.85);
+    --dark-gray: rgba(140, 30, 90, 0.05);
+    --gray: rgba(140, 30, 90, 0.1);
+    --light-gray: #280818;
+    --primary: #B02878;
+    --primary-opacity: rgba(176, 40, 120, 0.18);
+    --error: #A01030;
+    --error-opacity: rgba(160, 16, 48, 0.15);
+    --success: #307840;
+    --success-opacity: rgba(48, 120, 64, 0.15);
+    --warning: #906000;
+    --warning-opacity: rgba(144, 96, 0, 0.15);
+    --white: #280818;
+    --subtext: #7A3060;
+    --text: #280818;
+}

@@ -1,0 +1,69 @@
+/* @name: Molten Gold */
+/* @description: Obsidian darkness with veins of burnished amber */
+:root[data-theme="dark"] {
+    --background: #12100E;
+    --terminal: #0D0B09;
+    --lighter-background: #1C1810;
+    --dialog-background: rgba(18, 16, 14, 0.6);
+    --gray-full: #2E2415;
+    --darker-gray: rgba(46, 36, 21, 0.7);
+    --dark-gray: rgba(245, 166, 35, 0.06);
+    --gray: rgba(245, 166, 35, 0.12);
+    --light-gray: #FDE8B0;
+    --primary: #F5A623;
+    --primary-opacity: rgba(245, 166, 35, 0.25);
+    --error: #E05555;
+    --error-opacity: rgba(224, 85, 85, 0.25);
+    --success: #8DBF6A;
+    --success-opacity: rgba(141, 191, 106, 0.25);
+    --warning: #F5A623;
+    --warning-opacity: rgba(245, 166, 35, 0.25);
+    --white: #FDE8B0;
+    --subtext: #9A7A40;
+    --text: #FDE8B0;
+}
+:root[data-theme="oled"] {
+    --background: #080705;
+    --terminal: #0B0906;
+    --lighter-background: #100E08;
+    --dialog-background: rgba(8, 7, 5, 0.7);
+    --gray-full: #12100E;
+    --darker-gray: rgba(18, 16, 14, 0.7);
+    --dark-gray: rgba(245, 166, 35, 0.05);
+    --gray: rgba(245, 166, 35, 0.1);
+    --light-gray: #FDE8B0;
+    --primary: #F5A623;
+    --primary-opacity: rgba(245, 166, 35, 0.25);
+    --error: #E05555;
+    --error-opacity: rgba(224, 85, 85, 0.25);
+    --success: #8DBF6A;
+    --success-opacity: rgba(141, 191, 106, 0.25);
+    --warning: #F5A623;
+    --warning-opacity: rgba(245, 166, 35, 0.25);
+    --white: #FDE8B0;
+    --subtext: #5A4520;
+    --text: #FDE8B0;
+}
+:root[data-theme="light"] {
+    --background: #FAF5EA;
+    --terminal: #F2E8D0;
+    --lighter-background: #F2E8D0;
+    --dialog-background: rgba(250, 245, 234, 0.5);
+    --gray-full: #E8D8B0;
+    --darker-gray: rgba(232, 216, 176, 0.85);
+    --dark-gray: rgba(140, 90, 0, 0.05);
+    --gray: rgba(140, 90, 0, 0.1);
+    --light-gray: #3A2800;
+    --primary: #B07800;
+    --primary-opacity: rgba(176, 120, 0, 0.18);
+    --error: #B03030;
+    --error-opacity: rgba(176, 48, 48, 0.15);
+    --success: #507A30;
+    --success-opacity: rgba(80, 122, 48, 0.15);
+    --warning: #B07800;
+    --warning-opacity: rgba(176, 120, 0, 0.15);
+    --white: #3A2800;
+    --subtext: #7A5820;
+    --text: #3A2800;
+}
+ 

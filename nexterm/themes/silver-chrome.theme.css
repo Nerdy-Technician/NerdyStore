@@ -1,0 +1,68 @@
+/* @name: Silver Chrome */
+/* @description: Brushed metal aesthetics in cool metallic greys */
+:root[data-theme="dark"] {
+    --background: #0E1014;
+    --terminal: #080A0E;
+    --lighter-background: #14181E;
+    --dialog-background: rgba(14, 16, 20, 0.6);
+    --gray-full: #1E2228;
+    --darker-gray: rgba(30, 34, 40, 0.7);
+    --dark-gray: rgba(160, 180, 200, 0.06);
+    --gray: rgba(160, 180, 200, 0.12);
+    --light-gray: #E8EEF4;
+    --primary: #A0B4C8;
+    --primary-opacity: rgba(160, 180, 200, 0.25);
+    --error: #E05060;
+    --error-opacity: rgba(224, 80, 96, 0.25);
+    --success: #60C080;
+    --success-opacity: rgba(96, 192, 128, 0.25);
+    --warning: #D0A840;
+    --warning-opacity: rgba(208, 168, 64, 0.25);
+    --white: #E8EEF4;
+    --subtext: #5A6878;
+    --text: #E8EEF4;
+}
+:root[data-theme="oled"] {
+    --background: #040608;
+    --terminal: #06080C;
+    --lighter-background: #0E1014;
+    --dialog-background: rgba(4, 6, 8, 0.7);
+    --gray-full: #0E1014;
+    --darker-gray: rgba(14, 16, 20, 0.7);
+    --dark-gray: rgba(160, 180, 200, 0.05);
+    --gray: rgba(160, 180, 200, 0.1);
+    --light-gray: #E8EEF4;
+    --primary: #A0B4C8;
+    --primary-opacity: rgba(160, 180, 200, 0.25);
+    --error: #E05060;
+    --error-opacity: rgba(224, 80, 96, 0.25);
+    --success: #60C080;
+    --success-opacity: rgba(96, 192, 128, 0.25);
+    --warning: #D0A840;
+    --warning-opacity: rgba(208, 168, 64, 0.25);
+    --white: #E8EEF4;
+    --subtext: #2E3848;
+    --text: #E8EEF4;
+}
+:root[data-theme="light"] {
+    --background: #F4F6F8;
+    --terminal: #E8EDF2;
+    --lighter-background: #E8EDF2;
+    --dialog-background: rgba(244, 246, 248, 0.5);
+    --gray-full: #D8E0E8;
+    --darker-gray: rgba(216, 224, 232, 0.85);
+    --dark-gray: rgba(60, 80, 100, 0.05);
+    --gray: rgba(60, 80, 100, 0.1);
+    --light-gray: #0A1018;
+    --primary: #486078;
+    --primary-opacity: rgba(72, 96, 120, 0.18);
+    --error: #882030;
+    --error-opacity: rgba(136, 32, 48, 0.15);
+    --success: #206040;
+    --success-opacity: rgba(32, 96, 64, 0.15);
+    --warning: #705800;
+    --warning-opacity: rgba(112, 88, 0, 0.15);
+    --white: #0A1018;
+    --subtext: #3A5068;
+    --text: #0A1018;
+}

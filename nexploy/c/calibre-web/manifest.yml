@@ -1,0 +1,6 @@
+type: docker
+name: Calibre-Web
+version: latest
+description: Calibre-Web is a web-based ebook library browser and reader built on top of the Calibre database format.
+category: Media
+mainService: calibre-web

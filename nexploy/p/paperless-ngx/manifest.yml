@@ -1,0 +1,6 @@
+type: docker
+name: Paperless-ngx
+version: latest
+description: Paperless-ngx is a document management system that transforms your physical documents into a searchable online archive.
+category: Productivity
+mainService: paperless

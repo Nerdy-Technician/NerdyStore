@@ -1,0 +1,68 @@
+/* @name: Bamboo Forest */
+/* @description: Tranquil deep greens of a bamboo grove at dusk */
+:root[data-theme="dark"] {
+    --background: #0D1A0E;
+    --terminal: #081208;
+    --lighter-background: #142016;
+    --dialog-background: rgba(13, 26, 14, 0.6);
+    --gray-full: #1E3020;
+    --darker-gray: rgba(30, 48, 32, 0.7);
+    --dark-gray: rgba(80, 200, 100, 0.06);
+    --gray: rgba(80, 200, 100, 0.12);
+    --light-gray: #C0E8C4;
+    --primary: #50C864;
+    --primary-opacity: rgba(80, 200, 100, 0.25);
+    --error: #E05050;
+    --error-opacity: rgba(224, 80, 80, 0.25);
+    --success: #40D080;
+    --success-opacity: rgba(64, 208, 128, 0.25);
+    --warning: #D0C040;
+    --warning-opacity: rgba(208, 192, 64, 0.25);
+    --white: #C0E8C4;
+    --subtext: #2A6030;
+    --text: #C0E8C4;
+}
+:root[data-theme="oled"] {
+    --background: #040D05;
+    --terminal: #020802;
+    --lighter-background: #0D1A0E;
+    --dialog-background: rgba(4, 13, 5, 0.7);
+    --gray-full: #0D1A0E;
+    --darker-gray: rgba(13, 26, 14, 0.7);
+    --dark-gray: rgba(80, 200, 100, 0.05);
+    --gray: rgba(80, 200, 100, 0.1);
+    --light-gray: #C0E8C4;
+    --primary: #50C864;
+    --primary-opacity: rgba(80, 200, 100, 0.25);
+    --error: #E05050;
+    --error-opacity: rgba(224, 80, 80, 0.25);
+    --success: #40D080;
+    --success-opacity: rgba(64, 208, 128, 0.25);
+    --warning: #D0C040;
+    --warning-opacity: rgba(208, 192, 64, 0.25);
+    --white: #C0E8C4;
+    --subtext: #1A3A1E;
+    --text: #C0E8C4;
+}
+:root[data-theme="light"] {
+    --background: #EDFAEE;
+    --terminal: #D8F4DA;
+    --lighter-background: #D8F4DA;
+    --dialog-background: rgba(237, 250, 238, 0.5);
+    --gray-full: #B8E4BC;
+    --darker-gray: rgba(184, 228, 188, 0.85);
+    --dark-gray: rgba(20, 100, 30, 0.05);
+    --gray: rgba(20, 100, 30, 0.1);
+    --light-gray: #081808;
+    --primary: #146420;
+    --primary-opacity: rgba(20, 100, 32, 0.18);
+    --error: #A01818;
+    --error-opacity: rgba(160, 24, 24, 0.15);
+    --success: #0A6030;
+    --success-opacity: rgba(10, 96, 48, 0.15);
+    --warning: #706010;
+    --warning-opacity: rgba(112, 96, 16, 0.15);
+    --white: #081808;
+    --subtext: #2A6030;
+    --text: #081808;
+}

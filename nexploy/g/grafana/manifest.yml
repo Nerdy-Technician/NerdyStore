@@ -1,0 +1,6 @@
+type: docker
+name: Grafana
+version: latest
+description: Grafana is an open-source analytics and monitoring platform for visualizing metrics, logs, and traces from various data sources.
+category: Monitoring
+mainService: grafana

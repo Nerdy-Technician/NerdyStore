@@ -1,0 +1,68 @@
+/* @name: Slate Ocean */
+/* @description: Complementary orange↔blue — cool slate backgrounds with a burning orange accent */
+:root[data-theme="dark"] {
+    --background: #0A1218;
+    --terminal: #060E14;
+    --lighter-background: #101C24;
+    --dialog-background: rgba(10, 18, 24, 0.6);
+    --gray-full: #162430;
+    --darker-gray: rgba(22, 36, 48, 0.7);
+    --dark-gray: rgba(255, 140, 30, 0.06);
+    --gray: rgba(255, 140, 30, 0.12);
+    --light-gray: #FFE8CC;
+    --primary: #FF8C1E;
+    --primary-opacity: rgba(255, 140, 30, 0.25);
+    --error: #FF3050;
+    --error-opacity: rgba(255, 48, 80, 0.25);
+    --success: #40C880;
+    --success-opacity: rgba(64, 200, 128, 0.25);
+    --warning: #FFD840;
+    --warning-opacity: rgba(255, 216, 64, 0.25);
+    --white: #FFE8CC;
+    --subtext: #2A5070;
+    --text: #FFE8CC;
+}
+:root[data-theme="oled"] {
+    --background: #04090E;
+    --terminal: #02060A;
+    --lighter-background: #0A1218;
+    --dialog-background: rgba(4, 9, 14, 0.7);
+    --gray-full: #0A1218;
+    --darker-gray: rgba(10, 18, 24, 0.7);
+    --dark-gray: rgba(255, 140, 30, 0.05);
+    --gray: rgba(255, 140, 30, 0.1);
+    --light-gray: #FFE8CC;
+    --primary: #FF8C1E;
+    --primary-opacity: rgba(255, 140, 30, 0.25);
+    --error: #FF3050;
+    --error-opacity: rgba(255, 48, 80, 0.25);
+    --success: #40C880;
+    --success-opacity: rgba(64, 200, 128, 0.25);
+    --warning: #FFD840;
+    --warning-opacity: rgba(255, 216, 64, 0.25);
+    --white: #FFE8CC;
+    --subtext: #122840;
+    --text: #FFE8CC;
+}
+:root[data-theme="light"] {
+    --background: #F0F6FA;
+    --terminal: #E0EEF8;
+    --lighter-background: #E0EEF8;
+    --dialog-background: rgba(240, 246, 250, 0.5);
+    --gray-full: #C8DCF0;
+    --darker-gray: rgba(200, 220, 240, 0.85);
+    --dark-gray: rgba(160, 70, 0, 0.05);
+    --gray: rgba(160, 70, 0, 0.1);
+    --light-gray: #1E1000;
+    --primary: #A04600;
+    --primary-opacity: rgba(160, 70, 0, 0.18);
+    --error: #980020;
+    --error-opacity: rgba(152, 0, 32, 0.15);
+    --success: #1A6040;
+    --success-opacity: rgba(26, 96, 64, 0.15);
+    --warning: #806000;
+    --warning-opacity: rgba(128, 96, 0, 0.15);
+    --white: #1E1000;
+    --subtext: #1A4A68;
+    --text: #1E1000;
+}

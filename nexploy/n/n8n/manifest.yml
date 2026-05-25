@@ -1,0 +1,6 @@
+type: docker
+name: n8n
+version: latest
+description: n8n is an extendable workflow automation tool that connects apps and services with a visual node-based editor.
+category: Productivity
+mainService: n8n

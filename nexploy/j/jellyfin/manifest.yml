@@ -1,0 +1,6 @@
+type: docker
+name: Jellyfin
+version: latest
+description: Jellyfin is a free and open-source media server that lets you stream your personal media collection to any device.
+category: Media
+mainService: jellyfin

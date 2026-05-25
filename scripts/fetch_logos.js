@@ -10,6 +10,7 @@ const IGNORE = new Set(["dist", ".git", ".DS_Store", "NPINDEX"]);
 
 const ALIASES = {
     "hassio-supervisor": "home-assistant",
+    "filebrowser": "file-browser",
 };
 
 const TIMEOUT_MS = 15000;

@@ -1,0 +1,6 @@
+type: docker
+name: Kavita
+version: latest
+description: Kavita is a fast, feature-rich, self-hosted digital library for manga, comics, and ebooks with a modern web reader.
+category: Media
+mainService: kavita

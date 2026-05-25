@@ -1,0 +1,6 @@
+type: docker
+name: Miniflux
+version: latest
+description: Miniflux is a minimalist and opinionated RSS feed reader focused on simplicity and speed.
+category: Utilities
+mainService: miniflux

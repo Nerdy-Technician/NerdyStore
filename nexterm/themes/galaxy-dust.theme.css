@@ -1,0 +1,68 @@
+/* @name: Galaxy Dust */
+/* @description: Stardust purples and cosmic rose drifting through the deep galaxy */
+:root[data-theme="dark"] {
+    --background: #100D1A;
+    --terminal: #0A0812;
+    --lighter-background: #1A1428;
+    --dialog-background: rgba(16, 13, 26, 0.6);
+    --gray-full: #241E38;
+    --darker-gray: rgba(36, 30, 56, 0.7);
+    --dark-gray: rgba(200, 120, 220, 0.06);
+    --gray: rgba(200, 120, 220, 0.12);
+    --light-gray: #EDD8F8;
+    --primary: #C878DC;
+    --primary-opacity: rgba(200, 120, 220, 0.25);
+    --error: #FF4466;
+    --error-opacity: rgba(255, 68, 102, 0.25);
+    --success: #70E0A0;
+    --success-opacity: rgba(112, 224, 160, 0.25);
+    --warning: #FFD060;
+    --warning-opacity: rgba(255, 208, 96, 0.25);
+    --white: #EDD8F8;
+    --subtext: #6040A0;
+    --text: #EDD8F8;
+}
+:root[data-theme="oled"] {
+    --background: #06040E;
+    --terminal: #040208;
+    --lighter-background: #100D1A;
+    --dialog-background: rgba(6, 4, 14, 0.7);
+    --gray-full: #100D1A;
+    --darker-gray: rgba(16, 13, 26, 0.7);
+    --dark-gray: rgba(200, 120, 220, 0.05);
+    --gray: rgba(200, 120, 220, 0.1);
+    --light-gray: #EDD8F8;
+    --primary: #C878DC;
+    --primary-opacity: rgba(200, 120, 220, 0.25);
+    --error: #FF4466;
+    --error-opacity: rgba(255, 68, 102, 0.25);
+    --success: #70E0A0;
+    --success-opacity: rgba(112, 224, 160, 0.25);
+    --warning: #FFD060;
+    --warning-opacity: rgba(255, 208, 96, 0.25);
+    --white: #EDD8F8;
+    --subtext: #301860;
+    --text: #EDD8F8;
+}
+:root[data-theme="light"] {
+    --background: #FBF2FF;
+    --terminal: #F4E4FF;
+    --lighter-background: #F4E4FF;
+    --dialog-background: rgba(251, 242, 255, 0.5);
+    --gray-full: #E4CCFF;
+    --darker-gray: rgba(228, 204, 255, 0.85);
+    --dark-gray: rgba(110, 0, 140, 0.05);
+    --gray: rgba(110, 0, 140, 0.1);
+    --light-gray: #1A0030;
+    --primary: #6E008C;
+    --primary-opacity: rgba(110, 0, 140, 0.18);
+    --error: #A00030;
+    --error-opacity: rgba(160, 0, 48, 0.15);
+    --success: #106040;
+    --success-opacity: rgba(16, 96, 64, 0.15);
+    --warning: #806000;
+    --warning-opacity: rgba(128, 96, 0, 0.15);
+    --white: #1A0030;
+    --subtext: #602890;
+    --text: #1A0030;
+}

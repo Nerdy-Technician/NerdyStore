@@ -1,0 +1,6 @@
+type: docker
+name: Filebrowser
+version: latest
+description: Filebrowser is a web-based file manager that allows browsing, uploading, downloading, and managing files from a browser.
+category: Utilities
+mainService: filebrowser

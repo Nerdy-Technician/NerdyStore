@@ -1,0 +1,68 @@
+/* @name: Ash Storm */
+/* @description: Volcanic ash grays with a cold steel-blue accent cutting through the haze */
+:root[data-theme="dark"] {
+    --background: #141618;
+    --terminal: #0E1012;
+    --lighter-background: #1E2224;
+    --dialog-background: rgba(20, 22, 24, 0.6);
+    --gray-full: #2C3034;
+    --darker-gray: rgba(44, 48, 52, 0.7);
+    --dark-gray: rgba(100, 160, 220, 0.06);
+    --gray: rgba(100, 160, 220, 0.12);
+    --light-gray: #D8E4EE;
+    --primary: #64A0DC;
+    --primary-opacity: rgba(100, 160, 220, 0.25);
+    --error: #E05060;
+    --error-opacity: rgba(224, 80, 96, 0.25);
+    --success: #60C080;
+    --success-opacity: rgba(96, 192, 128, 0.25);
+    --warning: #E0B840;
+    --warning-opacity: rgba(224, 184, 64, 0.25);
+    --white: #D8E4EE;
+    --subtext: #5A6A78;
+    --text: #D8E4EE;
+}
+:root[data-theme="oled"] {
+    --background: #080A0C;
+    --terminal: #040608;
+    --lighter-background: #141618;
+    --dialog-background: rgba(8, 10, 12, 0.7);
+    --gray-full: #141618;
+    --darker-gray: rgba(20, 22, 24, 0.7);
+    --dark-gray: rgba(100, 160, 220, 0.05);
+    --gray: rgba(100, 160, 220, 0.1);
+    --light-gray: #D8E4EE;
+    --primary: #64A0DC;
+    --primary-opacity: rgba(100, 160, 220, 0.25);
+    --error: #E05060;
+    --error-opacity: rgba(224, 80, 96, 0.25);
+    --success: #60C080;
+    --success-opacity: rgba(96, 192, 128, 0.25);
+    --warning: #E0B840;
+    --warning-opacity: rgba(224, 184, 64, 0.25);
+    --white: #D8E4EE;
+    --subtext: #303840;
+    --text: #D8E4EE;
+}
+:root[data-theme="light"] {
+    --background: #F0F4F8;
+    --terminal: #E0E8F0;
+    --lighter-background: #E0E8F0;
+    --dialog-background: rgba(240, 244, 248, 0.5);
+    --gray-full: #C8D4DF;
+    --darker-gray: rgba(200, 212, 223, 0.85);
+    --dark-gray: rgba(40, 90, 150, 0.05);
+    --gray: rgba(40, 90, 150, 0.1);
+    --light-gray: #0A1828;
+    --primary: #285A96;
+    --primary-opacity: rgba(40, 90, 150, 0.18);
+    --error: #901830;
+    --error-opacity: rgba(144, 24, 48, 0.15);
+    --success: #246040;
+    --success-opacity: rgba(36, 96, 64, 0.15);
+    --warning: #806000;
+    --warning-opacity: rgba(128, 96, 0, 0.15);
+    --white: #0A1828;
+    --subtext: #4A6080;
+    --text: #0A1828;
+}

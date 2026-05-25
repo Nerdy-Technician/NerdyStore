@@ -1,0 +1,30 @@
+services:
+  photoprism:
+    image: photoprism/photoprism:latest
+    container_name: photoprism
+    restart: unless-stopped
+    stop_grace_period: 10s
+    ports:
+      - "2342:2342"
+    volumes:
+      - ./originals:/photoprism/originals
+      - ./storage:/photoprism/storage
+    environment:
+      - PHOTOPRISM_ADMIN_USER=admin
+      - PHOTOPRISM_ADMIN_PASSWORD=admin_password
+      - PHOTOPRISM_AUTH_MODE=password
+      - PHOTOPRISM_SITE_URL=http://localhost:2342/
+      - PHOTOPRISM_DISABLE_TLS=true
+      - PHOTOPRISM_DEFAULT_TLS=false
+      - PHOTOPRISM_ORIGINALS_LIMIT=5000
+      - PHOTOPRISM_HTTP_COMPRESSION=gzip
+      - PHOTOPRISM_DATABASE_DRIVER=sqlite
+    security_opt:
+      - seccomp:unconfined
+      - apparmor:unconfined
+    healthcheck:
+      test: ["CMD", "photoprism", "status"]
+      interval: 60s
+      timeout: 15s
+      retries: 5
+      start_period: 120s

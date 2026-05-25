@@ -1,0 +1,22 @@
+services:
+  speedtest-tracker:
+    image: ghcr.io/alexjustesen/speedtest-tracker:latest
+    container_name: speedtest-tracker
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./config:/config
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - APP_KEY=base64:YOUR_APP_KEY_HERE
+      - APP_URL=http://localhost
+      - DB_CONNECTION=sqlite
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/api/healthcheck"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s

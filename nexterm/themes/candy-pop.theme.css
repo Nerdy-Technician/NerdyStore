@@ -1,0 +1,68 @@
+/* @name: Candy Pop */
+/* @description: Sugary pastels and electric pink on a soft lavender night */
+:root[data-theme="dark"] {
+    --background: #1A0E22;
+    --terminal: #12091A;
+    --lighter-background: #241630;
+    --dialog-background: rgba(26, 14, 34, 0.6);
+    --gray-full: #321E42;
+    --darker-gray: rgba(50, 30, 66, 0.7);
+    --dark-gray: rgba(255, 100, 200, 0.06);
+    --gray: rgba(255, 100, 200, 0.12);
+    --light-gray: #FFD0F0;
+    --primary: #FF64C8;
+    --primary-opacity: rgba(255, 100, 200, 0.25);
+    --error: #FF3A5A;
+    --error-opacity: rgba(255, 58, 90, 0.25);
+    --success: #50EEA0;
+    --success-opacity: rgba(80, 238, 160, 0.25);
+    --warning: #FFE050;
+    --warning-opacity: rgba(255, 224, 80, 0.25);
+    --white: #FFD0F0;
+    --subtext: #7A3A8A;
+    --text: #FFD0F0;
+}
+:root[data-theme="oled"] {
+    --background: #0D0612;
+    --terminal: #080410;
+    --lighter-background: #1A0E22;
+    --dialog-background: rgba(13, 6, 18, 0.7);
+    --gray-full: #1A0E22;
+    --darker-gray: rgba(26, 14, 34, 0.7);
+    --dark-gray: rgba(255, 100, 200, 0.05);
+    --gray: rgba(255, 100, 200, 0.1);
+    --light-gray: #FFD0F0;
+    --primary: #FF64C8;
+    --primary-opacity: rgba(255, 100, 200, 0.25);
+    --error: #FF3A5A;
+    --error-opacity: rgba(255, 58, 90, 0.25);
+    --success: #50EEA0;
+    --success-opacity: rgba(80, 238, 160, 0.25);
+    --warning: #FFE050;
+    --warning-opacity: rgba(255, 224, 80, 0.25);
+    --white: #FFD0F0;
+    --subtext: #4A1A5A;
+    --text: #FFD0F0;
+}
+:root[data-theme="light"] {
+    --background: #FFF0FA;
+    --terminal: #FFE0F6;
+    --lighter-background: #FFE0F6;
+    --dialog-background: rgba(255, 240, 250, 0.5);
+    --gray-full: #F0C8E8;
+    --darker-gray: rgba(240, 200, 232, 0.85);
+    --dark-gray: rgba(160, 0, 110, 0.05);
+    --gray: rgba(160, 0, 110, 0.1);
+    --light-gray: #280018;
+    --primary: #A0006E;
+    --primary-opacity: rgba(160, 0, 110, 0.18);
+    --error: #A0001E;
+    --error-opacity: rgba(160, 0, 30, 0.15);
+    --success: #006840;
+    --success-opacity: rgba(0, 104, 64, 0.15);
+    --warning: #807000;
+    --warning-opacity: rgba(128, 112, 0, 0.15);
+    --white: #280018;
+    --subtext: #6A2888;
+    --text: #280018;
+}

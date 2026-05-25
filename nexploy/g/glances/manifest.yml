@@ -1,0 +1,6 @@
+type: docker
+name: Glances
+version: latest
+description: Glances is a cross-platform system monitoring tool that provides a comprehensive overview of system resources in real time.
+category: Monitoring
+mainService: glances

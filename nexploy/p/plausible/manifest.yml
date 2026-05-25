@@ -1,0 +1,6 @@
+type: docker
+name: Plausible
+version: v2
+description: Plausible is a lightweight, privacy-focused web analytics platform that is an alternative to Google Analytics.
+category: Monitoring
+mainService: plausible

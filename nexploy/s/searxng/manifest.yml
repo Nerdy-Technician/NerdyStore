@@ -1,0 +1,6 @@
+type: docker
+name: SearXNG
+version: latest
+description: SearXNG is a free and privacy-respecting meta search engine that aggregates results from multiple search engines.
+category: Utilities
+mainService: searxng

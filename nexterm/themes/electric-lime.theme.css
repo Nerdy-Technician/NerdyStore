@@ -1,0 +1,68 @@
+/* @name: Electric Lime */
+/* @description: High-voltage lime green on a near-black base for maximum punch */
+:root[data-theme="dark"] {
+    --background: #0E1408;
+    --terminal: #080E04;
+    --lighter-background: #161E0C;
+    --dialog-background: rgba(14, 20, 8, 0.6);
+    --gray-full: #202E10;
+    --darker-gray: rgba(32, 46, 16, 0.7);
+    --dark-gray: rgba(160, 255, 0, 0.06);
+    --gray: rgba(160, 255, 0, 0.12);
+    --light-gray: #DEFF90;
+    --primary: #A0FF00;
+    --primary-opacity: rgba(160, 255, 0, 0.25);
+    --error: #FF3A30;
+    --error-opacity: rgba(255, 58, 48, 0.25);
+    --success: #00FFB0;
+    --success-opacity: rgba(0, 255, 176, 0.25);
+    --warning: #FFDD00;
+    --warning-opacity: rgba(255, 221, 0, 0.25);
+    --white: #DEFF90;
+    --subtext: #4A7010;
+    --text: #DEFF90;
+}
+:root[data-theme="oled"] {
+    --background: #060904;
+    --terminal: #030602;
+    --lighter-background: #0E1408;
+    --dialog-background: rgba(6, 9, 4, 0.7);
+    --gray-full: #0E1408;
+    --darker-gray: rgba(14, 20, 8, 0.7);
+    --dark-gray: rgba(160, 255, 0, 0.05);
+    --gray: rgba(160, 255, 0, 0.1);
+    --light-gray: #DEFF90;
+    --primary: #A0FF00;
+    --primary-opacity: rgba(160, 255, 0, 0.25);
+    --error: #FF3A30;
+    --error-opacity: rgba(255, 58, 48, 0.25);
+    --success: #00FFB0;
+    --success-opacity: rgba(0, 255, 176, 0.25);
+    --warning: #FFDD00;
+    --warning-opacity: rgba(255, 221, 0, 0.25);
+    --white: #DEFF90;
+    --subtext: #284008;
+    --text: #DEFF90;
+}
+:root[data-theme="light"] {
+    --background: #F4FFDC;
+    --terminal: #E8FFBC;
+    --lighter-background: #E8FFBC;
+    --dialog-background: rgba(244, 255, 220, 0.5);
+    --gray-full: #D0F098;
+    --darker-gray: rgba(208, 240, 152, 0.85);
+    --dark-gray: rgba(70, 120, 0, 0.05);
+    --gray: rgba(70, 120, 0, 0.1);
+    --light-gray: #101A00;
+    --primary: #467800;
+    --primary-opacity: rgba(70, 120, 0, 0.18);
+    --error: #960800;
+    --error-opacity: rgba(150, 8, 0, 0.15);
+    --success: #007040;
+    --success-opacity: rgba(0, 112, 64, 0.15);
+    --warning: #706000;
+    --warning-opacity: rgba(112, 96, 0, 0.15);
+    --white: #101A00;
+    --subtext: #487020;
+    --text: #101A00;
+}

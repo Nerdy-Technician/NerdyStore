@@ -1,5 +1,5 @@
 import Icon from "@mdi/react";
-import { mdiStore, mdiPackageVariant, mdiConsoleLine, mdiArrowRight, mdiLayersTriple, mdiCubeOutline, mdiScriptText, mdiCodeBraces, mdiPalette } from "@mdi/js";
+import { mdiStore, mdiPackageVariant, mdiConsoleLine, mdiArrowRight, mdiLayersTriple, mdiCubeOutline, mdiScriptText, mdiCodeBraces, mdiPalette, mdiPencilRuler } from "@mdi/js";
 import "./styles.sass";
 
 const NEXTERM_ICONS = { scripts: mdiScriptText, snippets: mdiCodeBraces, themes: mdiPalette };
@@ -61,6 +61,16 @@ const HomePage = ({ categories, nextermData, onBrowse }) => {
                     <div className="section-card-body">
                         <h3>Nexterm</h3>
                         <p>Terminal scripts, snippets, and themes for your workflow</p>
+                    </div>
+                    <Icon path={mdiArrowRight} className="section-card-arrow" />
+                </div>
+                <div className="home-section-card" onClick={() => onBrowse("tools")}>
+                    <div className="section-card-icon">
+                        <Icon path={mdiPencilRuler} />
+                    </div>
+                    <div className="section-card-body">
+                        <h3>Theme Creator</h3>
+                        <p>Design custom Nexterm themes with live preview and CSS export</p>
                     </div>
                     <Icon path={mdiArrowRight} className="section-card-arrow" />
                 </div>

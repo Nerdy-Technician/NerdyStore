@@ -1,0 +1,68 @@
+/* @name: Forest Shadow */
+/* @description: Ancient forest shadows — deep moss greens and bark browns beneath the canopy */
+:root[data-theme="dark"] {
+    --background: #0C1208;
+    --terminal: #080C06;
+    --lighter-background: #141A0E;
+    --dialog-background: rgba(12, 18, 8, 0.6);
+    --gray-full: #1E2A14;
+    --darker-gray: rgba(30, 42, 20, 0.7);
+    --dark-gray: rgba(100, 160, 60, 0.06);
+    --gray: rgba(100, 160, 60, 0.12);
+    --light-gray: #CCDDB0;
+    --primary: #64A03C;
+    --primary-opacity: rgba(100, 160, 60, 0.25);
+    --error: #D04040;
+    --error-opacity: rgba(208, 64, 64, 0.25);
+    --success: #40C870;
+    --success-opacity: rgba(64, 200, 112, 0.25);
+    --warning: #C8A840;
+    --warning-opacity: rgba(200, 168, 64, 0.25);
+    --white: #CCDDB0;
+    --subtext: #3A5A20;
+    --text: #CCDDB0;
+}
+:root[data-theme="oled"] {
+    --background: #050904;
+    --terminal: #030602;
+    --lighter-background: #0C1208;
+    --dialog-background: rgba(5, 9, 4, 0.7);
+    --gray-full: #0C1208;
+    --darker-gray: rgba(12, 18, 8, 0.7);
+    --dark-gray: rgba(100, 160, 60, 0.05);
+    --gray: rgba(100, 160, 60, 0.1);
+    --light-gray: #CCDDB0;
+    --primary: #64A03C;
+    --primary-opacity: rgba(100, 160, 60, 0.25);
+    --error: #D04040;
+    --error-opacity: rgba(208, 64, 64, 0.25);
+    --success: #40C870;
+    --success-opacity: rgba(64, 200, 112, 0.25);
+    --warning: #C8A840;
+    --warning-opacity: rgba(200, 168, 64, 0.25);
+    --white: #CCDDB0;
+    --subtext: #1E3010;
+    --text: #CCDDB0;
+}
+:root[data-theme="light"] {
+    --background: #F0F8E8;
+    --terminal: #E0F0D0;
+    --lighter-background: #E0F0D0;
+    --dialog-background: rgba(240, 248, 232, 0.5);
+    --gray-full: #C4DCA8;
+    --darker-gray: rgba(196, 220, 168, 0.85);
+    --dark-gray: rgba(30, 80, 0, 0.05);
+    --gray: rgba(30, 80, 0, 0.1);
+    --light-gray: #0A1600;
+    --primary: #1E5000;
+    --primary-opacity: rgba(30, 80, 0, 0.18);
+    --error: #901010;
+    --error-opacity: rgba(144, 16, 16, 0.15);
+    --success: #0A5828;
+    --success-opacity: rgba(10, 88, 40, 0.15);
+    --warning: #686000;
+    --warning-opacity: rgba(104, 96, 0, 0.15);
+    --white: #0A1600;
+    --subtext: #305A18;
+    --text: #0A1600;
+}

@@ -1,0 +1,21 @@
+services:
+  calibre-web:
+    image: linuxserver/calibre-web:latest
+    container_name: calibre-web
+    restart: unless-stopped
+    ports:
+      - "8083:8083"
+    volumes:
+      - ./config:/config
+      - ./books:/books
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=UTC
+      - DOCKER_MODS=linuxserver/mods:universal-calibre
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8083"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s

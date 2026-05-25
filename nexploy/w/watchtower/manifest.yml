@@ -1,0 +1,6 @@
+type: docker
+name: Watchtower
+version: latest
+description: Watchtower automatically monitors and updates running Docker containers when new image versions are published.
+category: Utilities
+mainService: watchtower

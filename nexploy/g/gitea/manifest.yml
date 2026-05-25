@@ -1,0 +1,6 @@
+type: docker
+name: Gitea
+version: latest
+description: Gitea is a lightweight self-hosted Git service with a web interface similar to GitHub.
+category: Development
+mainService: gitea

@@ -1,0 +1,6 @@
+type: docker
+name: Syncthing
+version: latest
+description: Syncthing is a continuous file synchronization program that syncs files between two or more computers in real time.
+category: Utilities
+mainService: syncthing

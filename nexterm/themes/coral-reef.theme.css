@@ -1,0 +1,68 @@
+/* @name: Coral Reef */
+/* @description: Warm coral and ocean teal inspired by tropical reef ecosystems */
+:root[data-theme="dark"] {
+    --background: #1A0E0C;
+    --terminal: #120808;
+    --lighter-background: #261412;
+    --dialog-background: rgba(26, 14, 12, 0.6);
+    --gray-full: #342018;
+    --darker-gray: rgba(52, 32, 24, 0.7);
+    --dark-gray: rgba(255, 120, 90, 0.06);
+    --gray: rgba(255, 120, 90, 0.12);
+    --light-gray: #FFD8C8;
+    --primary: #FF785A;
+    --primary-opacity: rgba(255, 120, 90, 0.25);
+    --error: #FF3040;
+    --error-opacity: rgba(255, 48, 64, 0.25);
+    --success: #20C8A0;
+    --success-opacity: rgba(32, 200, 160, 0.25);
+    --warning: #FFC040;
+    --warning-opacity: rgba(255, 192, 64, 0.25);
+    --white: #FFD8C8;
+    --subtext: #7A3A28;
+    --text: #FFD8C8;
+}
+:root[data-theme="oled"] {
+    --background: #0C0604;
+    --terminal: #080402;
+    --lighter-background: #1A0E0C;
+    --dialog-background: rgba(12, 6, 4, 0.7);
+    --gray-full: #1A0E0C;
+    --darker-gray: rgba(26, 14, 12, 0.7);
+    --dark-gray: rgba(255, 120, 90, 0.05);
+    --gray: rgba(255, 120, 90, 0.1);
+    --light-gray: #FFD8C8;
+    --primary: #FF785A;
+    --primary-opacity: rgba(255, 120, 90, 0.25);
+    --error: #FF3040;
+    --error-opacity: rgba(255, 48, 64, 0.25);
+    --success: #20C8A0;
+    --success-opacity: rgba(32, 200, 160, 0.25);
+    --warning: #FFC040;
+    --warning-opacity: rgba(255, 192, 64, 0.25);
+    --white: #FFD8C8;
+    --subtext: #4A1A10;
+    --text: #FFD8C8;
+}
+:root[data-theme="light"] {
+    --background: #FFF3EE;
+    --terminal: #FFE4DA;
+    --lighter-background: #FFE4DA;
+    --dialog-background: rgba(255, 243, 238, 0.5);
+    --gray-full: #F0CCBA;
+    --darker-gray: rgba(240, 204, 186, 0.85);
+    --dark-gray: rgba(160, 50, 20, 0.05);
+    --gray: rgba(160, 50, 20, 0.1);
+    --light-gray: #240800;
+    --primary: #A03214;
+    --primary-opacity: rgba(160, 50, 20, 0.18);
+    --error: #900010;
+    --error-opacity: rgba(144, 0, 16, 0.15);
+    --success: #006848;
+    --success-opacity: rgba(0, 104, 72, 0.15);
+    --warning: #806000;
+    --warning-opacity: rgba(128, 96, 0, 0.15);
+    --white: #240800;
+    --subtext: #703820;
+    --text: #240800;
+}

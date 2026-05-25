@@ -1,0 +1,6 @@
+type: docker
+name: Tandoor Recipes
+version: latest
+description: Tandoor Recipes is a self-hosted recipe and meal planning application with shopping list and nutritional information support.
+category: Productivity
+mainService: tandoor

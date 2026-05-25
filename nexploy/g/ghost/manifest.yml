@@ -1,0 +1,6 @@
+type: docker
+name: Ghost
+version: latest
+description: Ghost is a modern open-source blogging platform focused on professional publishing with a clean editor and newsletter support.
+category: Productivity
+mainService: ghost

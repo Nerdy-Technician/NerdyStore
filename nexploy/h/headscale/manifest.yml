@@ -1,0 +1,6 @@
+type: docker
+name: Headscale
+version: latest
+description: Headscale is an open-source, self-hosted implementation of the Tailscale control server for managing WireGuard-based VPN networks.
+category: Networking
+mainService: headscale

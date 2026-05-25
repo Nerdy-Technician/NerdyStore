@@ -1,0 +1,6 @@
+type: docker
+name: Audiobookshelf
+version: latest
+description: Audiobookshelf is a self-hosted audiobook and podcast server with a mobile app and streaming support.
+category: Media
+mainService: audiobookshelf

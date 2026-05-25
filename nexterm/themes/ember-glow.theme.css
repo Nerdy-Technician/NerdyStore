@@ -1,0 +1,68 @@
+/* @name: Ember Glow */
+/* @description: Smoldering ember orange on deep charcoal, glowing from within */
+:root[data-theme="dark"] {
+    --background: #1A0E08;
+    --terminal: #120804;
+    --lighter-background: #261408;
+    --dialog-background: rgba(26, 14, 8, 0.6);
+    --gray-full: #321C10;
+    --darker-gray: rgba(50, 28, 16, 0.7);
+    --dark-gray: rgba(255, 140, 40, 0.06);
+    --gray: rgba(255, 140, 40, 0.12);
+    --light-gray: #FFE0B8;
+    --primary: #FF8C28;
+    --primary-opacity: rgba(255, 140, 40, 0.25);
+    --error: #FF2828;
+    --error-opacity: rgba(255, 40, 40, 0.25);
+    --success: #60D080;
+    --success-opacity: rgba(96, 208, 128, 0.25);
+    --warning: #FFD040;
+    --warning-opacity: rgba(255, 208, 64, 0.25);
+    --white: #FFE0B8;
+    --subtext: #7A4020;
+    --text: #FFE0B8;
+}
+:root[data-theme="oled"] {
+    --background: #0C0604;
+    --terminal: #080402;
+    --lighter-background: #1A0E08;
+    --dialog-background: rgba(12, 6, 4, 0.7);
+    --gray-full: #1A0E08;
+    --darker-gray: rgba(26, 14, 8, 0.7);
+    --dark-gray: rgba(255, 140, 40, 0.05);
+    --gray: rgba(255, 140, 40, 0.1);
+    --light-gray: #FFE0B8;
+    --primary: #FF8C28;
+    --primary-opacity: rgba(255, 140, 40, 0.25);
+    --error: #FF2828;
+    --error-opacity: rgba(255, 40, 40, 0.25);
+    --success: #60D080;
+    --success-opacity: rgba(96, 208, 128, 0.25);
+    --warning: #FFD040;
+    --warning-opacity: rgba(255, 208, 64, 0.25);
+    --white: #FFE0B8;
+    --subtext: #4A2008;
+    --text: #FFE0B8;
+}
+:root[data-theme="light"] {
+    --background: #FFF5EE;
+    --terminal: #FFE8D0;
+    --lighter-background: #FFE8D0;
+    --dialog-background: rgba(255, 245, 238, 0.5);
+    --gray-full: #F0D0B0;
+    --darker-gray: rgba(240, 208, 176, 0.85);
+    --dark-gray: rgba(160, 60, 0, 0.05);
+    --gray: rgba(160, 60, 0, 0.1);
+    --light-gray: #260800;
+    --primary: #A03C00;
+    --primary-opacity: rgba(160, 60, 0, 0.18);
+    --error: #980000;
+    --error-opacity: rgba(152, 0, 0, 0.15);
+    --success: #246040;
+    --success-opacity: rgba(36, 96, 64, 0.15);
+    --warning: #806000;
+    --warning-opacity: rgba(128, 96, 0, 0.15);
+    --white: #260800;
+    --subtext: #784020;
+    --text: #260800;
+}

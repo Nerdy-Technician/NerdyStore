@@ -1,0 +1,6 @@
+type: docker
+name: Homer
+version: latest
+description: Homer is a dead-simple static homepage for your server to keep your services accessible from a single place.
+category: Dashboard
+mainService: homer

@@ -1,0 +1,6 @@
+type: docker
+name: Changedetection.io
+version: latest
+description: Changedetection.io monitors websites for content changes and sends notifications when updates are detected.
+category: Monitoring
+mainService: changedetection

@@ -1,0 +1,6 @@
+type: docker
+name: Nextcloud
+version: latest
+description: Nextcloud is a self-hosted file sync and collaboration platform with support for documents, calendar, contacts, and more.
+category: Cloud
+mainService: nextcloud

@@ -1,0 +1,6 @@
+type: docker
+name: Loki
+version: latest
+description: Loki is a horizontally scalable log aggregation system by Grafana Labs, designed to be cost-effective and easy to operate.
+category: Monitoring
+mainService: loki

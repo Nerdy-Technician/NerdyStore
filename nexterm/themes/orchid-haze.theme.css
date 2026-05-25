@@ -1,0 +1,68 @@
+/* @name: Orchid Haze */
+/* @description: Dreamy orchid purples diffusing into a warm lilac haze */
+:root[data-theme="dark"] {
+    --background: #160E1E;
+    --terminal: #100A18;
+    --lighter-background: #20162C;
+    --dialog-background: rgba(22, 14, 30, 0.6);
+    --gray-full: #2C1E3A;
+    --darker-gray: rgba(44, 30, 58, 0.7);
+    --dark-gray: rgba(180, 100, 220, 0.06);
+    --gray: rgba(180, 100, 220, 0.12);
+    --light-gray: #EDD8FF;
+    --primary: #B464DC;
+    --primary-opacity: rgba(180, 100, 220, 0.25);
+    --error: #F04060;
+    --error-opacity: rgba(240, 64, 96, 0.25);
+    --success: #60D890;
+    --success-opacity: rgba(96, 216, 144, 0.25);
+    --warning: #F0D040;
+    --warning-opacity: rgba(240, 208, 64, 0.25);
+    --white: #EDD8FF;
+    --subtext: #6A3890;
+    --text: #EDD8FF;
+}
+:root[data-theme="oled"] {
+    --background: #0A0610;
+    --terminal: #070410;
+    --lighter-background: #160E1E;
+    --dialog-background: rgba(10, 6, 16, 0.7);
+    --gray-full: #160E1E;
+    --darker-gray: rgba(22, 14, 30, 0.7);
+    --dark-gray: rgba(180, 100, 220, 0.05);
+    --gray: rgba(180, 100, 220, 0.1);
+    --light-gray: #EDD8FF;
+    --primary: #B464DC;
+    --primary-opacity: rgba(180, 100, 220, 0.25);
+    --error: #F04060;
+    --error-opacity: rgba(240, 64, 96, 0.25);
+    --success: #60D890;
+    --success-opacity: rgba(96, 216, 144, 0.25);
+    --warning: #F0D040;
+    --warning-opacity: rgba(240, 208, 64, 0.25);
+    --white: #EDD8FF;
+    --subtext: #3A1858;
+    --text: #EDD8FF;
+}
+:root[data-theme="light"] {
+    --background: #FAF2FF;
+    --terminal: #F3E4FF;
+    --lighter-background: #F3E4FF;
+    --dialog-background: rgba(250, 242, 255, 0.5);
+    --gray-full: #E4CAFF;
+    --darker-gray: rgba(228, 202, 255, 0.85);
+    --dark-gray: rgba(100, 0, 150, 0.05);
+    --gray: rgba(100, 0, 150, 0.1);
+    --light-gray: #160028;
+    --primary: #640096;
+    --primary-opacity: rgba(100, 0, 150, 0.18);
+    --error: #980020;
+    --error-opacity: rgba(152, 0, 32, 0.15);
+    --success: #186040;
+    --success-opacity: rgba(24, 96, 64, 0.15);
+    --warning: #786000;
+    --warning-opacity: rgba(120, 96, 0, 0.15);
+    --white: #160028;
+    --subtext: #642090;
+    --text: #160028;
+}

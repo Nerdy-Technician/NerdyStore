@@ -1,0 +1,6 @@
+type: docker
+name: Vaultwarden
+version: latest
+description: Vaultwarden is an unofficial Bitwarden-compatible server written in Rust, perfect for self-hosting a password manager.
+category: Security
+mainService: vaultwarden

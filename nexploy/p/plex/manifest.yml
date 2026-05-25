@@ -1,0 +1,6 @@
+type: docker
+name: Plex
+version: latest
+description: Plex Media Server organizes your personal video, music, and photo collections and streams them to all your devices.
+category: Media
+mainService: plex

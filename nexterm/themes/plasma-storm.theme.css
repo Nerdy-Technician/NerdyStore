@@ -1,0 +1,68 @@
+/* @name: Plasma Storm */
+/* @description: Superheated plasma whites and electric blue-violet arcing through the dark */
+:root[data-theme="dark"] {
+    --background: #0A0818;
+    --terminal: #060414;
+    --lighter-background: #120E24;
+    --dialog-background: rgba(10, 8, 24, 0.6);
+    --gray-full: #1C1832;
+    --darker-gray: rgba(28, 24, 50, 0.7);
+    --dark-gray: rgba(120, 60, 255, 0.06);
+    --gray: rgba(120, 60, 255, 0.12);
+    --light-gray: #E8D8FF;
+    --primary: #783CFF;
+    --primary-opacity: rgba(120, 60, 255, 0.25);
+    --error: #FF2040;
+    --error-opacity: rgba(255, 32, 64, 0.25);
+    --success: #20FFC0;
+    --success-opacity: rgba(32, 255, 192, 0.25);
+    --warning: #FFDD20;
+    --warning-opacity: rgba(255, 221, 32, 0.25);
+    --white: #E8D8FF;
+    --subtext: #4428A0;
+    --text: #E8D8FF;
+}
+:root[data-theme="oled"] {
+    --background: #04030E;
+    --terminal: #020208;
+    --lighter-background: #0A0818;
+    --dialog-background: rgba(4, 3, 14, 0.7);
+    --gray-full: #0A0818;
+    --darker-gray: rgba(10, 8, 24, 0.7);
+    --dark-gray: rgba(120, 60, 255, 0.05);
+    --gray: rgba(120, 60, 255, 0.1);
+    --light-gray: #E8D8FF;
+    --primary: #783CFF;
+    --primary-opacity: rgba(120, 60, 255, 0.25);
+    --error: #FF2040;
+    --error-opacity: rgba(255, 32, 64, 0.25);
+    --success: #20FFC0;
+    --success-opacity: rgba(32, 255, 192, 0.25);
+    --warning: #FFDD20;
+    --warning-opacity: rgba(255, 221, 32, 0.25);
+    --white: #E8D8FF;
+    --subtext: #221060;
+    --text: #E8D8FF;
+}
+:root[data-theme="light"] {
+    --background: #F6F2FF;
+    --terminal: #EAE2FF;
+    --lighter-background: #EAE2FF;
+    --dialog-background: rgba(246, 242, 255, 0.5);
+    --gray-full: #D8CCFF;
+    --darker-gray: rgba(216, 204, 255, 0.85);
+    --dark-gray: rgba(60, 0, 180, 0.05);
+    --gray: rgba(60, 0, 180, 0.1);
+    --light-gray: #0A0028;
+    --primary: #3C00B4;
+    --primary-opacity: rgba(60, 0, 180, 0.18);
+    --error: #980020;
+    --error-opacity: rgba(152, 0, 32, 0.15);
+    --success: #006858;
+    --success-opacity: rgba(0, 104, 88, 0.15);
+    --warning: #806000;
+    --warning-opacity: rgba(128, 96, 0, 0.15);
+    --white: #0A0028;
+    --subtext: #4020A0;
+    --text: #0A0028;
+}

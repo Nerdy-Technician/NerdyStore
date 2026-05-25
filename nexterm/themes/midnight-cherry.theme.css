@@ -1,0 +1,68 @@
+/* @name: Midnight Cherry */
+/* @description: Deep black cherry reds and rose glow on a velvety dark base */
+:root[data-theme="dark"] {
+    --background: #180810;
+    --terminal: #100410;
+    --lighter-background: #221018;
+    --dialog-background: rgba(24, 8, 16, 0.6);
+    --gray-full: #301422;
+    --darker-gray: rgba(48, 20, 34, 0.7);
+    --dark-gray: rgba(220, 60, 100, 0.06);
+    --gray: rgba(220, 60, 100, 0.12);
+    --light-gray: #FFDCE8;
+    --primary: #DC3C64;
+    --primary-opacity: rgba(220, 60, 100, 0.25);
+    --error: #FF1830;
+    --error-opacity: rgba(255, 24, 48, 0.25);
+    --success: #50D090;
+    --success-opacity: rgba(80, 208, 144, 0.25);
+    --warning: #FFD040;
+    --warning-opacity: rgba(255, 208, 64, 0.25);
+    --white: #FFDCE8;
+    --subtext: #782040;
+    --text: #FFDCE8;
+}
+:root[data-theme="oled"] {
+    --background: #0C0408;
+    --terminal: #080208;
+    --lighter-background: #180810;
+    --dialog-background: rgba(12, 4, 8, 0.7);
+    --gray-full: #180810;
+    --darker-gray: rgba(24, 8, 16, 0.7);
+    --dark-gray: rgba(220, 60, 100, 0.05);
+    --gray: rgba(220, 60, 100, 0.1);
+    --light-gray: #FFDCE8;
+    --primary: #DC3C64;
+    --primary-opacity: rgba(220, 60, 100, 0.25);
+    --error: #FF1830;
+    --error-opacity: rgba(255, 24, 48, 0.25);
+    --success: #50D090;
+    --success-opacity: rgba(80, 208, 144, 0.25);
+    --warning: #FFD040;
+    --warning-opacity: rgba(255, 208, 64, 0.25);
+    --white: #FFDCE8;
+    --subtext: #481020;
+    --text: #FFDCE8;
+}
+:root[data-theme="light"] {
+    --background: #FFF2F6;
+    --terminal: #FFE4EC;
+    --lighter-background: #FFE4EC;
+    --dialog-background: rgba(255, 242, 246, 0.5);
+    --gray-full: #F0C8D8;
+    --darker-gray: rgba(240, 200, 216, 0.85);
+    --dark-gray: rgba(150, 0, 50, 0.05);
+    --gray: rgba(150, 0, 50, 0.1);
+    --light-gray: #220010;
+    --primary: #960032;
+    --primary-opacity: rgba(150, 0, 50, 0.18);
+    --error: #8C0000;
+    --error-opacity: rgba(140, 0, 0, 0.15);
+    --success: #006840;
+    --success-opacity: rgba(0, 104, 64, 0.15);
+    --warning: #806000;
+    --warning-opacity: rgba(128, 96, 0, 0.15);
+    --white: #220010;
+    --subtext: #781040;
+    --text: #220010;
+}

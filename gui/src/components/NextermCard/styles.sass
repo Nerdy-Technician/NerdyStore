@@ -67,6 +67,17 @@
           text-transform: uppercase
           letter-spacing: 0.3px
 
+        .nexterm-subcat
+          display: inline-block
+          padding: 0.15rem 0.4rem
+          background-color: colors.$darker-gray
+          color: colors.$subtext
+          border-radius: 0.3rem
+          font-size: 0.65rem
+          font-weight: 600
+          text-transform: uppercase
+          letter-spacing: 0.3px
+
         .nexterm-file
           font-size: 0.7rem
           color: colors.$subtext
@@ -91,3 +102,16 @@
       -webkit-line-clamp: 3
       -webkit-box-orient: vertical
       overflow: hidden
+
+  &.theme-card
+    .theme-preview
+      display: flex
+      gap: 0.375rem
+      margin-bottom: 0.875rem
+      border-radius: 0.5rem
+      overflow: hidden
+
+      .theme-swatch
+        flex: 1
+        height: 2.5rem
+        border-radius: 0.375rem

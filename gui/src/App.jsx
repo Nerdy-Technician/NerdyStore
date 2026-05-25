@@ -2,7 +2,7 @@ import "./styles/main.sass";
 import "./App.sass";
 import { useEffect, useState, useCallback, useMemo } from "react";
 import Icon from "@mdi/react";
-import { mdiPackageVariant, mdiAdvertisements, mdiWeb, mdiMagnify, mdiScriptText, mdiLan, mdiPlayCircle, mdiCloud, mdiCodeBraces, mdiWrench, mdiApps, mdiDotsHorizontal, mdiChevronDown, mdiGamepadVariant, mdiConsoleLine, mdiPalette, mdiDocker, mdiStore, mdiHomeAutomation, mdiChartLine, mdiViewDashboard, mdiClipboardList, mdiBriefcase } from "@mdi/js";
+import { mdiPackageVariant, mdiAdvertisements, mdiWeb, mdiMagnify, mdiScriptText, mdiLan, mdiPlayCircle, mdiCloud, mdiCodeBraces, mdiWrench, mdiApps, mdiDotsHorizontal, mdiChevronDown, mdiGamepadVariant, mdiConsoleLine, mdiPalette, mdiDocker, mdiStore, mdiHomeAutomation, mdiChartLine, mdiViewDashboard, mdiClipboardList, mdiBriefcase, mdiPencilRuler } from "@mdi/js";
 import IconInput from "./components/IconInput";
 import SelectBox from "./components/SelectBox";
 import AppCard from "./components/AppCard";
@@ -11,6 +11,7 @@ import Loader from "./components/Loader";
 import ServerUrlDialog from "./components/ServerUrlDialog";
 import { loadCategoriesIndex, loadCategoryApps, loadNextermData, loadSourceName } from "./utils/api";
 import HomePage from "./components/HomePage";
+import ThemeCreator from "./components/ThemeCreator";
 
 const CATEGORY_ICONS = { scripts: mdiScriptText, networking: mdiLan, "media-servers": mdiPlayCircle, cloud: mdiCloud, development: mdiCodeBraces, utilities: mdiWrench, gaming: mdiGamepadVariant, all: mdiApps, other: mdiDotsHorizontal, "container-management": mdiDocker, "web-tools": mdiWeb, "ad-blockers": mdiAdvertisements, "home-automation": mdiHomeAutomation, monitoring: mdiChartLine, dashboard: mdiViewDashboard, inventory: mdiClipboardList, productivity: mdiBriefcase };
 const NEXTERM_ICONS = { scripts: mdiScriptText, snippets: mdiCodeBraces, themes: mdiPalette };
@@ -20,6 +21,7 @@ const getNextermIcon = (slug) => NEXTERM_ICONS[slug?.toLowerCase()] || mdiScript
 const SECTIONS = [
     { key: "nexploy", label: "Nexploy", icon: mdiPackageVariant },
     { key: "nexterm", label: "Nexterm", icon: mdiConsoleLine },
+    { key: "tools", label: "Tools", icon: mdiPencilRuler },
 ];
 
 const App = () => {
@@ -44,6 +46,7 @@ const App = () => {
     const [nextermCategory, setNextermCategory] = useState(null);
     const [loadingNexterm, setLoadingNexterm] = useState(true);
     const [nextermSearch, setNextermSearch] = useState("");
+    const [nextermSubcat, setNextermSubcat] = useState(null);
 
     const baseUrl = "./";
 
@@ -97,13 +100,25 @@ const App = () => {
         return result;
     }, [apps, searchQuery, sortBy]);
 
+    const nextermSubcats = useMemo(() => {
+        if (!nextermData || !nextermCategory) return [];
+        const items = nextermData.items[nextermCategory]?.items || [];
+        const seen = new Set();
+        items.forEach(i => { if (i.subcategory) seen.add(i.subcategory); });
+        return [...seen].sort();
+    }, [nextermData, nextermCategory]);
+
     const filteredNextermItems = useMemo(() => {
         if (!nextermData || !nextermCategory) return [];
         const items = nextermData.items[nextermCategory]?.items || [];
-        if (!nextermSearch) return items;
-        const q = nextermSearch.toLowerCase();
-        return items.filter(item => item.name.toLowerCase().includes(q) || item.description?.toLowerCase().includes(q));
-    }, [nextermData, nextermCategory, nextermSearch]);
+        let result = items;
+        if (nextermSubcat) result = result.filter(i => i.subcategory === nextermSubcat);
+        if (nextermSearch) {
+            const q = nextermSearch.toLowerCase();
+            result = result.filter(item => item.name.toLowerCase().includes(q) || item.description?.toLowerCase().includes(q));
+        }
+        return result;
+    }, [nextermData, nextermCategory, nextermSearch, nextermSubcat]);
 
     const currentNextermCategoryName = nextermData?.categories.find(c => c.slug === nextermCategory)?.name || "All";
 
@@ -142,7 +157,7 @@ const App = () => {
                     <nav className="sidebar-nav">
                         <div className="nav-label">Categories</div>
                         {nextermData?.categories.map((cat) => (
-                            <button key={cat.slug} className={`nav-item${nextermCategory === cat.slug ? ' active' : ''}`} onClick={() => { setNextermCategory(cat.slug); setActiveView("store"); }}>
+                            <button key={cat.slug} className={`nav-item${nextermCategory === cat.slug ? ' active' : ''}`} onClick={() => { setNextermCategory(cat.slug); setNextermSubcat(null); setActiveView("store"); }}>
                                 <Icon path={getNextermIcon(cat.slug)} className="nav-icon" />
                                 <span className="nav-text">{cat.name}</span>
                                 <span className="nav-count">{cat.count}</span>
@@ -150,6 +165,17 @@ const App = () => {
                         ))}
                     </nav>
                 )}
+
+                <a className="sidebar-github" href="https://github.com/Nerdy-Technician/NerdyStore" target="_blank" rel="noopener noreferrer">
+                    <svg className="github-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" fill="currentColor"/>
+                    </svg>
+                    <div className="github-info">
+                        <span className="github-name">NerdyStore</span>
+                        <span className="github-version">v1.3.5</span>
+                    </div>
+                    <svg className="github-arrow" viewBox="0 0 24 24"><path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z" fill="currentColor"/></svg>
+                </a>
             </aside>
             <main className="store-main">
                 <header className="mobile-header">
@@ -206,6 +232,8 @@ const App = () => {
 
                 {activeView === "home" ? (
                     <HomePage categories={categories} nextermData={nextermData} onBrowse={handleBrowse} />
+                ) : activeSection === "tools" ? (
+                    <ThemeCreator />
                 ) : activeSection === "nexploy" ? (
                     <div className="store-content">
                         <div className="content-header">
@@ -233,6 +261,14 @@ const App = () => {
                         <div className="store-filters">
                             <div className="search-wrapper"><IconInput type="text" placeholder="Search items..." icon={mdiMagnify} value={nextermSearch} setValue={setNextermSearch} /></div>
                         </div>
+                        {nextermSubcats.length > 0 && (
+                            <div className="subcat-filters">
+                                <button className={`subcat-pill${!nextermSubcat ? ' active' : ''}`} onClick={() => setNextermSubcat(null)}>All</button>
+                                {nextermSubcats.map(s => (
+                                    <button key={s} className={`subcat-pill${nextermSubcat === s ? ' active' : ''}`} onClick={() => setNextermSubcat(s)}>{s}</button>
+                                ))}
+                            </div>
+                        )}
                         <div className="store-results">
                             {loadingNexterm ? <div className="loading-container"><Loader size="medium" /></div> : filteredNextermItems.length > 0 ? (
                                 <div className="apps-grid">

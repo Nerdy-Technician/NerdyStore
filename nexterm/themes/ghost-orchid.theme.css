@@ -1,0 +1,68 @@
+/* @name: Ghost Orchid */
+/* @description: Pale spectral whites and barely-there orchid pink, hauntingly elegant */
+:root[data-theme="dark"] {
+    --background: #141018;
+    --terminal: #0E0C12;
+    --lighter-background: #1E1A26;
+    --dialog-background: rgba(20, 16, 24, 0.6);
+    --gray-full: #2A2432;
+    --darker-gray: rgba(42, 36, 50, 0.7);
+    --dark-gray: rgba(220, 160, 220, 0.06);
+    --gray: rgba(220, 160, 220, 0.12);
+    --light-gray: #F0E0F0;
+    --primary: #DCA0DC;
+    --primary-opacity: rgba(220, 160, 220, 0.25);
+    --error: #F04060;
+    --error-opacity: rgba(240, 64, 96, 0.25);
+    --success: #80D8A0;
+    --success-opacity: rgba(128, 216, 160, 0.25);
+    --warning: #F0D060;
+    --warning-opacity: rgba(240, 208, 96, 0.25);
+    --white: #F0E0F0;
+    --subtext: #6A5070;
+    --text: #F0E0F0;
+}
+:root[data-theme="oled"] {
+    --background: #08060C;
+    --terminal: #060408;
+    --lighter-background: #141018;
+    --dialog-background: rgba(8, 6, 12, 0.7);
+    --gray-full: #141018;
+    --darker-gray: rgba(20, 16, 24, 0.7);
+    --dark-gray: rgba(220, 160, 220, 0.05);
+    --gray: rgba(220, 160, 220, 0.1);
+    --light-gray: #F0E0F0;
+    --primary: #DCA0DC;
+    --primary-opacity: rgba(220, 160, 220, 0.25);
+    --error: #F04060;
+    --error-opacity: rgba(240, 64, 96, 0.25);
+    --success: #80D8A0;
+    --success-opacity: rgba(128, 216, 160, 0.25);
+    --warning: #F0D060;
+    --warning-opacity: rgba(240, 208, 96, 0.25);
+    --white: #F0E0F0;
+    --subtext: #382040;
+    --text: #F0E0F0;
+}
+:root[data-theme="light"] {
+    --background: #FDF6FF;
+    --terminal: #F8ECFF;
+    --lighter-background: #F8ECFF;
+    --dialog-background: rgba(253, 246, 255, 0.5);
+    --gray-full: #EAD4EE;
+    --darker-gray: rgba(234, 212, 238, 0.85);
+    --dark-gray: rgba(120, 40, 120, 0.05);
+    --gray: rgba(120, 40, 120, 0.1);
+    --light-gray: #1C0020;
+    --primary: #782878;
+    --primary-opacity: rgba(120, 40, 120, 0.18);
+    --error: #98001C;
+    --error-opacity: rgba(152, 0, 28, 0.15);
+    --success: #1C6038;
+    --success-opacity: rgba(28, 96, 56, 0.15);
+    --warning: #786000;
+    --warning-opacity: rgba(120, 96, 0, 0.15);
+    --white: #1C0020;
+    --subtext: #6A3870;
+    --text: #1C0020;
+}

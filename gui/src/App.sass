@@ -66,29 +66,31 @@
 
   .sidebar-sections
     display: flex
-    gap: 0.375rem
+    flex-direction: column
+    gap: 0.25rem
     padding: 0.75rem
     border-bottom: 1px solid colors.$dark-gray
 
     .section-btn
-      flex: 1
+      width: 100%
       display: flex
       align-items: center
-      justify-content: center
-      gap: 0.5rem
+      gap: 0.625rem
       padding: 0.5rem 0.75rem
-      border: 1px solid colors.$dark-gray
+      border: 1px solid transparent
       border-radius: 0.5rem
       background: transparent
       cursor: pointer
       transition: all 0.15s
-      font-size: 0.8rem
+      font-size: 0.85rem
       font-weight: 600
       color: colors.$subtext
+      text-align: left
 
       .section-icon
         width: 1.125rem
         height: 1.125rem
+        flex-shrink: 0
 
       &:hover
         background-color: colors.$background
@@ -170,6 +172,56 @@
         .nav-count
           background-color: rgba(255, 255, 255, 0.15)
           color: colors.$white
+
+  .sidebar-github
+    display: flex
+    align-items: center
+    gap: 0.75rem
+    margin: 0.75rem
+    padding: 0.75rem
+    border-radius: 0.625rem
+    border: 1px solid colors.$dark-gray
+    background: colors.$background
+    text-decoration: none
+    transition: all 0.2s
+    flex-shrink: 0
+
+    &:hover
+      border-color: colors.$gray
+      background: colors.$lighter-background
+
+      .github-arrow
+        color: colors.$primary
+
+    .github-icon
+      width: 1.5rem
+      height: 1.5rem
+      color: colors.$subtext
+      flex-shrink: 0
+
+    .github-info
+      flex: 1
+      display: flex
+      flex-direction: column
+      min-width: 0
+
+      .github-name
+        font-size: 0.85rem
+        font-weight: 700
+        color: colors.$white
+        line-height: 1.2
+
+      .github-version
+        font-size: 0.72rem
+        color: colors.$subtext
+        font-family: 'SF Mono', 'Fira Code', monospace
+
+    .github-arrow
+      width: 1rem
+      height: 1rem
+      color: colors.$subtext
+      flex-shrink: 0
+      transition: color 0.2s
 
 .store-main
   flex: 1
@@ -394,6 +446,32 @@
 
       @media (max-width: 600px)
         min-width: 100%
+
+  .subcat-filters
+    display: flex
+    flex-wrap: wrap
+    gap: 0.5rem
+    margin-bottom: 1.25rem
+
+    .subcat-pill
+      padding: 0.3rem 0.75rem
+      border-radius: 2rem
+      border: 1px solid colors.$dark-gray
+      background: colors.$lighter-background
+      color: colors.$subtext
+      font-size: 0.8rem
+      font-weight: 600
+      cursor: pointer
+      transition: all 0.15s
+
+      &:hover
+        border-color: colors.$gray
+        color: colors.$white
+
+      &.active
+        background: colors.$primary-opacity
+        border-color: colors.$primary
+        color: colors.$primary
 
   .store-results
     .loading-container

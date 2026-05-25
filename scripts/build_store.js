@@ -27,6 +27,21 @@ const parseCommentMeta = (content, ext) => {
     return meta;
 };
 
+const parseThemeColors = (content) => {
+    const darkBlock = content.match(/:root\[data-theme="dark"\]\s*\{([^}]+)\}/);
+    if (!darkBlock) return null;
+    const vars = {};
+    for (const [, key, val] of darkBlock[1].matchAll(/--(\w[\w-]*):\s*([^;]+);/g))
+        vars[key] = val.trim();
+    return {
+        background: vars["background"] || null,
+        terminal: vars["terminal"] || null,
+        primary: vars["primary"] || null,
+        text: vars["text"] || null,
+        subtext: vars["subtext"] || null,
+    };
+};
+
 const NEXTERM_CATEGORIES = {
     scripts: { name: "Scripts", extensions: [".sh"] },
     snippets: { name: "Snippets", extensions: [".snippet"] },
@@ -99,12 +114,17 @@ for (const [dirName, catInfo] of Object.entries(NEXTERM_CATEGORIES)) {
         const content = readFileSync(filePath, "utf8");
         const ext = catInfo.extensions.find(ext => file.endsWith(ext));
         const meta = parseCommentMeta(content, ext);
+        const subdir = relPath.includes("/")
+            ? relPath.split("/").slice(0, -1).join("/")
+            : dirName === "snippets" ? file.split("-")[0] : null;
         const item = {
             id: relPath,
             name: meta.name || file,
             description: meta.description || "",
             category: dirName,
+            subcategory: subdir,
             file: `${dirName}/${relPath}`,
+            ...(dirName === "themes" ? { colors: parseThemeColors(content) } : {}),
         };
         items.push(item);
         console.log(`  → ${dirName}/${relPath} (${item.name})`);

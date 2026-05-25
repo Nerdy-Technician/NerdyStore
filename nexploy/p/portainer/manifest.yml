@@ -1,0 +1,6 @@
+type: docker
+name: Portainer
+version: latest
+description: Portainer is a lightweight container management UI that works with Docker, Swarm, and Kubernetes.
+category: Container Management
+mainService: portainer

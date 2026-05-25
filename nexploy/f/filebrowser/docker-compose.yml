@@ -1,0 +1,18 @@
+services:
+  filebrowser:
+    image: filebrowser/filebrowser:latest
+    container_name: filebrowser
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./root:/srv
+      - ./database.db:/database/filebrowser.db
+      - ./config/.filebrowser.json:/.filebrowser.json
+    user: "1000:1000"
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s

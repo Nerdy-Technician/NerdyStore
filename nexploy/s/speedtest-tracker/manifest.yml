@@ -1,0 +1,6 @@
+type: docker
+name: Speedtest Tracker
+version: latest
+description: Speedtest Tracker continuously runs internet speed tests and records historical results with a dashboard interface.
+category: Monitoring
+mainService: speedtest-tracker

@@ -1,0 +1,6 @@
+type: docker
+name: Whoogle Search
+version: latest
+description: Whoogle is a self-hosted, ad-free, privacy-respecting metasearch engine that proxies Google search results.
+category: Utilities
+mainService: whoogle

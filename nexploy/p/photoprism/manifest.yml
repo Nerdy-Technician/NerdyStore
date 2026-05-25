@@ -1,0 +1,6 @@
+type: docker
+name: PhotoPrism
+version: latest
+description: PhotoPrism is an AI-powered photo management application that organizes and indexes your personal photo library.
+category: Media
+mainService: photoprism

@@ -1,0 +1,417 @@
+@use "../../styles/colors"
+
+.theme-creator
+  padding: 2rem
+  max-width: 1400px
+
+  .creator-header
+    margin-bottom: 2rem
+
+    h2
+      margin: 0 0 0.5rem 0
+      font-size: 1.5rem
+      color: colors.$white
+      font-weight: 700
+
+    p
+      margin: 0 0 1rem 0
+      color: colors.$subtext
+      font-size: 0.9rem
+      max-width: 640px
+      line-height: 1.5
+
+    .creator-steps
+      display: flex
+      gap: 0.75rem
+      flex-wrap: wrap
+
+      .creator-step
+        display: flex
+        align-items: center
+        gap: 0.5rem
+        background: colors.$lighter-background
+        border: 1px solid colors.$dark-gray
+        border-radius: 0.5rem
+        padding: 0.45rem 0.75rem
+        font-size: 0.8rem
+        color: colors.$subtext
+
+        code
+          color: colors.$primary
+          font-family: 'SF Mono', 'Fira Code', monospace
+          font-size: 0.75rem
+
+        .step-num
+          width: 1.25rem
+          height: 1.25rem
+          border-radius: 50%
+          background: colors.$primary-opacity
+          color: colors.$primary
+          font-size: 0.7rem
+          font-weight: 700
+          display: flex
+          align-items: center
+          justify-content: center
+          flex-shrink: 0
+
+  .creator-body
+    display: grid
+    grid-template-columns: 280px 1fr
+    gap: 1.5rem
+    align-items: start
+
+    @media (max-width: 900px)
+      grid-template-columns: 1fr
+
+  .creator-controls
+    display: flex
+    flex-direction: column
+    gap: 1.25rem
+
+  .control-section
+    background: colors.$lighter-background
+    border: 1px solid colors.$dark-gray
+    border-radius: 0.75rem
+    padding: 1.25rem
+
+    h3
+      margin: 0 0 1rem 0
+      font-size: 0.8rem
+      font-weight: 700
+      text-transform: uppercase
+      letter-spacing: 0.5px
+      color: colors.$subtext
+
+  .text-field
+    display: flex
+    flex-direction: column
+    gap: 0.35rem
+    margin-bottom: 0.75rem
+
+    &:last-child
+      margin-bottom: 0
+
+    label
+      font-size: 0.78rem
+      font-weight: 600
+      color: colors.$subtext
+
+    input[type="text"]
+      background: colors.$background
+      border: 1px solid colors.$dark-gray
+      border-radius: 0.4rem
+      padding: 0.45rem 0.6rem
+      color: colors.$white
+      font-size: 0.85rem
+      outline: none
+      transition: border-color 0.15s
+
+      &:focus
+        border-color: colors.$primary
+
+  .color-field
+    display: flex
+    flex-direction: column
+    gap: 0.35rem
+    margin-bottom: 0.75rem
+
+    &:last-child
+      margin-bottom: 0
+
+    label
+      font-size: 0.78rem
+      font-weight: 600
+      color: colors.$subtext
+
+    .color-input-row
+      display: flex
+      gap: 0.5rem
+      align-items: center
+
+      input[type="color"]
+        width: 2.25rem
+        height: 2.25rem
+        border: 1px solid colors.$dark-gray
+        border-radius: 0.4rem
+        padding: 0.1rem
+        background: colors.$background
+        cursor: pointer
+        flex-shrink: 0
+
+      input[type="text"]
+        flex: 1
+        background: colors.$background
+        border: 1px solid colors.$dark-gray
+        border-radius: 0.4rem
+        padding: 0.45rem 0.6rem
+        color: colors.$white
+        font-size: 0.85rem
+        font-family: 'SF Mono', 'Fira Code', monospace
+        outline: none
+        transition: border-color 0.15s
+
+        &:focus
+          border-color: colors.$primary
+
+  .creator-actions
+    display: flex
+    gap: 0.75rem
+
+    button
+      flex: 1
+      display: flex
+      align-items: center
+      justify-content: center
+      gap: 0.4rem
+      padding: 0.6rem 1rem
+      border-radius: 0.5rem
+      font-size: 0.85rem
+      font-weight: 600
+      cursor: pointer
+      border: none
+      transition: all 0.15s
+
+      svg
+        width: 1.1rem
+        height: 1.1rem
+
+    .reset-btn
+      background: colors.$darker-gray
+      color: colors.$subtext
+      border: 1px solid colors.$dark-gray
+
+      &:hover
+        color: colors.$white
+        border-color: colors.$gray
+
+    .copy-btn
+      background: colors.$primary-opacity
+      color: colors.$primary
+      border: 1px solid colors.$primary
+
+      &:hover
+        background: colors.$primary
+        color: colors.$background
+
+  .creator-right
+    display: flex
+    flex-direction: column
+    gap: 1.25rem
+
+  .preview-panel
+    border-radius: 0.75rem
+    overflow: hidden
+    border: 1px solid var(--primary, #444)
+    background: var(--bg)
+    display: flex
+    height: 300px
+    font-size: 0.72rem
+
+    .preview-icon-rail
+      width: 2.5rem
+      flex-shrink: 0
+      display: flex
+      flex-direction: column
+      align-items: center
+      padding: 0.5rem 0
+      gap: 0.35rem
+
+      .preview-rail-logo
+        font-size: 0.65rem
+        font-weight: 800
+        font-family: monospace
+        margin-bottom: 0.5rem
+        letter-spacing: -1px
+
+      .preview-rail-icon
+        width: 1.75rem
+        height: 1.75rem
+        border-radius: 0.35rem
+        display: flex
+        align-items: center
+        justify-content: center
+
+        .rail-icon-shape
+          width: 0.9rem
+          height: 0.7rem
+          border-radius: 0.1rem
+          background: currentColor
+          opacity: 0.7
+
+          &.small
+            width: 0.7rem
+            height: 0.7rem
+            border-radius: 50%
+
+      .preview-rail-bottom
+        margin-top: auto
+
+    .preview-tree
+      width: 130px
+      flex-shrink: 0
+      border-right: 1px solid
+      display: flex
+      flex-direction: column
+      overflow: hidden
+
+      .preview-topbar-tree
+        display: flex
+        align-items: center
+        gap: 0.35rem
+        padding: 0.4rem 0.5rem
+        border-bottom: 1px solid
+
+      .preview-group
+        font-size: 0.6rem
+        font-weight: 600
+        padding: 0.4rem 0.5rem 0.15rem
+        letter-spacing: 0.2px
+
+      .preview-server-row
+        display: flex
+        align-items: center
+        gap: 0.35rem
+        padding: 0.2rem 0.5rem
+
+        .preview-server-icon
+          width: 1.1rem
+          height: 1.1rem
+          border-radius: 0.2rem
+          display: flex
+          align-items: center
+          justify-content: center
+          flex-shrink: 0
+
+          &.small
+            width: 0.9rem
+            height: 0.9rem
+
+        .preview-dot-status
+          width: 0.35rem
+          height: 0.35rem
+          border-radius: 50%
+          flex-shrink: 0
+          margin-left: auto
+
+    .preview-main
+      flex: 1
+      display: flex
+      align-items: center
+      justify-content: center
+      padding: 1rem
+
+      .preview-welcome
+        display: flex
+        flex-direction: column
+        gap: 0.5rem
+
+        .preview-welcome-text
+          display: flex
+          flex-direction: column
+          gap: 0.2rem
+
+        .preview-welcome-btns
+          display: flex
+          gap: 0.4rem
+          margin-top: 0.25rem
+
+          .preview-btn
+            font-size: 0.6rem
+            font-weight: 600
+            padding: 0.25rem 0.5rem
+            border-radius: 0.3rem
+            cursor: default
+
+    .preview-recent
+      width: 130px
+      flex-shrink: 0
+      border-left: 1px solid
+      display: flex
+      flex-direction: column
+      overflow: hidden
+
+      .preview-recent-title
+        font-size: 0.65rem
+        font-weight: 700
+        padding: 0.5rem 0.6rem 0.35rem
+
+      .preview-recent-row
+        display: flex
+        align-items: center
+        gap: 0.35rem
+        padding: 0.3rem 0.5rem
+        border-top: 1px solid
+
+        .preview-recent-info
+          flex: 1
+          display: flex
+          flex-direction: column
+          min-width: 0
+
+        .preview-proto
+          font-size: 0.5rem
+          font-weight: 700
+          padding: 0.1rem 0.3rem
+          border-radius: 0.2rem
+          flex-shrink: 0
+
+  .css-output
+    background: colors.$lighter-background
+    border: 1px solid colors.$dark-gray
+    border-radius: 0.75rem
+    overflow: hidden
+
+    .css-output-header
+      display: flex
+      align-items: center
+      justify-content: space-between
+      padding: 0.75rem 1rem
+      border-bottom: 1px solid colors.$dark-gray
+      background: colors.$background
+
+      span
+        font-size: 0.8rem
+        color: colors.$subtext
+
+        code
+          color: colors.$primary
+          font-family: 'SF Mono', 'Fira Code', monospace
+          background: colors.$primary-opacity
+          padding: 0.1rem 0.35rem
+          border-radius: 0.25rem
+
+      .copy-btn
+        display: flex
+        align-items: center
+        gap: 0.3rem
+        padding: 0.3rem 0.65rem
+        border-radius: 0.4rem
+        font-size: 0.78rem
+        font-weight: 600
+        cursor: pointer
+        border: 1px solid colors.$primary
+        background: colors.$primary-opacity
+        color: colors.$primary
+        transition: all 0.15s
+
+        svg
+          width: 0.9rem
+          height: 0.9rem
+
+        &:hover
+          background: colors.$primary
+          color: colors.$background
+
+    .css-pre
+      margin: 0
+      padding: 1rem 1.25rem
+      font-family: 'SF Mono', 'Fira Code', monospace
+      font-size: 0.75rem
+      color: colors.$subtext
+      white-space: pre
+      overflow-x: auto
+      max-height: 420px
+      overflow-y: auto
+      background: colors.$lighter-background
+      line-height: 1.6
+

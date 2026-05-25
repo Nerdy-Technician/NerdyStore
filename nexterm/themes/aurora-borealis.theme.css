@@ -1,0 +1,68 @@
+/* @name: Aurora Borealis */
+/* @description: Dancing greens and teals of the northern lights on a deep arctic night */
+:root[data-theme="dark"] {
+    --background: #071A1A;
+    --terminal: #041212;
+    --lighter-background: #0D2828;
+    --dialog-background: rgba(7, 26, 26, 0.6);
+    --gray-full: #133030;
+    --darker-gray: rgba(19, 48, 48, 0.7);
+    --dark-gray: rgba(0, 255, 180, 0.06);
+    --gray: rgba(0, 255, 180, 0.12);
+    --light-gray: #C0FFF0;
+    --primary: #00FFB4;
+    --primary-opacity: rgba(0, 255, 180, 0.25);
+    --error: #FF4466;
+    --error-opacity: rgba(255, 68, 102, 0.25);
+    --success: #00E070;
+    --success-opacity: rgba(0, 224, 112, 0.25);
+    --warning: #FFDD44;
+    --warning-opacity: rgba(255, 221, 68, 0.25);
+    --white: #C0FFF0;
+    --subtext: #2A7A6A;
+    --text: #C0FFF0;
+}
+:root[data-theme="oled"] {
+    --background: #020D0D;
+    --terminal: #010808;
+    --lighter-background: #071A1A;
+    --dialog-background: rgba(2, 13, 13, 0.7);
+    --gray-full: #071A1A;
+    --darker-gray: rgba(7, 26, 26, 0.7);
+    --dark-gray: rgba(0, 255, 180, 0.05);
+    --gray: rgba(0, 255, 180, 0.1);
+    --light-gray: #C0FFF0;
+    --primary: #00FFB4;
+    --primary-opacity: rgba(0, 255, 180, 0.25);
+    --error: #FF4466;
+    --error-opacity: rgba(255, 68, 102, 0.25);
+    --success: #00E070;
+    --success-opacity: rgba(0, 224, 112, 0.25);
+    --warning: #FFDD44;
+    --warning-opacity: rgba(255, 221, 68, 0.25);
+    --white: #C0FFF0;
+    --subtext: #1A4A3A;
+    --text: #C0FFF0;
+}
+:root[data-theme="light"] {
+    --background: #E8FFF8;
+    --terminal: #D0FFF0;
+    --lighter-background: #D0FFF0;
+    --dialog-background: rgba(232, 255, 248, 0.5);
+    --gray-full: #B0EEE0;
+    --darker-gray: rgba(176, 238, 224, 0.85);
+    --dark-gray: rgba(0, 120, 90, 0.05);
+    --gray: rgba(0, 120, 90, 0.1);
+    --light-gray: #003028;
+    --primary: #007A58;
+    --primary-opacity: rgba(0, 122, 88, 0.18);
+    --error: #A00030;
+    --error-opacity: rgba(160, 0, 48, 0.15);
+    --success: #006040;
+    --success-opacity: rgba(0, 96, 64, 0.15);
+    --warning: #806000;
+    --warning-opacity: rgba(128, 96, 0, 0.15);
+    --white: #003028;
+    --subtext: #2A6A58;
+    --text: #003028;
+}

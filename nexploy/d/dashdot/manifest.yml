@@ -1,0 +1,6 @@
+type: docker
+name: Dashdot
+version: latest
+description: Dashdot is a modern and minimal server dashboard with real-time metrics and a sleek glassmorphism design.
+category: Dashboard
+mainService: dashdot

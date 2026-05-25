@@ -40,8 +40,7 @@ jobs:
       - name: Extract changelog
         id: changelog
         run: |
-          # Extract everything after CHANGELOG= line
-          CHANGELOG=$(sed -n '/^CHANGELOG=/,$p' .github/VERSION | sed '1d')
+          CHANGELOG=$(grep '^CHANGELOG=' .github/VERSION | cut -d'=' -f2-)
           echo "changelog<<EOF" >> $GITHUB_OUTPUT
           echo "$CHANGELOG" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
@@ -52,20 +51,23 @@ jobs:
           VERSION=${{ steps.version_info.outputs.version }}
           RELEASE_DIR="nerdystore-$VERSION"
           ARCHIVE_FILE="nerdystore-$VERSION.zip"
-          
+
           mkdir -p "$RELEASE_DIR"
-          cp -r nexterm/scripts "$RELEASE_DIR/" 2>/dev/null || true
+          cp -r nexterm/scripts  "$RELEASE_DIR/" 2>/dev/null || true
           cp -r nexterm/snippets "$RELEASE_DIR/" 2>/dev/null || true
-          cp README.md "$RELEASE_DIR/" 2>/dev/null || true
-          
+          cp -r nexterm/themes   "$RELEASE_DIR/" 2>/dev/null || true
+          cp README.md           "$RELEASE_DIR/" 2>/dev/null || true
+
           zip -r "$ARCHIVE_FILE" "$RELEASE_DIR/"
           echo "archive=$ARCHIVE_FILE" >> $GITHUB_OUTPUT
-          
-          SCRIPTS=$(ls -1 nexterm/scripts/ 2>/dev/null | wc -l)
-          SNIPPETS=$(ls -1 nexterm/snippets/ 2>/dev/null | wc -l)
-          echo "scripts=$SCRIPTS" >> $GITHUB_OUTPUT
+
+          SCRIPTS=$(find nexterm/scripts  -maxdepth 1 -type f 2>/dev/null | wc -l)
+          SNIPPETS=$(find nexterm/snippets -maxdepth 1 -type f 2>/dev/null | wc -l)
+          THEMES=$(find nexterm/themes    -maxdepth 1 -type f 2>/dev/null | wc -l)
+          echo "scripts=$SCRIPTS"   >> $GITHUB_OUTPUT
           echo "snippets=$SNIPPETS" >> $GITHUB_OUTPUT
-          
+          echo "themes=$THEMES"     >> $GITHUB_OUTPUT
+
           sha256sum "$ARCHIVE_FILE" > "$ARCHIVE_FILE.sha256"
 
       - name: Create git tag
@@ -92,6 +94,7 @@ jobs:
             ## Contents
             - 📦 **Scripts:** ${{ steps.archive.outputs.scripts }}
             - 🔧 **Snippets:** ${{ steps.archive.outputs.snippets }}
+            - 🎨 **Themes:** ${{ steps.archive.outputs.themes }}
 
             ## Changes
             ${{ steps.changelog.outputs.changelog }}
@@ -100,7 +103,6 @@ jobs:
             ```bash
             unzip ${{ steps.archive.outputs.archive }}
             cd nerdystore-${{ steps.version_info.outputs.version }}
-            chmod +x nexterm/scripts/*.sh
             ```
 
             ## Verification

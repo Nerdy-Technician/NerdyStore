@@ -1,4 +1,4 @@
 VERSION=1.3.0
-RELEASE_DATE=2026-05.25
+RELEASE_DATE=2026-05-25
 BUILD_NUMBER=3
 CHANGELOG=Added 31 Nexterm themes (Arctic Void, Aquamarine, Blood Moon, Bubblegum, Coffee, Copper & Verdigris, Crimson Ember, Cyber Gold, Deep Ocean, Desert Sand, Glacier, Infrared, Lavender Mist, Matrix Rain, Midnight Indigo, Molten Gold, Moonlit Steel, Neon Dusk, Nordic Slate, Olive Drab, Parchment, Royal Cobalt, Rust & Ash, Sakura, Silver Chrome, Solar Flare, Sunset Coral, Synthwave, Terminal Pine, Toxic, Volcanic) — each with dark/OLED/light variants, compatible with Nexterm v1.2.1-BETA; fixed deploy_store.yml and update_ntindex.yml CI workflows

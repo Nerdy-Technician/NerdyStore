@@ -18,10 +18,13 @@ scripts/Docker-Cleanup-Interactive.sh@03bba2635edbc87701dc16f702e227d4
 scripts/Docker-Compose-Manager.sh@2b8be6c11680f52fa0b3d8782a7b1e0b
 scripts/Docker-Health-Check.sh@f4daaf21c48346e3182fa5b7c3fca250
 scripts/Docker-Image-Updater.sh@6b6e931c1249145525db06ca75cd7d53
+scripts/Maintenance/Maintain - Clear User Cache.sh@d3e674ec49592b4070301f20d0f54972
 scripts/Maintenance/Maintain - Disk Clean.sh@c28c63f74e2c29d52c25a699041322e8
 scripts/Maintenance/Maintain - Docker Clean.sh@251449ea11d76db6cf20ff469c20cddc
 scripts/Maintenance/Maintain - Journald Vacuum.sh@1216b5fc2ea3ad72e0643a5714c3fc14
 scripts/Maintenance/Maintain - Kernel Prune.sh@49f92e6eb31f051c7fea9fd5752b43f9
+scripts/Maintenance/Maintain - Rotate Old Logs.sh@062e023b39edfdd7a1bd773fdc2e5736
+scripts/Maintenance/Maintain - Trim SSD.sh@66816b244b097a0822a9bbee8681bed8
 scripts/Monitoring/Agent - MeshAgent Status.sh@b331538ce1502bafec118426974c1d4c
 scripts/Monitoring/Agent - Patchmon Status.sh@fdeb71c425f814b3cc7481548ea88904
 scripts/Monitoring/Agent - Remotely Status.sh@8c4242f8468dcc3c5a68e099f8900c3d
@@ -31,21 +34,26 @@ scripts/Monitoring/Check - DNS Resolution Latency.sh@83e2c361d153ad2290ae7f0753d
 scripts/Monitoring/Check - Disk Space.sh@367444cac5c267903a1d61b5f1b6b5a9
 scripts/Monitoring/Check - DiskSpace.sh@6263e1c614ba02429ee7767c9a1b6e27
 scripts/Monitoring/Check - Fail2ban Status.sh@1d5d15e8bb50c8362a03bc4a338d54e0
+scripts/Monitoring/Check - Last Reboot.sh@b2ccebc197f137ae7f5470af8991f74a
 scripts/Monitoring/Check - MeshAgent_is_running.sh@8c0c7d841b23e8dbd944384b22838e89
 scripts/Monitoring/Check - NTP Sync.sh@6f9afa91c51aeeabffaa07b80c53cc47
 scripts/Monitoring/Check - Orphan Zombie Processes.sh@9eb361944264c3b3eab5ecbd0ea20a2a
 scripts/Monitoring/Check - Patchmon Agent is installed.sh@0c6fab2d627660824847fec303f4c9f5
 scripts/Monitoring/Check - Remotely_is_running.sh@6d69db070228950fc78ee2d69e7ed030
+scripts/Monitoring/Check - Root Filesystem Usage.sh@323c946ae56db71ad39a5b4530b920fd
 scripts/Monitoring/Check - SSL Cert Expiry.sh@1fa66a8c245463443b4735b8aa5f5d13
 scripts/Monitoring/Check - SwapSpace.sh@eefe6c255feaf746ab14525b9a336b0a
 scripts/Monitoring/Check - Wazuh_is_running.sh@e18fdf62d9ae135e712c44e0191b4637
 scripts/Monitoring/Image - Stale Images Report.sh@da7aa04b52a54106d3ed84be19ee0c80
+scripts/Monitoring/Monitor - CPU Temperature.sh@a3cb4d4a590e5aa58eaa9bc71ececba7
 scripts/Monitoring/Monitor - CPU Usage.sh@cd452b7397ed40ae6ddb436243925152
 scripts/Monitoring/Monitor - Disk IO Activity.sh@cded9423c916a02e065683d84bd2bcf8
 scripts/Monitoring/Monitor - Docker Container Health.sh@4c43e3a60ca450e52a404c8cf3043d5e
 scripts/Monitoring/Monitor - Journald Error Rate.sh@42facac80f62b9db4d0f63a995a2e717
+scripts/Monitoring/Monitor - Load Average.sh@6c9d3f8a8120d67a7598a43da80c0c94
 scripts/Monitoring/Monitor - Network Bandwidth.sh@d573bd8b590780b2eed5756e33930b03
 scripts/Monitoring/Monitor - OOM Kill Events.sh@8c6832ec9bc4b2605564b5db929b9ca2
+scripts/Monitoring/Monitor - Open File Descriptors.sh@24af3dcb3d5ed80d1b652c679505a1ff
 scripts/Monitoring/Monitor - Process Snapshot.sh@f4825b204cf2f8e7d86e64763d206c12
 scripts/Monitoring/Monitor - RAM Usage.sh@6dc0fef878d6cd268d19abd23ca6fabc
 scripts/Monitoring/Monitor - Swap Usage.sh@844c9b61c9627b1d7927a8f1d54064ba
@@ -55,6 +63,7 @@ scripts/Network-Connection-Monitor.sh@146b02f4f48a07f952185d990c4799a7
 scripts/Network-Port-Scanner.sh@ea0777309c6992d4685fcaacab168afc
 scripts/Network-Speed-Test.sh@990c27a4400fcf64f34083fd8368363b
 scripts/Network/Check - Duplicate IPs.sh@86ab662303e6d8635088132f480c49ae
+scripts/Network/Check - Gateway Reachability.sh@0684fba78fa14a9c2ecc1e93af55d5c6
 scripts/Network/Check - Internet Connectivity.sh@6e0a4cc05622811d55eda7f28512d74b
 scripts/Network/Check - Speed Test.sh@0823b5331afb28386212aee6b0dd5238
 scripts/Network/Network - ARP Table.sh@dc467f07e618136df552a64ce0bbb103
@@ -65,6 +74,7 @@ scripts/Network/Network - Port Scan.sh@6bf249e6b518a09eb8075db10443acd3
 scripts/Network/Network - Reset Interfaces.sh@3c2685ca1d6bd41125e82121d39f6cc6
 scripts/Network/Network - Routes.sh@1e722c473b27cef0e9b56733c01c5c44
 scripts/Network/Network - Show DNS.sh@a75d0e2097f329d0bf09994955b7ec30
+scripts/Network/Network - Show Open Connections.sh@831799ab9244f9f348b29c927dc6924a
 scripts/Network/Security - Firewall Status.sh@c93d3072e838ed3f1a4de81ac7d17859
 scripts/Performance-Disk-IO-Check.sh@508a7662bd1a50b7bffee3b031d5169e
 scripts/Performance-Service-Resource-Usage.sh@f28d4e71f547133ad8a07f20eb54a08b
@@ -82,10 +92,14 @@ scripts/Security/Access/Audit - Sudo Users.sh@565bb71a7906c858929afd660c7ca36d
 scripts/Security/Access/Audit - Sudoers Config.sh@42d305fb8e8feae5a737c7b26a55b909
 scripts/Security/Audit/Audit - Basic System.sh@e01d2147f9bda1306962db270fa92b96
 scripts/Security/Audit/Audit - Docker Exposure.sh@23788aa2bd24d725c69a6f5932a8dfea
+scripts/Security/Audit/Audit - Failed Login Attempts.sh@8af4bfbab20b1dd69b6e73beab700e57
 scripts/Security/Audit/Audit - Listening Services.sh@b0a617b272a1c0e3dcaeacb3047442ae
 scripts/Security/Audit/Audit - Open Ports Diff.sh@398a08e76600fd7c744c346a10c2aa1c
+scripts/Security/Audit/Audit - Passwd Shadow Permissions.sh@45980c6d92f2ac82ef0d23ca897f3166
+scripts/Security/Audit/Audit - SSH Config.sh@28e2cd8d1d9bc591fec4aaacad2f047f
 scripts/Security/Audit/Audit - SUID SGID Files.sh@d1cc125cb1ac20f036010357bb6a7b5c
 scripts/Security/Audit/Audit - Users Overview.sh@170a40017751d700ea8513bc4c100b39
+scripts/Security/Audit/Audit - World Writable Files.sh@9f61d961f7509dc03ec9f0b6dce27e10
 scripts/Security/UFW/Security - UFW Provision.sh@78c489d6429f93f28836fd0b2a0d791e
 scripts/Software-Management/Install ClamAV.sh@be7e875076cd29c77a70106e2d0dcf00
 scripts/Software-Management/Software Management - Broken Packages Check.sh@f56084c3efd18072f7822c191f5cb65f
@@ -97,20 +111,6 @@ scripts/Software-Management/Software Management - Third Party Repos List.sh@43ce
 scripts/System-Log-Rotation-Check.sh@cd96dd3328c51a10f3d531a342813b6e
 scripts/System-Weekly-Maintenance.sh@0f11f5f44d2cf8813dd6dbb0b2fe4dff
 scripts/System-Zombie-Process-Killer.sh@f19cf9d4bb4529fe2639461d1eedb03d
-scripts/Maintenance/Maintain - Clear User Cache.sh@d3e674ec49592b4070301f20d0f54972
-scripts/Maintenance/Maintain - Rotate Old Logs.sh@062e023b39edfdd7a1bd773fdc2e5736
-scripts/Maintenance/Maintain - Trim SSD.sh@66816b244b097a0822a9bbee8681bed8
-scripts/Monitoring/Check - Last Reboot.sh@b2ccebc197f137ae7f5470af8991f74a
-scripts/Monitoring/Check - Root Filesystem Usage.sh@323c946ae56db71ad39a5b4530b920fd
-scripts/Monitoring/Monitor - CPU Temperature.sh@a3cb4d4a590e5aa58eaa9bc71ececba7
-scripts/Monitoring/Monitor - Load Average.sh@6c9d3f8a8120d67a7598a43da80c0c94
-scripts/Monitoring/Monitor - Open File Descriptors.sh@24af3dcb3d5ed80d1b652c679505a1ff
-scripts/Network/Check - Gateway Reachability.sh@0684fba78fa14a9c2ecc1e93af55d5c6
-scripts/Network/Network - Show Open Connections.sh@831799ab9244f9f348b29c927dc6924a
-scripts/Security/Audit/Audit - Failed Login Attempts.sh@8af4bfbab20b1dd69b6e73beab700e57
-scripts/Security/Audit/Audit - Passwd Shadow Permissions.sh@45980c6d92f2ac82ef0d23ca897f3166
-scripts/Security/Audit/Audit - SSH Config.sh@28e2cd8d1d9bc591fec4aaacad2f047f
-scripts/Security/Audit/Audit - World Writable Files.sh@9f61d961f7509dc03ec9f0b6dce27e10
 
 # Snippets
 snippets/APT-Autoremove.snippet@153e5c0766b62a9dfb62385b756cd998
@@ -122,6 +122,8 @@ snippets/APT-Unhold-Package.snippet@7714857c2a5201a122271f1220ba673f
 snippets/APT-Update.snippet@40edcc00fa9376d1e2a259f0d82980f1
 snippets/Auth-Log-Inspect.snippet@c321a2b5725dffaa543ec71f7fcf701b
 snippets/CPU-Top-Table.snippet@44494e076ae53c73ece2c929d1905ee9
+snippets/Disk-Layout.snippet@4a11786457dfc78c5e73c4dec3c3518f
+snippets/Disk-Trim-SSD.snippet@ac030dddb822925a7f3ab045c4d2a180
 snippets/Docker-List-Containers.snippet@0b6a3af277014825bde6dd0bba4faded
 snippets/Docker-List-Images.snippet@22f060283eaf27275d4d4993fca9dddc
 snippets/Firewall-UFW-Allow-SSH.snippet@b5435058a13e9dfceefc237efd1be2e9
@@ -130,37 +132,35 @@ snippets/Firewall-UFW-Status.snippet@97f8577a5a7f9ca3112e3e65311bca9d
 snippets/Logs-Auth-Tail.snippet@3c7913e573cd9d16142876744a58b4b7
 snippets/Maintenance-Chooser.snippet@7748dcea7576693e2d8ff426c7fc5dac
 snippets/Network-DNS-Lookup.snippet@07e63638bc0e0a18dc316cf751492f51
+snippets/Network-Gateway-Check.snippet@07004b566d66fb892a01d6cf59b3b81e
 snippets/Network-Interfaces.snippet@373dfa48d9a573db51340c77f59ed3e5
+snippets/Network-Listening-UDP.snippet@0fcdf0c82de100ab83bc0297a5abc3f9
+snippets/Network-Open-Connections.snippet@d1e0a62ffff23ea5f02c25aacb959790
 snippets/Network-Open-Ports.snippet@00a34127558efc2778d8eadce75341f2
 snippets/Network-Ping-Check.snippet@1f9e0feaf73a43e77780e39fa7a10bc1
 snippets/Network-Public-IP.snippet@b390a75c0046600cdbb5a58e2715afd1
 snippets/Network-Quick-Diag.snippet@8e6333e84a3062434359f41853394db0
 snippets/Network-Tracepath.snippet@ba2b5c11cbbf6e2cb195d94e8a520733
 snippets/Package-Hold-Interactive.snippet@7541db39d2637b841c3d8aa884104909
+snippets/Security-Failed-Logins.snippet@dd894c4a053b4e4e4561a66c0e783214
+snippets/Security-SSH-Config-Check.snippet@02747c9087ae4b1b48a6be440e081a13
+snippets/Security-World-Writable-Files.snippet@5087eac6cd55cef4c3495fc50ef6d064
 snippets/System-Disk-Usage.snippet@416eb62b695df889ee47e54ff1a32223
 snippets/System-Failed-Services.snippet@f63c166a4af2032c32d26ef811e04509
 snippets/System-Inodes.snippet@fb55dbfbb93fc64dc1fd02b85302744e
 snippets/System-Journal-Errors.snippet@5e6acd7d81f9464e6d30a71e52a01239
 snippets/System-Kernel-Logs.snippet@de139952c68737398e6f98eee8b31ce1
+snippets/System-Kernel-Version.snippet@1a0d1153133b9f0704883380951fbf14
+snippets/System-Load-Average.snippet@d4ba7920ffb307768adac61e82ab5370
 snippets/System-Load.snippet@eaf4f75a91ffd356102efca378d35e93
 snippets/System-Memory-Usage.snippet@0c3659aabbf11e9f861de2324d2d697f
+snippets/System-Open-File-Descriptors.snippet@61e02ea695e65622dc02d9f4883cab39
+snippets/System-Running-Services.snippet@dd19fc94f906d6168bfe871c26a8a149
 snippets/System-Top-CPU-Processes.snippet@ada2bcb617dcf54693e8e8eb8b47c7fb
 snippets/System-Top-Memory-Processes.snippet@4c9944257d4275148daedfb20b281291
 snippets/System-Uptime.snippet@0f55f70bf219a2a9c430cbb087ce2ead
 snippets/Users-Recent-Logins.snippet@848c050f5b48f75ad5e3c1f91eb4fc59
 snippets/Users-Sudo-Sessions.snippet@3f93224370bb6ed108cf594aaaa2a30e
-snippets/Disk-Layout.snippet@4a11786457dfc78c5e73c4dec3c3518f
-snippets/Disk-Trim-SSD.snippet@ac030dddb822925a7f3ab045c4d2a180
-snippets/Network-Gateway-Check.snippet@07004b566d66fb892a01d6cf59b3b81e
-snippets/Network-Listening-UDP.snippet@0fcdf0c82de100ab83bc0297a5abc3f9
-snippets/Network-Open-Connections.snippet@d1e0a62ffff23ea5f02c25aacb959790
-snippets/Security-Failed-Logins.snippet@dd894c4a053b4e4e4561a66c0e783214
-snippets/Security-SSH-Config-Check.snippet@02747c9087ae4b1b48a6be440e081a13
-snippets/Security-World-Writable-Files.snippet@5087eac6cd55cef4c3495fc50ef6d064
-snippets/System-Kernel-Version.snippet@1a0d1153133b9f0704883380951fbf14
-snippets/System-Load-Average.snippet@d4ba7920ffb307768adac61e82ab5370
-snippets/System-Open-File-Descriptors.snippet@61e02ea695e65622dc02d9f4883cab39
-snippets/System-Running-Services.snippet@dd19fc94f906d6168bfe871c26a8a149
 
 # Themes
 themes/aquamarine.theme.css@679a479119adc4a86d8de824303e5965

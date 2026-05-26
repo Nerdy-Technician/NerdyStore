@@ -27,7 +27,7 @@ export const ServerUrlDialog = ({ open, onClose, app, sourceName }) => {
             <div className="server-url-dialog">
                 <div className="dialog-header">
                     <div className="app-info">
-                        {app.hasLogo && <img src={`./logos/${app.id}.png`} alt={app.name} className="app-logo" />}
+                        {app.hasLogo && <img src={`/logos/${app.id}.png`} alt={app.name} className="app-logo" />}
                         <div className="app-details"><h2>Install {app.name}</h2><span className="app-version">v{app.version}</span></div>
                     </div>
                 </div>

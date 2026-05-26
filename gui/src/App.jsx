@@ -29,6 +29,12 @@ const TOOLS = [
 ];
 
 const parsePath = () => {
+    // Handle GitHub Pages 404 redirect: /?path=/nexploy/monitoring
+    const params = new URLSearchParams(window.location.search);
+    const redirected = params.get("path");
+    if (redirected) {
+        window.history.replaceState(null, "", redirected);
+    }
     const parts = window.location.pathname.replace(/^\//, "").split("/").filter(Boolean);
     return { section: parts[0] || null, sub: parts[1] || null };
 };

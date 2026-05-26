@@ -61,9 +61,9 @@ jobs:
           zip -r "$ARCHIVE_FILE" "$RELEASE_DIR/"
           echo "archive=$ARCHIVE_FILE" >> $GITHUB_OUTPUT
 
-          SCRIPTS=$(find nexterm/scripts  -maxdepth 1 -type f 2>/dev/null | wc -l)
-          SNIPPETS=$(find nexterm/snippets -maxdepth 1 -type f 2>/dev/null | wc -l)
-          THEMES=$(find nexterm/themes    -maxdepth 1 -type f 2>/dev/null | wc -l)
+          SCRIPTS=$(find nexterm/scripts  -type f 2>/dev/null | wc -l)
+          SNIPPETS=$(find nexterm/snippets -type f 2>/dev/null | wc -l)
+          THEMES=$(find nexterm/themes    -type f 2>/dev/null | wc -l)
           echo "scripts=$SCRIPTS"   >> $GITHUB_OUTPUT
           echo "snippets=$SNIPPETS" >> $GITHUB_OUTPUT
           echo "themes=$THEMES"     >> $GITHUB_OUTPUT

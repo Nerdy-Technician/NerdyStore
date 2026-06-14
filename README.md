@@ -46,6 +46,4 @@ Contributions are welcome!
 ## 🔗 Useful Links
 
 - **Nexterm Documentation**: https://docs.nexterm.dev  
-- **Report a bug**: https://github.com/gnmyt/NerdyStore/issues  
-- **Request a feature**: https://github.com/gnmyt/NerdyStore/issues  
 - **Discord community**: https://dc.gnmyt.dev  

@@ -6,6 +6,12 @@ export const loadSourceName = async (baseUrl) => {
     return match ? match[1] : "official";
 };
 
+export const loadStoreVersion = async (baseUrl) => {
+    const res = await fetch(`${baseUrl}version.json`);
+    if (!res.ok) return null;
+    return res.json();
+};
+
 export const loadCategoriesIndex = async (baseUrl) => {
     const res = await fetch(`${baseUrl}categories.json`);
     if (!res.ok) throw new Error('Failed to load categories index');

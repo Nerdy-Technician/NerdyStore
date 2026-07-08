@@ -119,3 +119,28 @@ jobs:
           draft: false
           prerelease: false
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Post release to Mastodon
+        if: steps.version_info.outputs.tag_exists == 'false'
+        env:
+          MASTODON_INSTANCE_URL: ${{ vars.MASTODON_INSTANCE_URL }}
+          MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
+          MASTODON_VISIBILITY: ${{ vars.MASTODON_VISIBILITY }}
+          RELEASE_VERSION: ${{ steps.version_info.outputs.version }}
+          RELEASE_CHANGELOG: ${{ steps.changelog.outputs.changelog }}
+        run: |
+          if [ -z "$MASTODON_INSTANCE_URL" ] || [ -z "$MASTODON_ACCESS_TOKEN" ]; then
+            echo "Skipping Mastodon post because MASTODON_INSTANCE_URL or MASTODON_ACCESS_TOKEN is not configured."
+            exit 0
+          fi
+
+          INSTANCE_URL="${MASTODON_INSTANCE_URL%/}"
+          VISIBILITY="${MASTODON_VISIBILITY:-public}"
+          RELEASE_URL="https://github.com/${{ github.repository }}/releases/tag/v$RELEASE_VERSION"
+          STATUS=$(printf 'NerdyStore v%s is out.\n\n%s\n\nRelease: %s' "$RELEASE_VERSION" "$RELEASE_CHANGELOG" "$RELEASE_URL")
+
+          curl --fail-with-body \
+            -X POST "$INSTANCE_URL/api/v1/statuses" \
+            -H "Authorization: Bearer $MASTODON_ACCESS_TOKEN" \
+            --data-urlencode "status=$STATUS" \
+            --data-urlencode "visibility=$VISIBILITY"

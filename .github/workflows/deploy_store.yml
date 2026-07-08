@@ -38,6 +38,10 @@ jobs:
           cp nexploy/dist/categories.json gui/public/categories.json
           cp nexploy/dist/nexterm.json gui/public/nexterm.json
           cp -r nexploy/dist/categories gui/public/categories
+          VERSION=$(grep '^VERSION=' .github/VERSION | cut -d'=' -f2)
+          RELEASE_DATE=$(grep '^RELEASE_DATE=' .github/VERSION | cut -d'=' -f2)
+          BUILD_NUMBER=$(grep '^BUILD_NUMBER=' .github/VERSION | cut -d'=' -f2)
+          printf '{"version":"%s","releaseDate":"%s","buildNumber":"%s"}\n' "$VERSION" "$RELEASE_DATE" "$BUILD_NUMBER" > gui/public/version.json
           mkdir -p gui/public/logos
           find gui/public/logos -type l -delete 2>/dev/null || true
 

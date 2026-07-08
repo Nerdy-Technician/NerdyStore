@@ -9,7 +9,7 @@ import AppCard from "./components/AppCard";
 import NextermCard from "./components/NextermCard";
 import Loader from "./components/Loader";
 import ServerUrlDialog from "./components/ServerUrlDialog";
-import { loadCategoriesIndex, loadCategoryApps, loadNextermData, loadSourceName } from "./utils/api";
+import { loadCategoriesIndex, loadCategoryApps, loadNextermData, loadSourceName, loadStoreVersion } from "./utils/api";
 import HomePage from "./components/HomePage";
 import ThemeCreator from "./components/ThemeCreator";
 
@@ -58,6 +58,7 @@ const App = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [appsCache, setAppsCache] = useState({});
     const [sourceName, setSourceName] = useState("official");
+    const [storeVersion, setStoreVersion] = useState(null);
 
     const [nextermData, setNextermData] = useState(null);
     const [nextermCategory, setNextermCategory] = useState(null);
@@ -69,6 +70,7 @@ const App = () => {
 
     useEffect(() => {
         loadSourceName(baseUrl).then(setSourceName).catch(() => {});
+        loadStoreVersion(baseUrl).then((data) => setStoreVersion(data?.version || null)).catch(() => {});
         loadCategoriesIndex(baseUrl).then((data) => {
             setCategories(data.categories);
             setGeneratedAt(data.generatedAt);
@@ -226,7 +228,7 @@ const App = () => {
                     </svg>
                     <div className="github-info">
                         <span className="github-name">NerdyStore</span>
-                        <span className="github-version">v1.3.5</span>
+                        <span className="github-version">{storeVersion ? `v${storeVersion}` : "GitHub"}</span>
                     </div>
                     <svg className="github-arrow" viewBox="0 0 24 24"><path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z" fill="currentColor"/></svg>
                 </a>

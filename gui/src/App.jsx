@@ -339,8 +339,15 @@ const App = () => {
                 )}
 
                 <footer className="store-footer">
+                    <div className="footer-links">
+                        <a rel="me noopener noreferrer" href="https://masto.nerdy-technician.social/@Roffo" target="_blank">Mastodon</a>
+                        <span className="footer-separator">/</span>
+                        <a href="https://nerdytech.dev/" target="_blank" rel="noopener noreferrer">Portfolio</a>
+                        <span className="footer-separator">/</span>
+                        <a href="https://nerdytech.dev/docs/NerdyStore/" target="_blank" rel="noopener noreferrer">Docs</a>
+                    </div>
                     <div className="footer-info">
-                        <span className="footer-copyright"><a href="https://nerdytech.dev/" target="_blank" rel="noopener noreferrer">NerdyTech</a> </span>
+                        <span className="footer-copyright">NerdyTech</span>
                         {generatedAt && <span className="footer-generated">Updated {new Date(generatedAt).toLocaleDateString()}</span>}
                     </div>
                 </footer>

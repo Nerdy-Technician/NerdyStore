@@ -123,7 +123,7 @@ jobs:
       - name: Post release to Mastodon
         if: steps.version_info.outputs.tag_exists == 'false'
         env:
-          MASTODON_INSTANCE_URL: ${{ vars.MASTODON_INSTANCE_URL }}
+          MASTODON_INSTANCE_URL: ${{ secrets.MASTODON_INSTANCE_URL }}
           MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
           MASTODON_VISIBILITY: ${{ vars.MASTODON_VISIBILITY }}
           RELEASE_VERSION: ${{ steps.version_info.outputs.version }}

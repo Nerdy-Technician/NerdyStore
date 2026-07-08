@@ -1,0 +1,112 @@
+name: Post Release to Mastodon
+
+on:
+  workflow_run:
+    workflows:
+      - Release on Version Update
+    types:
+      - completed
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  post:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout release commit
+        if: github.event_name == 'workflow_run'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Checkout current commit
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/checkout@v4
+
+      - name: Read VERSION file
+        id: version_info
+        run: |
+          VERSION=$(grep '^VERSION=' .github/VERSION | cut -d'=' -f2)
+          CHANGELOG=$(grep '^CHANGELOG=' .github/VERSION | cut -d'=' -f2-)
+
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "changelog<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGELOG" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Wait for GitHub Pages deploy
+        if: github.event_name == 'workflow_run'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const headSha = context.payload.workflow_run.head_sha;
+            const workflowName = "Build and Deploy to GitHub Pages";
+            const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+            for (let attempt = 1; attempt <= 60; attempt++) {
+              const { data } = await github.rest.actions.listWorkflowRunsForRepo({
+                owner,
+                repo,
+                head_sha: headSha,
+                per_page: 100,
+              });
+
+              const runs = data.workflow_runs
+                .filter((run) => run.name === workflowName)
+                .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+              const pagesRun = runs[0];
+
+              if (!pagesRun) {
+                core.info(`Waiting for ${workflowName} for ${headSha} to start (${attempt}/60).`);
+                await sleep(20000);
+                continue;
+              }
+
+              core.info(`${workflowName} is ${pagesRun.status} (${pagesRun.conclusion || "pending"}).`);
+
+              if (pagesRun.status === "completed" && pagesRun.conclusion === "success") {
+                return;
+              }
+
+              if (pagesRun.status === "completed") {
+                core.setFailed(`${workflowName} finished with conclusion: ${pagesRun.conclusion}`);
+                return;
+              }
+
+              await sleep(20000);
+            }
+
+            core.setFailed(`${workflowName} did not complete within 20 minutes.`);
+
+      - name: Post release to Mastodon
+        env:
+          MASTODON_INSTANCE_URL: ${{ secrets.MASTODON_INSTANCE_URL }}
+          MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
+          MASTODON_VISIBILITY: ${{ vars.MASTODON_VISIBILITY }}
+          RELEASE_VERSION: ${{ steps.version_info.outputs.version }}
+          RELEASE_CHANGELOG: ${{ steps.version_info.outputs.changelog }}
+        run: |
+          if [ -z "$MASTODON_INSTANCE_URL" ] || [ -z "$MASTODON_ACCESS_TOKEN" ]; then
+            echo "Skipping Mastodon post because MASTODON_INSTANCE_URL or MASTODON_ACCESS_TOKEN is not configured."
+            exit 0
+          fi
+
+          INSTANCE_URL="${MASTODON_INSTANCE_URL%/}"
+          VISIBILITY="${MASTODON_VISIBILITY:-public}"
+          STORE_URL="https://store.nerdytech.dev/"
+          RELEASE_URL="https://github.com/${{ github.repository }}/releases/tag/v$RELEASE_VERSION"
+          STATUS=$(printf 'NerdyStore v%s is out.\n\n%s\n\nStore: %s\nRelease: %s' "$RELEASE_VERSION" "$RELEASE_CHANGELOG" "$STORE_URL" "$RELEASE_URL")
+
+          curl --fail-with-body \
+            -X POST "$INSTANCE_URL/api/v1/statuses" \
+            -H "Authorization: Bearer $MASTODON_ACCESS_TOKEN" \
+            --data-urlencode "status=$STATUS" \
+            --data-urlencode "visibility=$VISIBILITY"

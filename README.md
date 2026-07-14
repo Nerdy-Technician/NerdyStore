@@ -1,5 +1,13 @@
 ![NerdyStore Logo](/Icons/Logo.png)
 
+[![Latest GitHub tag](https://img.shields.io/github/v/tag/Nerdy-Technician/NerdyStore?label=latest%20tag&sort=semver)](https://github.com/Nerdy-Technician/NerdyStore/tags)
+[![Latest release](https://img.shields.io/github/v/release/Nerdy-Technician/NerdyStore?label=release&sort=semver)](https://github.com/Nerdy-Technician/NerdyStore/releases)
+[![Last commit](https://img.shields.io/github/last-commit/Nerdy-Technician/NerdyStore)](https://github.com/Nerdy-Technician/NerdyStore/commits/main)
+[![Stars](https://img.shields.io/github/stars/Nerdy-Technician/NerdyStore?style=flat)](https://github.com/Nerdy-Technician/NerdyStore/stargazers)
+[![Forks](https://img.shields.io/github/forks/Nerdy-Technician/NerdyStore?style=flat)](https://github.com/Nerdy-Technician/NerdyStore/forks)
+[![Issues](https://img.shields.io/github/issues/Nerdy-Technician/NerdyStore)](https://github.com/Nerdy-Technician/NerdyStore/issues)
+[![Pull requests](https://img.shields.io/github/issues-pr/Nerdy-Technician/NerdyStore)](https://github.com/Nerdy-Technician/NerdyStore/pulls)
+[![License](https://img.shields.io/github/license/Nerdy-Technician/NerdyStore)](https://github.com/Nerdy-Technician/NerdyStore/blob/main/LICENSE)
 
 Storefront for Nexploy apps and Nexterm scripts/snippets
 
@@ -47,3 +55,4 @@ Contributions are welcome!
 
 - **Nexterm Documentation**: https://docs.nexterm.dev  
 - **Discord community**: https://dc.gnmyt.dev  
+- **GitHub Tags**: https://github.com/Nerdy-Technician/NerdyStore/tags

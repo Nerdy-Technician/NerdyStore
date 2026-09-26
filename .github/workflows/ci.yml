@@ -1,0 +1,97 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gui:
+    name: Store index + GUI build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: gui/package-lock.json
+      - name: Build apps index
+        run: node scripts/build_store.js
+      # Same steps as deploy_store.yml: gui/public contains symlinks to a local
+      # checkout path, so replace them with the freshly built index.
+      - name: Populate gui/public from nexploy dist
+        run: |
+          rm -f gui/public/NPINDEX gui/public/categories.json gui/public/nexterm.json
+          rm -rf gui/public/categories
+          cp nexploy/dist/NPINDEX gui/public/NPINDEX
+          cp nexploy/dist/categories.json gui/public/categories.json
+          cp nexploy/dist/nexterm.json gui/public/nexterm.json
+          cp -r nexploy/dist/categories gui/public/categories
+      - name: Install gui dependencies
+        working-directory: gui
+        run: npm ci
+      # ESLint currently reports existing errors (see PR description); report
+      # them without failing CI until they are fixed.
+      - name: Lint gui (report only)
+        working-directory: gui
+        continue-on-error: true
+        run: npm run lint
+      - name: Build gui
+        working-directory: gui
+        run: npm run build
+
+  compose:
+    name: Compose templates
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - name: docker compose config
+        run: |
+          failed=0
+          while IFS= read -r -d '' file; do
+            dir=$(dirname "$file")
+            # nexterm references a user-provided .env file (env_file); use an empty one.
+            if [ "$dir" = "nexploy/n/nexterm" ] && [ ! -f "$dir/.env" ]; then touch "$dir/.env"; fi
+            if ! (cd "$dir" && docker compose -f "$(basename "$file")" config --quiet); then
+              echo "::error file=$file::docker compose config failed"
+              failed=1
+            fi
+          done < <(git ls-files -z 'nexploy/*docker-compose.yml' 'nexploy/*docker-compose.yaml')
+          exit "$failed"
+
+  shellcheck:
+    name: ShellCheck
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      # Scripts with existing ShellCheck errors (see PR description). They are
+      # reported without failing CI; remove them from this list once fixed.
+      KNOWN_ISSUES: |
+        nexterm/scripts/Monitoring/Check - MeshAgent_is_running.sh
+        nexterm/scripts/Monitoring/Check - Remotely_is_running.sh
+        nexterm/scripts/Monitoring/Check - Wazuh_is_running.sh
+        nexterm/scripts/Network/Network - Port Scan.sh
+    steps:
+      - uses: actions/checkout@v7
+      - name: ShellCheck (errors only)
+        run: |
+          shellcheck --version
+          git ls-files -z '*.sh' '*.bash' \
+            | grep -zvxF -f <(printf '%s\n' "$KNOWN_ISSUES" | sed '/^$/d') \
+            | xargs -0 -r shellcheck --severity=error
+      - name: ShellCheck known issues (report only)
+        continue-on-error: true
+        run: |
+          printf '%s\n' "$KNOWN_ISSUES" | sed '/^$/d' | tr '\n' '\0' \
+            | xargs -0 -r shellcheck --severity=error --format=gcc \
+            | sed -E 's/^([^:]+):([0-9]+):([0-9]+): error: (.*)$/::warning file=\1,line=\2,col=\3::\4/'

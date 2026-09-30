@@ -20,13 +20,13 @@ jobs:
     steps:
       - name: Checkout release commit
         if: github.event_name == 'workflow_run'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: ${{ github.event.workflow_run.head_sha }}
 
       - name: Checkout current commit
         if: github.event_name == 'workflow_dispatch'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Read VERSION file
         id: version_info
@@ -41,7 +41,7 @@ jobs:
 
       - name: Wait for GitHub Pages deploy
         if: github.event_name == 'workflow_run'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const owner = context.repo.owner;

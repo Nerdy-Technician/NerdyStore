@@ -1,5 +1,5 @@
 import "./styles.sass";
-import Icon from "@mdi/react";
+import { Icon } from "@mdi/react";
 import { mdiScriptText, mdiCodeBraces, mdiPalette } from "@mdi/js";
 
 const CATEGORY_ICONS = {

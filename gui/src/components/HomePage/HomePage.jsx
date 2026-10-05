@@ -1,4 +1,4 @@
-import Icon from "@mdi/react";
+import { Icon } from "@mdi/react";
 import { mdiStore, mdiPackageVariant, mdiConsoleLine, mdiArrowRight, mdiLayersTriple, mdiCubeOutline, mdiScriptText, mdiCodeBraces, mdiPalette, mdiPencilRuler } from "@mdi/js";
 import "./styles.sass";
 

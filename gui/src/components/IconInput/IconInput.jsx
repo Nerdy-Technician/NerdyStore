@@ -1,5 +1,5 @@
 import "./styles.sass";
-import Icon from "@mdi/react";
+import { Icon } from "@mdi/react";
 
 export const IconInput = ({ type, placeholder, icon, value, setValue, disabled }) => (
     <div className="input-container">

@@ -1,5 +1,5 @@
 import "./styles.sass";
-import Icon from "@mdi/react";
+import { Icon } from "@mdi/react";
 import { mdiChevronDown } from "@mdi/js";
 import { useState, useRef, useEffect } from "react";
 

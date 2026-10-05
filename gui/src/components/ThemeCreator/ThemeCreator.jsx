@@ -1,5 +1,5 @@
 import { useState, useMemo, useCallback } from "react";
-import Icon from "@mdi/react";
+import { Icon } from "@mdi/react";
 import { mdiContentCopy, mdiCheck, mdiRefresh } from "@mdi/js";
 import "./styles.sass";
 

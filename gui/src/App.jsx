@@ -1,7 +1,7 @@
 import "./styles/main.sass";
 import "./App.sass";
 import { useEffect, useState, useCallback, useMemo } from "react";
-import Icon from "@mdi/react";
+import { Icon } from "@mdi/react";
 import { mdiPackageVariant, mdiAdvertisements, mdiWeb, mdiMagnify, mdiScriptText, mdiLan, mdiPlayCircle, mdiCloud, mdiCodeBraces, mdiWrench, mdiApps, mdiDotsHorizontal, mdiChevronDown, mdiGamepadVariant, mdiConsoleLine, mdiPalette, mdiDocker, mdiStore, mdiHomeAutomation, mdiChartLine, mdiViewDashboard, mdiClipboardList, mdiBriefcase, mdiPencilRuler } from "@mdi/js";
 import IconInput from "./components/IconInput";
 import SelectBox from "./components/SelectBox";

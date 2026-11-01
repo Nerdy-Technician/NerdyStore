@@ -60,6 +60,8 @@ jobs:
           failed=0
           while IFS= read -r -d '' file; do
             dir=$(dirname "$file")
+            # Samples fail closed on required secrets; seed CI with the committed example values.
+            if [ ! -f "$dir/.env" ] && [ -f "$dir/.env.example" ]; then cp "$dir/.env.example" "$dir/.env"; fi
             # nexterm references a user-provided .env file (env_file); use an empty one.
             if [ "$dir" = "nexploy/n/nexterm" ] && [ ! -f "$dir/.env" ]; then touch "$dir/.env"; fi
             if ! (cd "$dir" && docker compose -f "$(basename "$file")" config --quiet); then

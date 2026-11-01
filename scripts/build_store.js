@@ -87,6 +87,18 @@ const headerPlatforms = meta => {
 const MAX_COPY_CHARS = 20000;
 const copyText = content => content.length > MAX_COPY_CHARS ? undefined : content.replace(/\s+$/, "") + "\n";
 
+// Compose template (and .env.example) for the storefront compose preview / download.
+const readTemplate = (appDir, names) => {
+    for (const n of names) { const f = join(appDir, n); if (existsSync(f)) return copyText(readFileSync(f, "utf8")); }
+    return undefined;
+};
+const composeFields = appDir => {
+    const compose = readTemplate(appDir, ["docker-compose.yml", "docker-compose.yaml"]);
+    if (!compose) return {};
+    const envExample = readTemplate(appDir, [".env.example"]);
+    return { compose, ...(envExample ? { envExample } : {}) };
+};
+
 const buildApp = (appDir, appId, letter) => {
     const raw = readFileSync(join(appDir, "manifest.yml"), "utf8");
     const manifest = parseManifest(raw);
@@ -97,7 +109,7 @@ const buildApp = (appDir, appId, letter) => {
     mkdirSync(destDir, { recursive: true });
     cpSync(appDir, destDir, { recursive: true });
     console.log(`  → ${letter}/${appId}@${version}`);
-    return { id: appId, slug: appId, letter, version, name: manifest.name || appId, description: manifest.description || "", category: manifest.category || "Other", type: manifest.type || "unknown", kind: manifest.kind || "app", ...optionalSearchFields(manifest), ...(platforms ? { platforms } : {}), hasLogo: existsSync(join(LOGOS_DIR, `${appId}.png`)) };
+    return { id: appId, slug: appId, letter, version, name: manifest.name || appId, description: manifest.description || "", category: manifest.category || "Other", type: manifest.type || "unknown", kind: manifest.kind || "app", ...optionalSearchFields(manifest), ...(platforms ? { platforms } : {}), hasLogo: existsSync(join(LOGOS_DIR, `${appId}.png`)), ...composeFields(appDir) };
 };
 
 const npindexPath = join(APPS_DIR, "NPINDEX");

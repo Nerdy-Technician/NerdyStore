@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Nerdy-Technician/NerdyStore/main/schema/manifest.v1.json",
+  "title": "NerdyStore listing manifest v1",
+  "description": "Metadata for one NerdyStore listing (Nexploy app manifest.yml, or Nexterm item header mapped to the same keys). Unknown keys are allowed so clients/old manifests are not broken; clients MUST ignore unknown keys.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["schemaVersion", "id", "kind", "name", "summary", "version", "license", "category", "platforms", "maintainer", "icon"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$", "maxLength": 64, "description": "Kebab-case; must equal folder/file name (checked by CI, not schema)." },
+    "kind": { "enum": ["app", "script", "snippet", "theme", "bundle"] },
+    "type": { "enum": ["docker"], "description": "Install method (existing field). Required when kind=app." },
+    "name": { "type": "string", "minLength": 1, "maxLength": 40 },
+    "summary": { "type": "string", "minLength": 1, "maxLength": 120, "description": "One line. Migrated from today's `description`." },
+    "description": { "type": "string", "description": "Long-form markdown for the detail page." },
+    "version": { "type": "string", "minLength": 1, "description": "Upstream app version (semver/calver). `latest`/`stable` flagged by CI lint." },
+    "imageTag": { "type": "string", "minLength": 1, "description": "Pinned image tag for mainService. `latest` allowed but warned by CI." },
+    "license": { "type": "string", "pattern": "^[A-Za-z0-9.+()\\- ]+$", "description": "SPDX expression, e.g. MIT, AGPL-3.0-only, Apache-2.0 OR MIT." },
+    "category": {
+      "enum": ["ad-blocking", "cloud-storage", "containers", "dashboards", "development", "home-automation", "inventory", "media", "monitoring", "networking", "productivity", "security", "utilities", "web-tools"],
+      "description": "Controlled slug. Legacy map: Ad Blockers→ad-blocking, Cloud→cloud-storage, Container Management→containers, Dashboard→dashboards, Media + Media Servers→media, Web Tools→web-tools, others lower-kebab."
+    },
+    "tags": {
+      "type": "array", "maxItems": 8, "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$", "maxLength": 32 }
+    },
+    "platforms": {
+      "type": "object", "additionalProperties": false, "required": ["os", "arch"],
+      "properties": {
+        "os": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["linux", "windows", "macos"] } },
+        "arch": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["amd64", "arm64", "armv7", "386", "any"] } }
+      }
+    },
+    "maintainer": {
+      "type": "object", "required": ["name"], "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "github": { "type": "string", "pattern": "^[A-Za-z0-9-]{1,39}$" },
+        "email": { "type": "string", "format": "email" }
+      }
+    },
+    "links": {
+      "type": "object", "additionalProperties": false,
+      "properties": {
+        "homepage": { "type": "string", "format": "uri" },
+        "source": { "type": "string", "format": "uri" },
+        "docs": { "type": "string", "format": "uri" },
+        "support": { "type": "string", "format": "uri" }
+      }
+    },
+    "icon": { "type": "string", "pattern": "\\.(png|svg)$", "description": "Relative path; square, min 256px (size checked by CI)." },
+    "screenshots": {
+      "type": "array", "maxItems": 6,
+      "items": {
+        "type": "object", "required": ["src", "alt"], "additionalProperties": false,
+        "properties": {
+          "src": { "type": "string", "description": "Relative path (gallery/x.png) or https URL. PNG/WebP, 16:9, >=1280x720, <=1MB (CI-checked)." },
+          "alt": { "type": "string", "minLength": 3, "maxLength": 140 },
+          "order": { "type": "integer", "minimum": 1, "description": "1 = hero. Defaults to array position." },
+          "caption": { "type": "string", "maxLength": 140 }
+        }
+      }
+    },
+    "gallery": {
+      "type": "array", "items": { "type": "string" }, "deprecated": true,
+      "description": "Legacy bare-path screenshots. Build maps to screenshots[] with alt=name; CI warns."
+    },
+    "requires": {
+      "type": "object", "additionalProperties": false,
+      "properties": {
+        "runtime": { "type": "array", "items": { "$ref": "#/$defs/namedVersion" } },
+        "services": {
+          "type": "array",
+          "items": {
+            "type": "object", "required": ["name"], "additionalProperties": false,
+            "properties": {
+              "name": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+              "version": { "type": "string" },
+              "bundled": { "type": "boolean", "default": false, "description": "true if provided by this listing's compose." }
+            }
+          }
+        },
+        "resources": {
+          "type": "object", "additionalProperties": false,
+          "properties": {
+            "minRamMb": { "type": "integer", "minimum": 0 },
+            "minDiskMb": { "type": "integer", "minimum": 0 },
+            "gpu": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "ports": {
+      "type": "array",
+      "items": {
+        "type": "object", "required": ["container"], "additionalProperties": false,
+        "properties": {
+          "container": { "$ref": "#/$defs/port" },
+          "default": { "$ref": "#/$defs/port" },
+          "protocol": { "enum": ["tcp", "udp"], "default": "tcp" },
+          "web": { "type": "boolean", "default": false },
+          "label": { "type": "string", "maxLength": 40 }
+        }
+      }
+    },
+    "volumes": {
+      "type": "array",
+      "items": {
+        "type": "object", "required": ["path"], "additionalProperties": false,
+        "properties": {
+          "path": { "type": "string", "pattern": "^/" },
+          "label": { "type": "string", "maxLength": 60 },
+          "persistent": { "type": "boolean", "default": true }
+        }
+      }
+    },
+    "mainService": { "type": "string", "minLength": 1, "description": "Existing field: compose service name of the main container." },
+    "inputs": {
+      "type": "array", "description": "Existing field, unchanged shape.",
+      "items": {
+        "type": "object", "required": ["id", "label", "type"], "additionalProperties": true,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+          "label": { "type": "string" },
+          "description": { "type": "string" },
+          "type": { "enum": ["text", "number", "password", "boolean", "select"] },
+          "placeholder": { "type": "string" },
+          "default": { "type": ["string", "number", "boolean"] },
+          "required": { "type": "boolean" },
+          "options": { "type": "array" }
+        }
+      }
+    },
+    "hooks": {
+      "type": "object", "description": "Existing field. Values are JS files relative to the listing folder.",
+      "additionalProperties": { "type": "string", "pattern": "\\.js$" },
+      "properties": { "postInstall": { "type": "string" }, "onConfigure": { "type": "string" } }
+    },
+    "deprecated": { "type": "boolean", "default": false }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "kind": { "const": "app" } } },
+      "then": { "required": ["type", "imageTag", "mainService", "requires", "ports", "volumes", "links"],
+                "properties": { "links": { "required": ["homepage", "source"] } } }
+    }
+  ],
+  "$defs": {
+    "port": { "type": "integer", "minimum": 1, "maximum": 65535 },
+    "namedVersion": {
+      "type": "object", "required": ["name"], "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+        "version": { "type": "string", "description": "Range, e.g. >=24" }
+      }
+    }
+  }
+}

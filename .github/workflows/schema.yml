@@ -1,0 +1,35 @@
+name: Manifest schema
+
+on:
+  pull_request:
+    paths: ["nexploy/**", "schema/**", "scripts/validate_manifests.js", ".github/workflows/schema.yml"]
+  push:
+    branches: [main]
+    paths: ["nexploy/**", "schema/**", "scripts/validate_manifests.js", ".github/workflows/schema.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  schema-core:
+    name: schema-core (blocking)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+      - run: npm i --no-save --no-package-lock ajv@8 ajv-formats@3 yaml@2
+      - run: node scripts/validate_manifests.js --mode core
+
+  schema-strict:
+    name: schema-strict (warn only)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+      - run: npm i --no-save --no-package-lock ajv@8 ajv-formats@3 yaml@2
+      - run: node scripts/validate_manifests.js --mode strict

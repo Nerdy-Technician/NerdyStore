@@ -1,6 +1,6 @@
 type: docker
 name: TiddlyWiki
-version: latest
+version: v5.3.6
 description: Self-hosted personal wiki and non-linear notebook. Default credentials are admin / admin.
 category: Productivity
 mainService: tiddlywiki

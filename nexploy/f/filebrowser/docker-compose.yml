@@ -1,15 +1,17 @@
 services:
   filebrowser:
-    image: filebrowser/filebrowser:latest
+    image: filebrowser/filebrowser:v2.63.23
     container_name: filebrowser
     restart: unless-stopped
     ports:
       - "80:80"
+    # Change the image's default first-run login immediately.
     volumes:
       - ./root:/srv
-      - ./database.db:/database/filebrowser.db
-      - ./config/.filebrowser.json:/.filebrowser.json
-    user: "1000:1000"
+      # Directories, not files. Docker creates a directory if a bind source is missing,
+      # which breaks a file mount such as database.db or settings.json.
+      - ./database:/database
+      - ./config:/config
     healthcheck:
       test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80"]
       interval: 30s

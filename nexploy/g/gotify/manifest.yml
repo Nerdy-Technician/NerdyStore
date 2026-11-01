@@ -1,6 +1,6 @@
 type: docker
 name: Gotify
-version: latest
+version: 3.1.1
 description: Self-hosted push notification server. Default credentials are admin / admin.
 category: Monitoring
 mainService: gotify

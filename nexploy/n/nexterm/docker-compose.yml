@@ -1,6 +1,7 @@
 services:
   nexterm:
     image: germannewsmaker/nexterm:1.2.0-BETA
+    # Host network is intentional: Nexterm binds SERVER_PORT on the host.
     network_mode: host
     restart: always
     env_file:

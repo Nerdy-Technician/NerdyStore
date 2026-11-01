@@ -1,8 +1,9 @@
 services:
   hassio-supervisor:
-    image: ghcr.io/home-assistant/amd64-hassio-supervisor:2026.04.2
+    image: ghcr.io/home-assistant/amd64-hassio-supervisor:2026.10.5
     container_name: hassio_supervisor
     restart: always
+    # Supervisor needs a privileged container, the Docker socket, and D-Bus.
     privileged: true
     security_opt:
       - seccomp=unconfined

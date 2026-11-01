@@ -1,6 +1,7 @@
+# Copy .env.example to .env and replace the placeholders before starting.
 services:
   photoprism:
-    image: photoprism/photoprism:latest
+    image: photoprism/photoprism:261029
     container_name: photoprism
     restart: unless-stopped
     stop_grace_period: 10s
@@ -10,8 +11,8 @@ services:
       - ./originals:/photoprism/originals
       - ./storage:/photoprism/storage
     environment:
-      - PHOTOPRISM_ADMIN_USER=admin
-      - PHOTOPRISM_ADMIN_PASSWORD=admin_password
+      - PHOTOPRISM_ADMIN_USER=${PHOTOPRISM_ADMIN_USER:-admin}
+      - PHOTOPRISM_ADMIN_PASSWORD=${PHOTOPRISM_ADMIN_PASSWORD:?Set PHOTOPRISM_ADMIN_PASSWORD in .env}
       - PHOTOPRISM_AUTH_MODE=password
       - PHOTOPRISM_SITE_URL=http://localhost:2342/
       - PHOTOPRISM_DISABLE_TLS=true
@@ -19,6 +20,7 @@ services:
       - PHOTOPRISM_ORIGINALS_LIMIT=5000
       - PHOTOPRISM_HTTP_COMPRESSION=gzip
       - PHOTOPRISM_DATABASE_DRIVER=sqlite
+    # Upstream requires these so PhotoPrism can read media inside the container.
     security_opt:
       - seccomp:unconfined
       - apparmor:unconfined

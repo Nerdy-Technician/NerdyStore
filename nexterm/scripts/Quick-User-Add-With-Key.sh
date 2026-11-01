@@ -31,7 +31,11 @@ fi
 
 # Setup SSH directory
 @NEXTERM:STEP "Setting up SSH directory"
-USER_HOME=$(eval echo ~$USERNAME)
+USER_HOME=$(getent passwd "$USERNAME" | cut -d: -f6)
+if [ -z "$USER_HOME" ]; then
+    @NEXTERM:ERROR "Could not resolve home directory for $USERNAME"
+    exit 1
+fi
 SSH_DIR="$USER_HOME/.ssh"
 
 sudo mkdir -p "$SSH_DIR"

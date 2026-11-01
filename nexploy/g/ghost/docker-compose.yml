@@ -1,6 +1,7 @@
+# Copy .env.example to .env and replace the placeholders before starting.
 services:
   ghost:
-    image: ghost:latest
+    image: ghost:6.73.0
     container_name: ghost
     restart: unless-stopped
     ports:
@@ -11,9 +12,9 @@ services:
       - database__client=mysql
       - database__connection__host=db
       - database__connection__user=ghost
-      - database__connection__password=ghost_password
+      - database__connection__password=${GHOST_DB_PASSWORD:?Set GHOST_DB_PASSWORD in .env}
       - database__connection__database=ghost
-      - url=http://localhost:2368
+      - url=${GHOST_URL:-http://localhost:2368}
     depends_on:
       db:
         condition: service_healthy
@@ -25,18 +26,18 @@ services:
       start_period: 60s
 
   db:
-    image: mysql:8.0
+    image: mysql:8.0.46
     container_name: ghost-db
     restart: unless-stopped
     environment:
-      - MYSQL_ROOT_PASSWORD=root_password
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD in .env}
       - MYSQL_DATABASE=ghost
       - MYSQL_USER=ghost
-      - MYSQL_PASSWORD=ghost_password
+      - MYSQL_PASSWORD=${GHOST_DB_PASSWORD:?Set GHOST_DB_PASSWORD in .env}
     volumes:
       - ./mysql:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot_password"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$$MYSQL_ROOT_PASSWORD"]
       interval: 10s
       timeout: 5s
       retries: 5

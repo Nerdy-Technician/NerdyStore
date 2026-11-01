@@ -1,21 +1,26 @@
 services:
   traefik:
-    image: traefik:latest
+    image: traefik:v3.7.17
     container_name: traefik
     restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"
-      - "8080:8080"
+      # Insecure API/dashboard. Loopback only; tunnel in if you need it remotely.
+      - "127.0.0.1:8080:8080"
     volumes:
+      # Read-only Docker socket is required for the Docker provider. It still reveals the host's containers.
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./config/traefik.yml:/traefik.yml:ro
       - ./config/dynamic:/dynamic:ro
       - ./letsencrypt:/letsencrypt
     command:
+      - "--api.dashboard=true"
       - "--api.insecure=true"
+      - "--ping=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
+      - "--providers.file.directory=/dynamic"
+      - "--providers.file.watch=true"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
       - "--log.level=INFO"

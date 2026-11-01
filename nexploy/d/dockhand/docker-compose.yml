@@ -4,6 +4,7 @@ services:
         ports:
             - 3866:3000
         volumes:
+            # Required to manage Docker. Equivalent to root on the host.
             - /var/run/docker.sock:/var/run/docker.sock
             - ./data:/app/data:rw
         restart: always

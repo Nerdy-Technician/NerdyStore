@@ -1,6 +1,6 @@
 type: docker
 name: Stirling-PDF
-version: latest
+version: 3.2.2
 description: Stirling-PDF is a self-hosted web application for performing various PDF operations including merging, splitting, and converting.
 category: Utilities
 mainService: stirling-pdf

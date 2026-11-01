@@ -1,6 +1,7 @@
+# Copy .env.example to .env and replace the placeholders before starting.
 services:
   nextcloud:
-    image: nextcloud:latest
+    image: nextcloud:31.0.14-apache
     container_name: nextcloud
     restart: unless-stopped
     ports:
@@ -11,9 +12,9 @@ services:
       - MYSQL_HOST=db
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
-      - MYSQL_PASSWORD=nextcloud_password
-      - NEXTCLOUD_ADMIN_USER=admin
-      - NEXTCLOUD_ADMIN_PASSWORD=admin_password
+      - MYSQL_PASSWORD=${NEXTCLOUD_DB_PASSWORD:?Set NEXTCLOUD_DB_PASSWORD in .env}
+      - NEXTCLOUD_ADMIN_USER=${NEXTCLOUD_ADMIN_USER:-admin}
+      - NEXTCLOUD_ADMIN_PASSWORD=${NEXTCLOUD_ADMIN_PASSWORD:?Set NEXTCLOUD_ADMIN_PASSWORD in .env}
     depends_on:
       db:
         condition: service_healthy
@@ -25,14 +26,14 @@ services:
       start_period: 60s
 
   db:
-    image: mariadb:11
+    image: mariadb:11.4
     container_name: nextcloud-db
     restart: unless-stopped
     environment:
-      - MYSQL_ROOT_PASSWORD=root_password
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD in .env}
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
-      - MYSQL_PASSWORD=nextcloud_password
+      - MYSQL_PASSWORD=${NEXTCLOUD_DB_PASSWORD:?Set NEXTCLOUD_DB_PASSWORD in .env}
     volumes:
       - ./db:/var/lib/mysql
     healthcheck:

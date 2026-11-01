@@ -1,18 +1,19 @@
+# Copy .env.example to .env before starting.
 services:
   stirling-pdf:
-    image: stirlingtools/stirling-pdf:latest
+    image: stirlingtools/stirling-pdf:3.2.2
     container_name: stirling-pdf
     restart: unless-stopped
     ports:
       - "8080:8080"
     volumes:
-      - ./training-data:/usr/share/tessdata
-      - ./extraConfigs:/configs
-      - ./customFiles:/customFiles
+      - ./tessdata:/usr/share/tessdata
+      - ./config:/configs
       - ./logs:/logs
     environment:
-      - DOCKER_ENABLE_SECURITY=false
+      - SECURITY_ENABLELOGIN=${SECURITY_ENABLELOGIN:-true}
       - INSTALL_BOOK_AND_ADVANCED_HTML_OPS=false
+      - SYSTEM_DEFAULTLOCALE=en-US
       - LANGS=en_GB
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/api/v1/info/status"]

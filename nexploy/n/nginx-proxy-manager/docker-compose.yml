@@ -1,13 +1,13 @@
 services:
   nginx-proxy-manager:
-    image: jc21/nginx-proxy-manager
+    image: jc21/nginx-proxy-manager:2.16.0
     container_name: nginx_proxy_manager
     restart: always
     ports:
       - "8341:80"
+      # Admin UI. Change the image's default first-run login immediately.
       - "81:81"
       - "8766:443"
     volumes:
-      - ./config.json:/app/config/production.json
       - ./data:/data
       - ./letsencrypt:/etc/letsencrypt

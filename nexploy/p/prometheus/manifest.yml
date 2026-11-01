@@ -1,6 +1,6 @@
 type: docker
 name: Prometheus
-version: latest
+version: v3.15.1
 description: Prometheus is an open-source systems monitoring and alerting toolkit that collects and stores metrics as time series data.
 category: Monitoring
 mainService: prometheus

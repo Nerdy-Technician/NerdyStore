@@ -16,6 +16,7 @@ services:
       - ./logs:/app/logs
 
   mongo:
+    # 4.4 is end of life. Petio has not published a compose sample for a newer server.
     image: mongo:4.4
     container_name: Petio-DB
     hostname: mongo

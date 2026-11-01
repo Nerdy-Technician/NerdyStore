@@ -8,6 +8,7 @@ services:
       - "61208:61208"
       - "61209:61209"
     volumes:
+      # Read-only Docker socket is for container stats.
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /etc/os-release:/etc/os-release:ro
     environment:

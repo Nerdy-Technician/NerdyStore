@@ -49,7 +49,7 @@ jobs:
       - name: Install gui dependencies
         run: |
           cd gui
-          npm install
+          npm ci
 
       - name: Build gui
         run: |

@@ -1,0 +1,94 @@
+@use "../../styles/colors"
+
+.compose-preview-dialog
+  width: min(720px, 90vw)
+
+  .compose-fields
+    display: grid
+    grid-template-columns: repeat(4, 1fr)
+    gap: 0.75rem
+    margin-bottom: 1rem
+
+    @media (max-width: 640px)
+      grid-template-columns: repeat(2, 1fr)
+
+  .compose-field
+    display: flex
+    flex-direction: column
+    gap: 0.3rem
+    font-size: 0.8rem
+    color: colors.$subtext
+
+    input
+      min-width: 0
+      width: 100%
+      box-sizing: border-box
+      background: colors.$background
+      border: 1px solid colors.$gray
+      border-radius: 0.4rem
+      color: colors.$white
+      padding: 0.45rem 0.6rem
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace
+      font-size: 0.85rem
+
+      &:focus
+        outline: none
+        border-color: colors.$primary
+
+    small
+      font-size: 0.7rem
+
+  .compose-tabs
+    display: flex
+    gap: 0.25rem
+
+    button
+      background: transparent
+      border: 1px solid colors.$gray
+      border-bottom: none
+      border-radius: 0.4rem 0.4rem 0 0
+      color: colors.$subtext
+      padding: 0.35rem 0.75rem
+      font-size: 0.8rem
+      cursor: pointer
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace
+
+      &.active
+        color: colors.$white
+        background: colors.$background
+
+  .compose-code
+    margin: 0 0 1rem
+    max-height: 45vh
+    overflow: auto
+    padding: 0.85rem
+    background: colors.$background
+    border: 1px solid colors.$gray
+    border-radius: 0 0.5rem 0.5rem 0.5rem
+    color: colors.$white
+    font-size: 0.78rem
+    line-height: 1.5
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace
+
+  .compose-action
+    display: inline-flex
+    align-items: center
+    gap: 0.35rem
+    background-color: colors.$primary-opacity
+    border: 1px solid colors.$primary
+    color: colors.$white
+    border-radius: 0.4rem
+    padding: 0.45rem 0.85rem
+    font-size: 0.85rem
+    font-weight: 600
+    cursor: pointer
+    font-family: inherit
+
+    svg
+      width: 1rem
+      height: 1rem
+
+    &.secondary
+      background: transparent
+      border-color: colors.$gray
+      color: colors.$subtext

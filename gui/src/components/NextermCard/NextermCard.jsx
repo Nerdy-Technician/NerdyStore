@@ -1,6 +1,30 @@
 import "./styles.sass";
+import { useEffect, useState } from "react";
 import { Icon } from "@mdi/react";
-import { mdiScriptText, mdiCodeBraces, mdiPalette } from "@mdi/js";
+import { mdiScriptText, mdiCodeBraces, mdiPalette, mdiContentCopy, mdiCheck, mdiAlertCircleOutline } from "@mdi/js";
+import { copyToClipboard } from "../../utils/clipboard";
+import { platformLabel } from "../../utils/platforms";
+
+const CopyButton = ({ item }) => {
+    const [state, setState] = useState("idle");
+    useEffect(() => {
+        if (state === "idle") return undefined;
+        const t = setTimeout(() => setState("idle"), 1800);
+        return () => clearTimeout(t);
+    }, [state]);
+    if (!item.copy) return null;
+    const onCopy = async (e) => {
+        e.stopPropagation();
+        setState((await copyToClipboard(item.copy)) ? "copied" : "failed");
+    };
+    const label = state === "copied" ? "Copied" : state === "failed" ? "Copy failed" : item.category === "snippets" ? "Copy snippet" : "Copy script";
+    const icon = state === "copied" ? mdiCheck : state === "failed" ? mdiAlertCircleOutline : mdiContentCopy;
+    return (
+        <button type="button" className={`copy-btn${state !== "idle" ? ` ${state}` : ""}`} onClick={onCopy} aria-label={`${label}: ${item.name}`} title="Copy to clipboard, then paste into Nexterm">
+            <Icon path={icon} /><span aria-live="polite">{label}</span>
+        </button>
+    );
+};
 
 const CATEGORY_ICONS = {
     scripts: mdiScriptText,
@@ -67,6 +91,10 @@ export const NextermCard = ({ item }) => {
             </div>
             <div className="card-content">
                 <p className="nexterm-description">{item.description || "No description available"}</p>
+            </div>
+            <div className="card-actions">
+                {platformLabel(item) && <span className="platform-badge">{platformLabel(item)}</span>}
+                <CopyButton item={item} />
             </div>
         </div>
     );

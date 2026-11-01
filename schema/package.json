@@ -1,0 +1,10 @@
+{
+  "name": "nerdystore-schema-tools",
+  "private": true,
+  "description": "Pinned dependencies for scripts/validate_manifests.js",
+  "dependencies": {
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "yaml": "2.9.1"
+  }
+}

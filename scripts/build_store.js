@@ -55,14 +55,49 @@ const optionalSearchFields = meta => ({
     ...(parseTags(meta.tags)?.length ? { tags: parseTags(meta.tags) } : {}),
 });
 
+// Schema v1 `platforms` ({ os: [...], arch: [...] }). The flat manifest parser above
+// skips nested keys, so read the block directly. Accepts inline `[a, b]` or `- a` lists.
+const PLATFORM_OS = { linux: "linux", windows: "windows", macos: "macos", mac: "macos", osx: "macos", darwin: "macos" };
+const listValues = (lines, key) => {
+    const i = lines.findIndex(l => new RegExp(`^\\s+${key}:`).test(l));
+    if (i === -1) return [];
+    const inline = lines[i].split(":").slice(1).join(":").trim();
+    if (inline) return parseTags(inline) || [];
+    const out = [];
+    for (const l of lines.slice(i + 1)) { const m = l.match(/^\s+-\s*["']?([^"'\s]+)/); if (!m) break; out.push(m[1]); }
+    return out;
+};
+const parsePlatforms = content => {
+    const lines = content.split("\n");
+    const start = lines.findIndex(l => /^platforms:\s*$/.test(l));
+    if (start === -1) return null;
+    const end = lines.findIndex((l, i) => i > start && /^\S/.test(l));
+    const block = lines.slice(start + 1, end === -1 ? undefined : end);
+    const os = [...new Set(listValues(block, "os").map(v => PLATFORM_OS[v.toLowerCase()]).filter(Boolean))];
+    const arch = [...new Set(listValues(block, "arch").map(v => v.toLowerCase()))];
+    return os.length ? { os, arch: arch.length ? arch : ["any"] } : null;
+};
+// Nexterm headers use `@OS: Linux` (comma separated); map to the same shape.
+const headerPlatforms = meta => {
+    const os = [...new Set(String(meta.OS || "").split(",").map(v => PLATFORM_OS[v.trim().toLowerCase()]).filter(Boolean))];
+    return os.length ? { os, arch: ["any"] } : null;
+};
+// Text copied by the storefront "Copy" button: the item exactly as Nexterm imports it
+// (header comments and @NEXTERM directives kept). Very large files link out instead.
+const MAX_COPY_CHARS = 20000;
+const copyText = content => content.length > MAX_COPY_CHARS ? undefined : content.replace(/\s+$/, "") + "\n";
+
 const buildApp = (appDir, appId, letter) => {
-    const manifest = parseManifest(readFileSync(join(appDir, "manifest.yml"), "utf8"));
+    const raw = readFileSync(join(appDir, "manifest.yml"), "utf8");
+    const manifest = parseManifest(raw);
+    // Docker listings run on Linux hosts; declared schema v1 platforms win.
+    const platforms = parsePlatforms(raw) || ((manifest.type || "docker") === "docker" ? { os: ["linux"], arch: ["any"] } : undefined);
     const version = manifest.version || "0.0.0";
     const destDir = join(DIST_DIR, letter, appId);
     mkdirSync(destDir, { recursive: true });
     cpSync(appDir, destDir, { recursive: true });
     console.log(`  → ${letter}/${appId}@${version}`);
-    return { id: appId, slug: appId, letter, version, name: manifest.name || appId, description: manifest.description || "", category: manifest.category || "Other", type: manifest.type || "unknown", kind: manifest.kind || "app", ...optionalSearchFields(manifest), hasLogo: existsSync(join(LOGOS_DIR, `${appId}.png`)) };
+    return { id: appId, slug: appId, letter, version, name: manifest.name || appId, description: manifest.description || "", category: manifest.category || "Other", type: manifest.type || "unknown", kind: manifest.kind || "app", ...optionalSearchFields(manifest), ...(platforms ? { platforms } : {}), hasLogo: existsSync(join(LOGOS_DIR, `${appId}.png`)) };
 };
 
 const npindexPath = join(APPS_DIR, "NPINDEX");
@@ -133,6 +168,8 @@ for (const [dirName, catInfo] of Object.entries(NEXTERM_CATEGORIES)) {
             subcategory: subdir,
             ...optionalSearchFields(meta),
             file: `${dirName}/${relPath}`,
+            ...(headerPlatforms(meta) ? { platforms: headerPlatforms(meta) } : {}),
+            ...(dirName !== "themes" && copyText(content) ? { copy: copyText(content) } : {}),
             ...(dirName === "themes" ? { colors: parseThemeColors(content) } : {}),
         };
         items.push(item);

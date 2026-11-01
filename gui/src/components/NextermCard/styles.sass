@@ -115,3 +115,49 @@
         flex: 1
         height: 2.5rem
         border-radius: 0.375rem
+
+.nexterm-card .card-actions
+  margin-top: auto
+  padding-top: 0.75rem
+  display: flex
+  align-items: center
+  justify-content: space-between
+  gap: 0.5rem
+
+  .platform-badge
+    font-size: 0.7rem
+    font-weight: 600
+    color: colors.$subtext
+    border: 1px solid colors.$dark-gray
+    border-radius: 0.375rem
+    padding: 0.15rem 0.45rem
+
+  .copy-btn
+    margin-left: auto
+    display: inline-flex
+    align-items: center
+    gap: 0.375rem
+    padding: 0.4rem 0.75rem
+    border-radius: 0.5rem
+    border: 1px solid colors.$dark-gray
+    background: colors.$primary-opacity
+    color: colors.$primary
+    font-size: 0.8rem
+    font-weight: 600
+    cursor: pointer
+    transition: all 0.15s
+
+    svg
+      width: 1rem
+      height: 1rem
+
+    &:hover, &:focus-visible
+      border-color: colors.$primary
+
+    &.copied
+      color: #4ade80
+      border-color: #4ade80
+
+    &.failed
+      color: #f87171
+      border-color: #f87171

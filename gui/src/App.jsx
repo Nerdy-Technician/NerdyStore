@@ -15,6 +15,7 @@ import HomePage from "./components/HomePage";
 import ThemeCreator from "./components/ThemeCreator";
 import NotFound from "./components/NotFound";
 import { matchesQuery, appSearchFields, nextermSearchFields } from "./utils/search";
+import { ALL_PLATFORMS, matchesPlatform, platformOptions } from "./utils/platforms";
 
 const CATEGORY_ICONS = { scripts: mdiScriptText, networking: mdiLan, "media-servers": mdiPlayCircle, cloud: mdiCloud, development: mdiCodeBraces, utilities: mdiWrench, gaming: mdiGamepadVariant, all: mdiApps, other: mdiDotsHorizontal, "container-management": mdiDocker, "web-tools": mdiWeb, "ad-blockers": mdiAdvertisements, "home-automation": mdiHomeAutomation, monitoring: mdiChartLine, dashboard: mdiViewDashboard, inventory: mdiClipboardList, productivity: mdiBriefcase };
 const NEXTERM_ICONS = { all: mdiApps, scripts: mdiScriptText, snippets: mdiCodeBraces, themes: mdiPalette };
@@ -75,6 +76,8 @@ const App = () => {
     const [loadingNexterm, setLoadingNexterm] = useState(true);
     const [nextermSearch, setNextermSearch] = useState("");
     const [nextermSubcat, setNextermSubcat] = useState(null);
+    const [appPlatform, setAppPlatform] = useState(ALL_PLATFORMS);
+    const [nextermPlatform, setNextermPlatform] = useState(ALL_PLATFORMS);
 
     const baseUrl = "/";
 
@@ -155,7 +158,8 @@ const App = () => {
 
     const nexployCategories = useMemo(() => [{ ...ALL_APPS, count: allApps.length }, ...categories], [categories, allApps.length]);
 
-    const searchedApps = useMemo(() => allApps.filter((app) => matchesQuery(appSearchFields(app), searchQuery)), [allApps, searchQuery]);
+    const appPlatforms = useMemo(() => platformOptions(allApps), [allApps]);
+    const searchedApps = useMemo(() => allApps.filter((app) => matchesPlatform(app, appPlatform) && matchesQuery(appSearchFields(app), searchQuery)), [allApps, searchQuery, appPlatform]);
 
     const appMatchCounts = useMemo(() => {
         const counts = { [ALL_APPS.slug]: searchedApps.length };
@@ -170,8 +174,8 @@ const App = () => {
         return result;
     }, [searchedApps, selectedCategory, sortBy]);
 
-    const nexployFiltered = Boolean(searchQuery.trim()) || (selectedCategory && selectedCategory.slug !== ALL_APPS.slug);
-    const clearNexployFilters = () => { setSearchQuery(""); setSelectedCategory(ALL_APPS); navigate("nexploy"); };
+    const nexployFiltered = Boolean(searchQuery.trim()) || appPlatform !== ALL_PLATFORMS || (selectedCategory && selectedCategory.slug !== ALL_APPS.slug);
+    const clearNexployFilters = () => { setSearchQuery(""); setAppPlatform(ALL_PLATFORMS); setSelectedCategory(ALL_APPS); navigate("nexploy"); };
 
     const allNextermItems = useMemo(() => nextermData ? Object.values(nextermData.items).flatMap((group) => group.items) : [], [nextermData]);
 
@@ -192,22 +196,25 @@ const App = () => {
     const nextermMatchCounts = useMemo(() => {
         const counts = { [ALL_NEXTERM]: 0 };
         allNextermItems.forEach((item) => {
+            if (!matchesPlatform(item, nextermPlatform)) return;
             if (!matchesQuery(nextermSearchFields(item), nextermSearch)) return;
             counts[ALL_NEXTERM]++;
             counts[item.category] = (counts[item.category] || 0) + 1;
         });
         return counts;
-    }, [allNextermItems, nextermSearch]);
+    }, [allNextermItems, nextermSearch, nextermPlatform]);
+
+    const nextermPlatforms = useMemo(() => platformOptions(allNextermItems), [allNextermItems]);
 
     const filteredNextermItems = useMemo(() => {
         let result = nextermCategoryItems;
         if (nextermSubcat) result = result.filter(i => i.subcategory === nextermSubcat);
-        return result.filter((item) => matchesQuery(nextermSearchFields(item), nextermSearch));
-    }, [nextermCategoryItems, nextermSearch, nextermSubcat]);
+        return result.filter((item) => matchesPlatform(item, nextermPlatform) && matchesQuery(nextermSearchFields(item), nextermSearch));
+    }, [nextermCategoryItems, nextermSearch, nextermSubcat, nextermPlatform]);
 
-    const nextermFiltered = Boolean(nextermSearch.trim()) || nextermCategory !== ALL_NEXTERM || Boolean(nextermSubcat);
+    const nextermFiltered = Boolean(nextermSearch.trim()) || nextermPlatform !== ALL_PLATFORMS || nextermCategory !== ALL_NEXTERM || Boolean(nextermSubcat);
     const selectNextermCategory = (slug) => { setNextermCategory(slug); setNextermSubcat(null); setMobileMenuOpen(false); setActiveView("store"); navigate("nexterm", slug === ALL_NEXTERM ? undefined : slug); };
-    const clearNextermFilters = () => { setNextermSearch(""); selectNextermCategory(ALL_NEXTERM); };
+    const clearNextermFilters = () => { setNextermSearch(""); setNextermPlatform(ALL_PLATFORMS); selectNextermCategory(ALL_NEXTERM); };
 
     const currentNextermCategoryName = nextermCategories.find(c => c.slug === nextermCategory)?.name || "All";
 
@@ -362,6 +369,15 @@ const App = () => {
                             ))}
                             {nexployFiltered && <button className="subcat-pill clear-filters" onClick={clearNexployFilters}><Icon path={mdiClose} size={0.6} /> Clear filters</button>}
                         </div>
+                        {appPlatforms.length > 0 && (
+                            <div className="subcat-filters platform-filters" role="group" aria-label="Filter apps by platform">
+                                <span className="filter-label">Platform</span>
+                                <button className={`subcat-pill${appPlatform === ALL_PLATFORMS ? ' active' : ''}`} aria-pressed={appPlatform === ALL_PLATFORMS} onClick={() => setAppPlatform(ALL_PLATFORMS)}>Any</button>
+                                {appPlatforms.map((p) => (
+                                    <button key={p.slug} className={`subcat-pill${appPlatform === p.slug ? ' active' : ''}`} aria-pressed={appPlatform === p.slug} onClick={() => setAppPlatform(p.slug)}>{p.name} ({p.count})</button>
+                                ))}
+                            </div>
+                        )}
                         <div className="store-results">
                             {loadingApps ? <div className="loading-container"><Loader size="medium" /></div> : filteredAndSortedApps.length > 0 ? (
                                 <div className="apps-grid">
@@ -389,6 +405,15 @@ const App = () => {
                             ))}
                             {nextermFiltered && <button className="subcat-pill clear-filters" onClick={clearNextermFilters}><Icon path={mdiClose} size={0.6} /> Clear filters</button>}
                         </div>
+                        {nextermPlatforms.length > 0 && (
+                            <div className="subcat-filters platform-filters" role="group" aria-label="Filter Nexterm items by platform">
+                                <span className="filter-label">Platform</span>
+                                <button className={`subcat-pill${nextermPlatform === ALL_PLATFORMS ? ' active' : ''}`} aria-pressed={nextermPlatform === ALL_PLATFORMS} onClick={() => setNextermPlatform(ALL_PLATFORMS)}>Any</button>
+                                {nextermPlatforms.map((p) => (
+                                    <button key={p.slug} className={`subcat-pill${nextermPlatform === p.slug ? ' active' : ''}`} aria-pressed={nextermPlatform === p.slug} onClick={() => setNextermPlatform(p.slug)}>{p.name} ({p.count})</button>
+                                ))}
+                            </div>
+                        )}
                         {nextermSubcats.length > 0 && (
                             <div className="subcat-filters">
                                 <button className={`subcat-pill${!nextermSubcat ? ' active' : ''}`} onClick={() => setNextermSubcat(null)}>All folders</button>

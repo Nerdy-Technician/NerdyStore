@@ -2,5 +2,9 @@
   "name": "nerdystore-schema-tools",
   "private": true,
   "description": "Pinned dependencies for scripts/validate_manifests.js",
-  "dependencies": { "ajv": "8.17.1", "ajv-formats": "3.0.1", "yaml": "2.8.1" }
+  "dependencies": {
+    "ajv": "8.17.1",
+    "ajv-formats": "3.0.1",
+    "yaml": "2.8.1"
+  }
 }

@@ -5,3 +5,4 @@ gui/dist/
 *.local
 ADD_APP.md
 start.sh
+schema/node_modules/

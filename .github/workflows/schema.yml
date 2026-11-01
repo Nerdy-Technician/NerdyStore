@@ -10,6 +10,9 @@ on:
 permissions:
   contents: read
 
+env:
+  NODE_PATH: ${{ github.workspace }}/schema/node_modules
+
 jobs:
   schema-core:
     name: schema-core (blocking)
@@ -19,7 +22,7 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '24'
-      - run: npm i --no-save --no-package-lock ajv@8 ajv-formats@3 yaml@2
+      - run: npm ci --prefix schema --ignore-scripts
       - run: node scripts/validate_manifests.js --mode core
 
   schema-strict:
@@ -30,7 +33,7 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '24'
-      - run: npm i --no-save --no-package-lock ajv@8 ajv-formats@3 yaml@2
+      - run: npm ci --prefix schema --ignore-scripts
       - name: Validate (strict, warnings only until backfill)
         continue-on-error: true
         run: node scripts/validate_manifests.js --mode strict

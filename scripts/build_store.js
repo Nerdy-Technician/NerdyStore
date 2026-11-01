@@ -62,7 +62,7 @@ const buildApp = (appDir, appId, letter) => {
     mkdirSync(destDir, { recursive: true });
     cpSync(appDir, destDir, { recursive: true });
     console.log(`  → ${letter}/${appId}@${version}`);
-    return { id: appId, letter, version, name: manifest.name || appId, description: manifest.description || "", category: manifest.category || "Other", type: manifest.type || "unknown", kind: manifest.kind || "app", ...optionalSearchFields(manifest), hasLogo: existsSync(join(LOGOS_DIR, `${appId}.png`)) };
+    return { id: appId, slug: appId, letter, version, name: manifest.name || appId, description: manifest.description || "", category: manifest.category || "Other", type: manifest.type || "unknown", kind: manifest.kind || "app", ...optionalSearchFields(manifest), hasLogo: existsSync(join(LOGOS_DIR, `${appId}.png`)) };
 };
 
 const npindexPath = join(APPS_DIR, "NPINDEX");

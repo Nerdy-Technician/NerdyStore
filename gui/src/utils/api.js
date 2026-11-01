@@ -1,9 +1,11 @@
+import { DEFAULT_SOURCE_NAME } from "./deployLink";
+
 export const loadSourceName = async (baseUrl) => {
     const res = await fetch(`${baseUrl}NPINDEX`);
-    if (!res.ok) return "official";
+    if (!res.ok) return DEFAULT_SOURCE_NAME;
     const text = await res.text();
     const match = text.match(/^#!NPINDEX1\s+(\S+)/);
-    return match ? match[1] : "official";
+    return match ? match[1] : DEFAULT_SOURCE_NAME;
 };
 
 export const loadStoreVersion = async (baseUrl) => {

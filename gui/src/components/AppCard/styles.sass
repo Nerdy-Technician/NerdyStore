@@ -99,3 +99,30 @@
       -webkit-box-orient: vertical
       overflow: hidden
       flex: 1
+
+  .card-actions
+    margin-top: 0.85rem
+    display: flex
+    justify-content: flex-end
+
+  .deploy-btn
+    display: inline-flex
+    align-items: center
+    gap: 0.35rem
+    background-color: colors.$primary-opacity
+    border: 1px solid colors.$primary
+    color: colors.$white
+    border-radius: 0.4rem
+    padding: 0.35rem 0.7rem
+    font-size: 0.8rem
+    font-weight: 600
+    text-decoration: none
+    cursor: pointer
+    font-family: inherit
+
+    svg
+      width: 0.95rem
+      height: 0.95rem
+
+    &:hover
+      filter: brightness(1.15)

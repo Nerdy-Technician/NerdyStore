@@ -16,7 +16,7 @@ const ALIASES = {
 const TIMEOUT_MS = 15000;
 
 const tryUnlink = f => { try { fs.unlinkSync(f); } catch {} };
-const sanitizeForLog = value => String(value).replace(/[\r\n]+/g, " ");
+const sanitizeForLog = value => String(value).replace(/[\x00-\x1F\x7F]+/g, " ").trim();
 
 const download = (url, dest) => new Promise((resolve, reject) => {
     fs.mkdirSync(path.dirname(dest), { recursive: true });

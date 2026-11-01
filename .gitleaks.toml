@@ -1,0 +1,10 @@
+# Extend the default rules; only allow obvious placeholder values in
+# committed .env.example templates. Real secrets anywhere still fail.
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Placeholder values in .env.example templates"
+condition = "AND"
+paths = ['''(^|/)\.env\.example$''']
+regexes = ['''(?i)^(replace-with|change-?me|example|placeholder)[a-z0-9_-]*$''']

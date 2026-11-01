@@ -18,16 +18,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Read the VERSION file through the API instead of checking out the
-      # triggering commit, so no untrusted code lands in this privileged job.
-      - name: Fetch VERSION file
-        env:
-          GH_TOKEN: ${{ github.token }}
-          REPO: ${{ github.repository }}
-          REF: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
-        run: |
-          mkdir -p .github
-          gh api -H "Accept: application/vnd.github.raw" "repos/$REPO/contents/.github/VERSION?ref=$REF" > .github/VERSION
+      - name: Checkout release commit
+        if: github.event_name == 'workflow_run'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Checkout current commit
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Read VERSION file
         id: version_info

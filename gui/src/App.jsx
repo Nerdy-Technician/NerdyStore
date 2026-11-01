@@ -2,7 +2,7 @@ import "./styles/main.sass";
 import "./App.sass";
 import { useEffect, useState, useCallback, useMemo } from "react";
 import { Icon } from "@mdi/react";
-import { mdiPackageVariant, mdiAdvertisements, mdiWeb, mdiMagnify, mdiScriptText, mdiLan, mdiPlayCircle, mdiCloud, mdiCodeBraces, mdiWrench, mdiApps, mdiDotsHorizontal, mdiChevronDown, mdiGamepadVariant, mdiConsoleLine, mdiPalette, mdiDocker, mdiStore, mdiHomeAutomation, mdiChartLine, mdiViewDashboard, mdiClipboardList, mdiBriefcase, mdiPencilRuler } from "@mdi/js";
+import { mdiPackageVariant, mdiAdvertisements, mdiWeb, mdiMagnify, mdiScriptText, mdiLan, mdiPlayCircle, mdiCloud, mdiCodeBraces, mdiWrench, mdiApps, mdiDotsHorizontal, mdiChevronDown, mdiGamepadVariant, mdiConsoleLine, mdiPalette, mdiDocker, mdiStore, mdiHomeAutomation, mdiChartLine, mdiViewDashboard, mdiClipboardList, mdiBriefcase, mdiPencilRuler, mdiClose } from "@mdi/js";
 import IconInput from "./components/IconInput";
 import SelectBox from "./components/SelectBox";
 import AppCard from "./components/AppCard";
@@ -12,9 +12,11 @@ import ServerUrlDialog from "./components/ServerUrlDialog";
 import { loadCategoriesIndex, loadCategoryApps, loadNextermData, loadSourceName, loadStoreVersion } from "./utils/api";
 import HomePage from "./components/HomePage";
 import ThemeCreator from "./components/ThemeCreator";
+import NotFound from "./components/NotFound";
+import { matchesQuery, appSearchFields, nextermSearchFields } from "./utils/search";
 
 const CATEGORY_ICONS = { scripts: mdiScriptText, networking: mdiLan, "media-servers": mdiPlayCircle, cloud: mdiCloud, development: mdiCodeBraces, utilities: mdiWrench, gaming: mdiGamepadVariant, all: mdiApps, other: mdiDotsHorizontal, "container-management": mdiDocker, "web-tools": mdiWeb, "ad-blockers": mdiAdvertisements, "home-automation": mdiHomeAutomation, monitoring: mdiChartLine, dashboard: mdiViewDashboard, inventory: mdiClipboardList, productivity: mdiBriefcase };
-const NEXTERM_ICONS = { scripts: mdiScriptText, snippets: mdiCodeBraces, themes: mdiPalette };
+const NEXTERM_ICONS = { all: mdiApps, scripts: mdiScriptText, snippets: mdiCodeBraces, themes: mdiPalette };
 const getCategoryIcon = (slug) => CATEGORY_ICONS[slug?.toLowerCase()] || mdiApps;
 const getNextermIcon = (slug) => NEXTERM_ICONS[slug?.toLowerCase()] || mdiScriptText;
 
@@ -28,6 +30,10 @@ const TOOLS = [
     { key: "theme-creator", label: "Theme Creator", icon: mdiPalette },
 ];
 
+const KNOWN_SECTIONS = ["nexploy", "nexterm", "tools"];
+const ALL_APPS = { name: "All apps", slug: "all" };
+const ALL_NEXTERM = "all";
+
 const parsePath = () => {
     // Handle GitHub Pages 404 redirect: /?path=/nexploy/monitoring
     const params = new URLSearchParams(window.location.search);
@@ -36,19 +42,22 @@ const parsePath = () => {
         window.history.replaceState(null, "", redirected);
     }
     const parts = window.location.pathname.replace(/^\//, "").split("/").filter(Boolean);
-    return { section: parts[0] || null, sub: parts[1] || null };
+    const section = parts[0] || null;
+    const known = !section || KNOWN_SECTIONS.includes(section);
+    return { section: known ? section : null, sub: parts[1] || null, notFound: !known || parts.length > 2 };
 };
 
 const App = () => {
     const initialPath = parsePath();
-    const [activeView, setActiveView] = useState(initialPath.section ? "store" : "home");
+    const [activeView, setActiveView] = useState(initialPath.notFound ? "notfound" : initialPath.section ? "store" : "home");
+    const [notFoundPath, setNotFoundPath] = useState(initialPath.notFound ? window.location.pathname : null);
     const [activeSection, setActiveSection] = useState(initialPath.section || "nexploy");
     const [activeTool, setActiveTool] = useState(initialPath.sub || "theme-creator");
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(null);
-    const [apps, setApps] = useState([]);
+    const [allApps, setAllApps] = useState([]);
     const [loadingCategories, setLoadingCategories] = useState(true);
-    const [loadingApps, setLoadingApps] = useState(false);
+    const [loadingApps, setLoadingApps] = useState(true);
     const [error, setError] = useState(null);
     const [searchQuery, setSearchQuery] = useState("");
     const [sortBy, setSortBy] = useState("name");
@@ -56,7 +65,6 @@ const App = () => {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [generatedAt, setGeneratedAt] = useState(null);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [appsCache, setAppsCache] = useState({});
     const [sourceName, setSourceName] = useState("official");
     const [storeVersion, setStoreVersion] = useState(null);
 
@@ -75,33 +83,25 @@ const App = () => {
             setCategories(data.categories);
             setGeneratedAt(data.generatedAt);
             const { section, sub } = parsePath();
-            const match = sub && data.categories.find(c => c.slug === sub);
-            setSelectedCategory(match || data.categories[0]);
+            const match = section === "nexploy" && sub && data.categories.find(c => c.slug === sub);
+            if (section === "nexploy" && sub && sub !== ALL_APPS.slug && !match) { setNotFoundPath(window.location.pathname); setActiveView("notfound"); }
+            setSelectedCategory(match || ALL_APPS);
             setLoadingCategories(false);
+            Promise.all(data.categories.map((cat) => loadCategoryApps(baseUrl, cat.slug).then((d) => d.apps.map((app) => ({ ...app, categorySlug: cat.slug })))))
+                .then((lists) => setAllApps(lists.flat()))
+                .catch((err) => setError(err.message))
+                .finally(() => setLoadingApps(false));
         }).catch((err) => { setError(err.message); setLoadingCategories(false); });
 
         loadNextermData(baseUrl).then((data) => {
             setNextermData(data);
             const { section, sub } = parsePath();
             const match = section === "nexterm" && sub && data.categories.find(c => c.slug === sub);
-            setNextermCategory(match ? match.slug : data.categories[0]?.slug);
+            if (section === "nexterm" && sub && sub !== ALL_NEXTERM && !match) { setNotFoundPath(window.location.pathname); setActiveView("notfound"); }
+            setNextermCategory(match ? match.slug : ALL_NEXTERM);
             setLoadingNexterm(false);
         }).catch(() => { setLoadingNexterm(false); });
     }, [baseUrl]);
-
-    const loadAppsForCategory = useCallback(async (category) => {
-        if (!category) return;
-        if (appsCache[category.slug]) { setApps(appsCache[category.slug]); return; }
-        setLoadingApps(true);
-        try {
-            const data = await loadCategoryApps(baseUrl, category.slug);
-            setApps(data.apps);
-            setAppsCache(prev => ({...prev, [category.slug]: data.apps}));
-        } catch (err) { setError(err.message); }
-        finally { setLoadingApps(false); }
-    }, [appsCache, baseUrl]);
-
-    useEffect(() => { if (selectedCategory) loadAppsForCategory(selectedCategory); }, [selectedCategory, loadAppsForCategory]);
 
     useEffect(() => {
         const handleClick = (e) => { if (mobileMenuOpen && !e.target.closest('.category-dropdown')) setMobileMenuOpen(false); };
@@ -110,63 +110,99 @@ const App = () => {
     }, [mobileMenuOpen]);
 
     const navigate = useCallback((section, sub) => {
+        if (typeof section !== "string" || (sub != null && typeof sub !== "string")) return;
         const path = sub ? `/${section}/${sub}` : `/${section}`;
         window.history.pushState(null, "", path);
     }, []);
 
     const handleBrowse = (section) => {
-        if (section) { setActiveSection(section); navigate(section); }
+        const target = typeof section === "string" && KNOWN_SECTIONS.includes(section) ? section : "nexploy";
+        setActiveSection(target); navigate(target);
         setActiveView("store");
     };
     const handleCategoryChange = (category) => {
         setSelectedCategory(category);
         setMobileMenuOpen(false);
         setActiveView("store");
-        navigate("nexploy", category.slug);
+        navigate("nexploy", category.slug === ALL_APPS.slug ? undefined : category.slug);
     };
 
     useEffect(() => {
         const onPop = () => {
-            const { section, sub } = parsePath();
-            if (section) { setActiveSection(section); setActiveView("store"); if (sub) setActiveTool(sub); }
+            const { section, sub, notFound } = parsePath();
+            if (notFound) { setNotFoundPath(window.location.pathname); setActiveView("notfound"); }
+            else if (section) {
+                setActiveSection(section); setActiveView("store");
+                if (section === "tools" && sub) setActiveTool(sub);
+                if (section === "nexploy") setSelectedCategory(categories.find(c => c.slug === sub) || ALL_APPS);
+                if (section === "nexterm") { setNextermCategory(sub || ALL_NEXTERM); setNextermSubcat(null); }
+            }
             else setActiveView("home");
         };
         window.addEventListener("popstate", onPop);
         return () => window.removeEventListener("popstate", onPop);
-    }, []);
+    }, [categories]);
+
+    const goHome = () => { window.history.pushState(null, "", "/"); setActiveView("home"); };
     const sortOptions = [{ label: "Name (A-Z)", value: "name" }, { label: "Name (Z-A)", value: "name-desc" }, { label: "Version", value: "version" }];
 
+    const nexployCategories = useMemo(() => [{ ...ALL_APPS, count: allApps.length }, ...categories], [categories, allApps.length]);
+
+    const searchedApps = useMemo(() => allApps.filter((app) => matchesQuery(appSearchFields(app), searchQuery)), [allApps, searchQuery]);
+
+    const appMatchCounts = useMemo(() => {
+        const counts = { [ALL_APPS.slug]: searchedApps.length };
+        searchedApps.forEach((app) => { counts[app.categorySlug] = (counts[app.categorySlug] || 0) + 1; });
+        return counts;
+    }, [searchedApps]);
+
     const filteredAndSortedApps = useMemo(() => {
-        let result = [...apps];
-        if (searchQuery) {
-            const q = searchQuery.toLowerCase();
-            result = result.filter(app => app.name.toLowerCase().includes(q) || app.description?.toLowerCase().includes(q));
-        }
+        const slug = selectedCategory?.slug || ALL_APPS.slug;
+        let result = slug === ALL_APPS.slug ? [...searchedApps] : searchedApps.filter((app) => app.categorySlug === slug);
         result.sort((a, b) => sortBy === "name" ? a.name.localeCompare(b.name) : sortBy === "name-desc" ? b.name.localeCompare(a.name) : b.version.localeCompare(a.version));
         return result;
-    }, [apps, searchQuery, sortBy]);
+    }, [searchedApps, selectedCategory, sortBy]);
+
+    const nexployFiltered = Boolean(searchQuery.trim()) || (selectedCategory && selectedCategory.slug !== ALL_APPS.slug);
+    const clearNexployFilters = () => { setSearchQuery(""); setSelectedCategory(ALL_APPS); navigate("nexploy"); };
+
+    const allNextermItems = useMemo(() => nextermData ? Object.values(nextermData.items).flatMap((group) => group.items) : [], [nextermData]);
+
+    const nextermCategories = useMemo(() => nextermData ? [{ name: "All", slug: ALL_NEXTERM, count: allNextermItems.length }, ...nextermData.categories] : [], [nextermData, allNextermItems.length]);
+
+    const nextermCategoryItems = useMemo(() => {
+        if (!nextermData || !nextermCategory) return [];
+        return nextermCategory === ALL_NEXTERM ? allNextermItems : nextermData.items[nextermCategory]?.items || [];
+    }, [nextermData, nextermCategory, allNextermItems]);
 
     const nextermSubcats = useMemo(() => {
-        if (!nextermData || !nextermCategory) return [];
-        const items = nextermData.items[nextermCategory]?.items || [];
+        const items = nextermCategoryItems;
         const seen = new Set();
         items.forEach(i => { if (i.subcategory) seen.add(i.subcategory); });
         return [...seen].sort();
-    }, [nextermData, nextermCategory]);
+    }, [nextermCategoryItems]);
+
+    const nextermMatchCounts = useMemo(() => {
+        const counts = { [ALL_NEXTERM]: 0 };
+        allNextermItems.forEach((item) => {
+            if (!matchesQuery(nextermSearchFields(item), nextermSearch)) return;
+            counts[ALL_NEXTERM]++;
+            counts[item.category] = (counts[item.category] || 0) + 1;
+        });
+        return counts;
+    }, [allNextermItems, nextermSearch]);
 
     const filteredNextermItems = useMemo(() => {
-        if (!nextermData || !nextermCategory) return [];
-        const items = nextermData.items[nextermCategory]?.items || [];
-        let result = items;
+        let result = nextermCategoryItems;
         if (nextermSubcat) result = result.filter(i => i.subcategory === nextermSubcat);
-        if (nextermSearch) {
-            const q = nextermSearch.toLowerCase();
-            result = result.filter(item => item.name.toLowerCase().includes(q) || item.description?.toLowerCase().includes(q));
-        }
-        return result;
-    }, [nextermData, nextermCategory, nextermSearch, nextermSubcat]);
+        return result.filter((item) => matchesQuery(nextermSearchFields(item), nextermSearch));
+    }, [nextermCategoryItems, nextermSearch, nextermSubcat]);
 
-    const currentNextermCategoryName = nextermData?.categories.find(c => c.slug === nextermCategory)?.name || "All";
+    const nextermFiltered = Boolean(nextermSearch.trim()) || nextermCategory !== ALL_NEXTERM || Boolean(nextermSubcat);
+    const selectNextermCategory = (slug) => { setNextermCategory(slug); setNextermSubcat(null); setMobileMenuOpen(false); setActiveView("store"); navigate("nexterm", slug === ALL_NEXTERM ? undefined : slug); };
+    const clearNextermFilters = () => { setNextermSearch(""); selectNextermCategory(ALL_NEXTERM); };
+
+    const currentNextermCategoryName = nextermCategories.find(c => c.slug === nextermCategory)?.name || "All";
 
     if (loadingCategories && loadingNexterm) return <div className="app-loading"><Loader size="large" /></div>;
     if (error) return <div className="app-error"><p>Error: {error}</p></div>;
@@ -191,7 +227,7 @@ const App = () => {
                 {activeSection === "nexploy" ? (
                     <nav className="sidebar-nav">
                         <div className="nav-label">Categories</div>
-                        {categories.map((cat) => (
+                        {nexployCategories.map((cat) => (
                             <button key={cat.slug} className={`nav-item${selectedCategory?.slug === cat.slug ? ' active' : ''}`} onClick={() => handleCategoryChange(cat)}>
                                 <Icon path={getCategoryIcon(cat.slug)} className="nav-icon" />
                                 <span className="nav-text">{cat.name}</span>
@@ -202,8 +238,8 @@ const App = () => {
                 ) : activeSection === "nexterm" ? (
                     <nav className="sidebar-nav">
                         <div className="nav-label">Categories</div>
-                        {nextermData?.categories.map((cat) => (
-                            <button key={cat.slug} className={`nav-item${nextermCategory === cat.slug ? ' active' : ''}`} onClick={() => { setNextermCategory(cat.slug); setNextermSubcat(null); setActiveView("store"); navigate("nexterm", cat.slug); }}>
+                        {nextermCategories.map((cat) => (
+                            <button key={cat.slug} className={`nav-item${nextermCategory === cat.slug ? ' active' : ''}`} onClick={() => selectNextermCategory(cat.slug)}>
                                 <Icon path={getNextermIcon(cat.slug)} className="nav-icon" />
                                 <span className="nav-text">{cat.name}</span>
                                 <span className="nav-count">{cat.count}</span>
@@ -253,7 +289,7 @@ const App = () => {
                                 </button>
                                 {mobileMenuOpen && (
                                     <div className="dropdown-menu">
-                                        {categories.map((cat) => (
+                                        {nexployCategories.map((cat) => (
                                             <button key={cat.slug} className={`dropdown-item${selectedCategory?.slug === cat.slug ? ' active' : ''}`} onClick={() => handleCategoryChange(cat)}>
                                                 <Icon path={getCategoryIcon(cat.slug)} />
                                                 <span className="item-text">{cat.name}</span>
@@ -272,8 +308,8 @@ const App = () => {
                                 </button>
                                 {mobileMenuOpen && (
                                     <div className="dropdown-menu">
-                                        {nextermData?.categories.map((cat) => (
-                                            <button key={cat.slug} className={`dropdown-item${nextermCategory === cat.slug ? ' active' : ''}`} onClick={() => { setNextermCategory(cat.slug); setMobileMenuOpen(false); }}>
+                                        {nextermCategories.map((cat) => (
+                                            <button key={cat.slug} className={`dropdown-item${nextermCategory === cat.slug ? ' active' : ''}`} onClick={() => selectNextermCategory(cat.slug)}>
                                                 <Icon path={getNextermIcon(cat.slug)} />
                                                 <span className="item-text">{cat.name}</span>
                                                 <span className="item-count">{cat.count}</span>
@@ -286,7 +322,9 @@ const App = () => {
                     </div>
                 </header>
 
-                {activeView === "home" ? (
+                {activeView === "notfound" ? (
+                    <NotFound path={notFoundPath || window.location.pathname} onHome={goHome} onBrowse={handleBrowse} />
+                ) : activeView === "home" ? (
                     <HomePage categories={categories} nextermData={nextermData} onBrowse={handleBrowse} />
                 ) : activeSection === "tools" ? (
                     <div className="store-content">
@@ -300,15 +338,23 @@ const App = () => {
                             <span className="app-count">{filteredAndSortedApps.length} {filteredAndSortedApps.length === 1 ? 'app' : 'apps'}</span>
                         </div>
                         <div className="store-filters">
-                            <div className="search-wrapper"><IconInput type="text" placeholder="Search apps..." icon={mdiMagnify} value={searchQuery} setValue={setSearchQuery} /></div>
+                            <div className="search-wrapper"><IconInput type="text" placeholder="Search apps by name, description or category…" icon={mdiMagnify} value={searchQuery} setValue={setSearchQuery} /></div>
                             <div className="sort-wrapper"><SelectBox options={sortOptions} selected={sortBy} setSelected={setSortBy} /></div>
+                        </div>
+                        <div className="subcat-filters" role="group" aria-label="Filter apps by category">
+                            {nexployCategories.map((cat) => (
+                                <button key={cat.slug} className={`subcat-pill${(selectedCategory?.slug || ALL_APPS.slug) === cat.slug ? ' active' : ''}`} onClick={() => handleCategoryChange(cat)}>
+                                    {cat.name} ({appMatchCounts[cat.slug] || 0})
+                                </button>
+                            ))}
+                            {nexployFiltered && <button className="subcat-pill clear-filters" onClick={clearNexployFilters}><Icon path={mdiClose} size={0.6} /> Clear filters</button>}
                         </div>
                         <div className="store-results">
                             {loadingApps ? <div className="loading-container"><Loader size="medium" /></div> : filteredAndSortedApps.length > 0 ? (
                                 <div className="apps-grid">
                                     {filteredAndSortedApps.map((app) => <AppCard key={app.id} app={app} baseUrl={baseUrl} onClick={() => { setSelectedApp(app); setDialogOpen(true); }} />)}
                                 </div>
-                            ) : <div className="no-results"><Icon path={mdiMagnify} /><h3>No apps found</h3><p>Try adjusting your search</p></div>}
+                            ) : <div className="no-results"><Icon path={mdiMagnify} /><h3>No apps found</h3><p>Try a different search or category</p>{nexployFiltered && <div className="subcat-filters"><button className="subcat-pill active" onClick={clearNexployFilters}>Clear filters</button></div>}</div>}
                         </div>
                     </div>
                 ) : (
@@ -318,11 +364,19 @@ const App = () => {
                             <span className="app-count">{filteredNextermItems.length} {filteredNextermItems.length === 1 ? 'item' : 'items'}</span>
                         </div>
                         <div className="store-filters">
-                            <div className="search-wrapper"><IconInput type="text" placeholder="Search items..." icon={mdiMagnify} value={nextermSearch} setValue={setNextermSearch} /></div>
+                            <div className="search-wrapper"><IconInput type="text" placeholder="Search scripts, snippets and themes…" icon={mdiMagnify} value={nextermSearch} setValue={setNextermSearch} /></div>
+                        </div>
+                        <div className="subcat-filters" role="group" aria-label="Filter Nexterm items by category">
+                            {nextermCategories.map((cat) => (
+                                <button key={cat.slug} className={`subcat-pill${nextermCategory === cat.slug ? ' active' : ''}`} onClick={() => selectNextermCategory(cat.slug)}>
+                                    {cat.name} ({nextermMatchCounts[cat.slug] || 0})
+                                </button>
+                            ))}
+                            {nextermFiltered && <button className="subcat-pill clear-filters" onClick={clearNextermFilters}><Icon path={mdiClose} size={0.6} /> Clear filters</button>}
                         </div>
                         {nextermSubcats.length > 0 && (
                             <div className="subcat-filters">
-                                <button className={`subcat-pill${!nextermSubcat ? ' active' : ''}`} onClick={() => setNextermSubcat(null)}>All</button>
+                                <button className={`subcat-pill${!nextermSubcat ? ' active' : ''}`} onClick={() => setNextermSubcat(null)}>All folders</button>
                                 {nextermSubcats.map(s => (
                                     <button key={s} className={`subcat-pill${nextermSubcat === s ? ' active' : ''}`} onClick={() => setNextermSubcat(s)}>{s}</button>
                                 ))}
@@ -333,7 +387,7 @@ const App = () => {
                                 <div className="apps-grid">
                                     {filteredNextermItems.map((item) => <NextermCard key={item.id} item={item} />)}
                                 </div>
-                            ) : <div className="no-results"><Icon path={mdiMagnify} /><h3>No items found</h3><p>Try adjusting your search</p></div>}
+                            ) : <div className="no-results"><Icon path={mdiMagnify} /><h3>No items found</h3><p>Try a different search or category</p>{nextermFiltered && <div className="subcat-filters"><button className="subcat-pill active" onClick={clearNextermFilters}>Clear filters</button></div>}</div>}
                         </div>
                     </div>
                 )}

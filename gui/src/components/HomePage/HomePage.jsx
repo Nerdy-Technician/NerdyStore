@@ -17,7 +17,7 @@ const HomePage = ({ categories, nextermData, onBrowse }) => {
                 <p className="home-subtitle">
                     A curated self-hosted app store for your homelab. Browse, deploy, and manage Docker apps with ease.
                 </p>
-                <button className="home-cta" onClick={onBrowse}>
+                <button className="home-cta" onClick={() => onBrowse("nexploy")}>
                     <span>Browse Apps</span>
                     <Icon path={mdiArrowRight} />
                 </button>

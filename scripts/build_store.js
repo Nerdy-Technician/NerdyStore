@@ -43,10 +43,17 @@ const parseThemeColors = (content) => {
 };
 
 const NEXTERM_CATEGORIES = {
-    scripts: { name: "Scripts", extensions: [".sh"] },
-    snippets: { name: "Snippets", extensions: [".snippet"] },
-    themes: { name: "Themes", extensions: [".theme.css"] },
+    scripts: { name: "Scripts", kind: "script", extensions: [".sh"] },
+    snippets: { name: "Snippets", kind: "snippet", extensions: [".snippet"] },
+    themes: { name: "Themes", kind: "theme", extensions: [".theme.css"] },
 };
+
+// Optional schema v1 search fields (summary, tags). Accepts "a, b" or "[a, b]".
+const parseTags = value => value ? value.replace(/^\[|\]$/g, "").split(",").map(t => t.trim().replace(/^["']|["']$/g, "")).filter(Boolean).slice(0, 8) : undefined;
+const optionalSearchFields = meta => ({
+    ...(meta.summary ? { summary: meta.summary } : {}),
+    ...(parseTags(meta.tags)?.length ? { tags: parseTags(meta.tags) } : {}),
+});
 
 const buildApp = (appDir, appId, letter) => {
     const manifest = parseManifest(readFileSync(join(appDir, "manifest.yml"), "utf8"));
@@ -55,7 +62,7 @@ const buildApp = (appDir, appId, letter) => {
     mkdirSync(destDir, { recursive: true });
     cpSync(appDir, destDir, { recursive: true });
     console.log(`  → ${letter}/${appId}@${version}`);
-    return { id: appId, letter, version, name: manifest.name || appId, description: manifest.description || "", category: manifest.category || "Other", type: manifest.type || "unknown", hasLogo: existsSync(join(LOGOS_DIR, `${appId}.png`)) };
+    return { id: appId, letter, version, name: manifest.name || appId, description: manifest.description || "", category: manifest.category || "Other", type: manifest.type || "unknown", kind: manifest.kind || "app", ...optionalSearchFields(manifest), hasLogo: existsSync(join(LOGOS_DIR, `${appId}.png`)) };
 };
 
 const npindexPath = join(APPS_DIR, "NPINDEX");
@@ -121,8 +128,10 @@ for (const [dirName, catInfo] of Object.entries(NEXTERM_CATEGORIES)) {
             id: relPath,
             name: meta.name || file,
             description: meta.description || "",
+            kind: catInfo.kind,
             category: dirName,
             subcategory: subdir,
+            ...optionalSearchFields(meta),
             file: `${dirName}/${relPath}`,
             ...(dirName === "themes" ? { colors: parseThemeColors(content) } : {}),
         };

@@ -1,6 +1,6 @@
 services:
   mealie:
-    image: ghcr.io/mealie-recipes/mealie:latest
+    image: ghcr.io/mealie-recipes/mealie:v3.30.0
     container_name: mealie
     restart: unless-stopped
     ports:
@@ -8,7 +8,7 @@ services:
     volumes:
       - ./data:/app/data
     environment:
-      - ALLOW_SIGNUP=true
+      - ALLOW_SIGNUP=${ALLOW_SIGNUP:-false}
       - PUID=1000
       - PGID=1000
       - TZ=UTC

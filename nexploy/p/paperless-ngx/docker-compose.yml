@@ -1,6 +1,7 @@
+# Copy .env.example to .env and replace the placeholders before starting.
 services:
   paperless:
-    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    image: ghcr.io/paperless-ngx/paperless-ngx:3.4.1
     container_name: paperless
     restart: unless-stopped
     ports:
@@ -13,10 +14,11 @@ services:
     environment:
       - PAPERLESS_REDIS=redis://broker:6379
       - PAPERLESS_DBHOST=db
+      - PAPERLESS_DBENGINE=postgresql
       - PAPERLESS_DBNAME=paperless
       - PAPERLESS_DBUSER=paperless
-      - PAPERLESS_DBPASS=paperless_password
-      - PAPERLESS_SECRET_KEY=change_me_to_a_long_random_string
+      - PAPERLESS_DBPASS=${PAPERLESS_DBPASS:?Set PAPERLESS_DBPASS in .env}
+      - PAPERLESS_SECRET_KEY=${PAPERLESS_SECRET_KEY:?Set PAPERLESS_SECRET_KEY in .env}
       - PAPERLESS_TIME_ZONE=UTC
       - PAPERLESS_OCR_LANGUAGE=eng
     depends_on:
@@ -32,27 +34,28 @@ services:
       start_period: 60s
 
   broker:
-    image: redis:7-alpine
+    image: docker.io/valkey/valkey:9-alpine
     container_name: paperless-redis
     restart: unless-stopped
     volumes:
       - ./redis:/data
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ["CMD", "valkey-cli", "ping"]
       interval: 10s
       timeout: 5s
       retries: 3
 
   db:
-    image: postgres:16-alpine
+    image: postgres:18
     container_name: paperless-db
     restart: unless-stopped
     environment:
       - POSTGRES_DB=paperless
       - POSTGRES_USER=paperless
-      - POSTGRES_PASSWORD=paperless_password
+      - POSTGRES_PASSWORD=${PAPERLESS_DBPASS:?Set PAPERLESS_DBPASS in .env}
     volumes:
-      - ./pgdata:/var/lib/postgresql/data
+      # Postgres 18 images store data in /var/lib/postgresql, not .../data.
+      - ./pgdata:/var/lib/postgresql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U paperless"]
       interval: 10s

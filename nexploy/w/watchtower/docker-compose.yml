@@ -1,9 +1,10 @@
 services:
   watchtower:
-    image: containrrr/watchtower:latest
+    image: containrrr/watchtower:1.7.1
     container_name: watchtower
     restart: unless-stopped
     volumes:
+      # Required to update containers. Equivalent to root on the host.
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - WATCHTOWER_CLEANUP=true

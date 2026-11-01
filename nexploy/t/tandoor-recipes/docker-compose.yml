@@ -1,6 +1,7 @@
+# Copy .env.example to .env and replace the placeholders before starting.
 services:
   tandoor:
-    image: vabene1111/recipes:latest
+    image: vabene1111/recipes:2.7.2
     container_name: tandoor
     restart: unless-stopped
     ports:
@@ -9,13 +10,13 @@ services:
       - ./staticfiles:/opt/recipes/staticfiles
       - ./mediafiles:/opt/recipes/mediafiles
     environment:
-      - SECRET_KEY=change_me_to_a_long_random_string
+      - SECRET_KEY=${SECRET_KEY:?Set SECRET_KEY in .env}
       - DB_ENGINE=django.db.backends.postgresql
       - POSTGRES_HOST=db
       - POSTGRES_PORT=5432
       - POSTGRES_DB=tandoor
       - POSTGRES_USER=tandoor
-      - POSTGRES_PASSWORD=tandoor_password
+      - POSTGRES_PASSWORD=${TANDOOR_DB_PASSWORD:?Set TANDOOR_DB_PASSWORD in .env}
     depends_on:
       db:
         condition: service_healthy
@@ -33,7 +34,7 @@ services:
     environment:
       - POSTGRES_DB=tandoor
       - POSTGRES_USER=tandoor
-      - POSTGRES_PASSWORD=tandoor_password
+      - POSTGRES_PASSWORD=${TANDOOR_DB_PASSWORD:?Set TANDOOR_DB_PASSWORD in .env}
     volumes:
       - ./pgdata:/var/lib/postgresql/data
     healthcheck:

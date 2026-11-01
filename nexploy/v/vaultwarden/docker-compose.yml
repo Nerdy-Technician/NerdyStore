@@ -1,6 +1,7 @@
+# Copy .env.example to .env before starting.
 services:
   vaultwarden:
-    image: vaultwarden/server:latest
+    image: vaultwarden/server:1.37.4
     container_name: vaultwarden
     restart: unless-stopped
     ports:
@@ -8,8 +9,8 @@ services:
     volumes:
       - ./data:/data
     environment:
-      - WEBSOCKET_ENABLED=true
-      - SIGNUPS_ALLOWED=true
+      # Turn signups on only long enough to create the first account.
+      - SIGNUPS_ALLOWED=${SIGNUPS_ALLOWED:-false}
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:80/"]
       interval: 30s

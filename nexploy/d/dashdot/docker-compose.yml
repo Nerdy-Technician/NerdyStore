@@ -3,6 +3,7 @@ services:
     image: mauricenino/dashdot:latest
     container_name: dashdot
     restart: unless-stopped
+    # Privileged mode and the read-only host root mount are for hardware sensors.
     privileged: true
     ports:
       - "3001:3001"

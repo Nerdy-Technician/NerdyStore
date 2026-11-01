@@ -1,6 +1,7 @@
+# Copy .env.example to .env and replace the password before starting.
 services:
   grafana:
-    image: grafana/grafana:latest
+    image: grafana/grafana:13.3.0
     container_name: grafana
     restart: unless-stopped
     ports:
@@ -8,8 +9,8 @@ services:
     volumes:
       - ./data:/var/lib/grafana
     environment:
-      - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SECURITY_ADMIN_USER=${GF_SECURITY_ADMIN_USER:-admin}
+      - GF_SECURITY_ADMIN_PASSWORD=${GF_SECURITY_ADMIN_PASSWORD:?Set GF_SECURITY_ADMIN_PASSWORD in .env}
       - GF_USERS_ALLOW_SIGN_UP=false
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]

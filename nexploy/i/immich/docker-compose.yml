@@ -1,14 +1,14 @@
+# Copy .env.example to .env before starting.
+# DB_PASSWORD must be letters and digits only (A-Za-z0-9).
 services:
   server:
-    image: ghcr.io/immich-app/immich-server:v2.3.1
+    image: ghcr.io/immich-app/immich-server:v3.3.5
     volumes:
       - ./data/upload:/data
+    env_file:
+      - .env
     environment:
-      - NODE_ENV=production
       - DB_HOSTNAME=postgres
-      - DB_USERNAME=immich
-      - DB_PASSWORD=immich
-      - DB_DATABASE_NAME=immich
       - REDIS_HOSTNAME=redis
       - IMMICH_MACHINE_LEARNING_URL=http://machine-learning:3003
     depends_on:
@@ -19,26 +19,23 @@ services:
       - "2283:2283"
 
   machine-learning:
-    image: ghcr.io/immich-app/immich-machine-learning:v2.3.1
+    image: ghcr.io/immich-app/immich-machine-learning:v3.3.5
     volumes:
       - ./data/model-cache:/cache
-    environment:
-      - NODE_ENV=production
     restart: always
 
   redis:
-    image: valkey/valkey:8-bookworm
+    image: docker.io/valkey/valkey:9@sha256:c123e3715db63d06d4ad6964884037aa0d5d4d703939b9929954112889708e1d
     restart: always
-    volumes:
-      - ./data/redis:/data
 
   postgres:
-    image: ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0
+    image: ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0@sha256:bcf63357191b76a916ae5eb93464d65c07511da41e3bf7a8416db519b40b1c23
     environment:
-      - POSTGRES_PASSWORD=immich
-      - POSTGRES_USER=immich
-      - POSTGRES_DB=immich
+      - POSTGRES_PASSWORD=${DB_PASSWORD:?Set DB_PASSWORD in .env}
+      - POSTGRES_USER=${DB_USERNAME:-postgres}
+      - POSTGRES_DB=${DB_DATABASE_NAME:-immich}
       - POSTGRES_INITDB_ARGS=--data-checksums
     volumes:
       - ./data/postgres:/var/lib/postgresql/data
+    shm_size: 128mb
     restart: always

@@ -14,5 +14,5 @@ services:
     environment:
       - PUID=1026
       - PGID=100
-      - USER=admin
-      - PASS=admin
+      - USER=${TRANSMISSION_USER:-admin}
+      - PASS=${TRANSMISSION_PASS:?Set TRANSMISSION_PASS in .env}

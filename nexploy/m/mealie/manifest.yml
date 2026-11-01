@@ -1,6 +1,6 @@
 type: docker
 name: Mealie
-version: latest
+version: v3.30.0
 description: Mealie is a self-hosted recipe manager and meal planner with a clean interface and automatic recipe import.
 category: Productivity
 mainService: mealie

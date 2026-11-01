@@ -1,8 +1,9 @@
 services:
   home-assistant:
-    image: homeassistant/home-assistant
+    image: homeassistant/home-assistant:2026.10.4
     container_name: home_assistant
     restart: always
+    # Host network is required for discovery and device integrations.
     network_mode: host
     volumes:
       - ./config:/config

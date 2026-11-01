@@ -1,3 +1,4 @@
+# Copy .env.example to .env and replace APP_KEY before starting.
 services:
   speedtest-tracker:
     image: ghcr.io/alexjustesen/speedtest-tracker:latest
@@ -11,8 +12,8 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - APP_KEY=base64:YOUR_APP_KEY_HERE
-      - APP_URL=http://localhost
+      - APP_KEY=${APP_KEY:?Set APP_KEY in .env}
+      - APP_URL=${APP_URL:-http://localhost}
       - DB_CONNECTION=sqlite
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost/api/healthcheck"]

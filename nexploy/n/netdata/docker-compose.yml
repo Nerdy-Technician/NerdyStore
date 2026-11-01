@@ -5,6 +5,7 @@ services:
     restart: unless-stopped
     pid: host
     network_mode: host
+    # SYS_ADMIN, host pid/network, and a read-only Docker socket are for host metrics.
     cap_add:
       - SYS_PTRACE
       - SYS_ADMIN

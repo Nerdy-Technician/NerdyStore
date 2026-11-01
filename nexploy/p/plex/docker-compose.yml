@@ -3,9 +3,10 @@ services:
     image: plexinc/pms-docker:latest
     container_name: plex
     restart: unless-stopped
+    # Host network is required for Plex discovery and remote access.
     network_mode: host
     environment:
-      - PLEX_CLAIM=${PLEX_CLAIM}
+      - PLEX_CLAIM=${PLEX_CLAIM:-}
       - TZ=UTC
     volumes:
       - ./config:/config

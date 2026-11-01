@@ -1,6 +1,6 @@
 type: docker
 name: Traefik
-version: latest
+version: v3.7.17
 description: Traefik is a modern HTTP reverse proxy and load balancer that integrates with Docker to route traffic automatically.
 category: Networking
 mainService: traefik

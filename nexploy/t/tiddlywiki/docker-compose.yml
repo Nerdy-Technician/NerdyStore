@@ -1,6 +1,7 @@
+# Copy .env.example to .env and replace the password before starting.
 services:
   tiddlywiki:
-    image: jbardi/tiddlywiki5-lazy-images
+    image: jbardi/tiddlywiki5-lazy-images:v5.3.6
     container_name: tiddlywiki
     restart: always
     ports:
@@ -8,5 +9,5 @@ services:
     volumes:
       - ./data:/var/lib/tiddlywiki
     environment:
-      - USERNAME=admin
-      - PASSWORD=admin
+      - USERNAME=${TIDDLYWIKI_USERNAME:-admin}
+      - PASSWORD=${TIDDLYWIKI_PASSWORD:?Set TIDDLYWIKI_PASSWORD in .env}

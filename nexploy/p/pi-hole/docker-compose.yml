@@ -1,10 +1,12 @@
+# Copy .env.example to .env and replace the password before starting.
 services:
   pihole:
     container_name: pihole
-    image: pihole/pihole:latest
+    image: pihole/pihole:2026.10.1
 
     ports:
       - "8080:80"
+      # DNS must listen on the host interfaces this resolver serves.
       - 53:53/tcp
       - 53:53/udp
 
@@ -13,7 +15,7 @@ services:
       DNSMASQ_USER: pihole
       PIHOLE_UID: 1000
       PIHOLE_GID: 1000
-      FTLCONF_webserver_api_password: admin
+      FTLCONF_webserver_api_password: ${FTLCONF_webserver_api_password:?Set FTLCONF_webserver_api_password in .env}
 
     volumes:
       - ./pihole/pihole:/etc/pihole

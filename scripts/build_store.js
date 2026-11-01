@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const { readdirSync, statSync, readFileSync, writeFileSync, existsSync, mkdirSync, cpSync } = require("fs");
 const { join, extname } = require("path");
-const { execSync } = require("child_process");
+const { execFileSync } = require("child_process");
 
 const APPS_DIR = join(__dirname, "..", "nexploy");
 const NEXTERM_DIR = join(__dirname, "..", "nexterm");
@@ -71,7 +71,7 @@ const npindexHeader = npindexContent.match(/^#!NPINDEX1\s+(\S+)/);
 const sourceName = npindexHeader ? npindexHeader[1] : "NerdyStore";
 
 console.log("Fetching logos...");
-execSync(`node ${join(__dirname, "fetch_logos.js")}`, { stdio: "inherit" });
+execFileSync(process.execPath, [join(__dirname, "fetch_logos.js")], { stdio: "inherit" });
 
 console.log(`\nBuilding apps (source: ${sourceName})...\n`);
 if (!existsSync(DIST_DIR)) mkdirSync(DIST_DIR);

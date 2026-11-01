@@ -87,7 +87,7 @@ const isValidPng = dest => {
                     throw new Error("not a PNG");
                 }
             } catch (err) {
-                console.log(`MISS (${err.message})`);
+                console.log(`MISS (${String(err.message).replace(/[\r\n]+/g, " ")})`);
                 failed++;
             }
         } else {

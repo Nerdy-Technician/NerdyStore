@@ -16,6 +16,7 @@ const ALIASES = {
 const TIMEOUT_MS = 15000;
 
 const tryUnlink = f => { try { fs.unlinkSync(f); } catch {} };
+const sanitizeForLog = value => String(value).replace(/[\r\n]+/g, " ");
 
 const download = (url, dest) => new Promise((resolve, reject) => {
     fs.mkdirSync(path.dirname(dest), { recursive: true });
@@ -87,7 +88,7 @@ const isValidPng = dest => {
                     throw new Error("not a PNG");
                 }
             } catch (err) {
-                console.log(`MISS (${String(err.message).replace(/[\r\n]+/g, " ")})`);
+                console.log(`MISS (${sanitizeForLog(err.message)})`);
                 failed++;
             }
         } else {
@@ -100,7 +101,7 @@ const isValidPng = dest => {
                 fs.copyFileSync(dest, manifestLogo);
                 copied++;
             } catch (err) {
-                console.warn(`  WARN: could not copy logo for ${id}: ${err.message}`);
+                console.warn(`  WARN: could not copy logo for ${id}: ${sanitizeForLog(err.message)}`);
             }
         }
     }

@@ -424,6 +424,34 @@
       @media (max-width: 768px)
         font-size: 1.25rem
 
+    .header-actions
+      display: flex
+      align-items: center
+      gap: 0.75rem
+
+    .deploy-target
+      display: inline-flex
+      align-items: center
+      gap: 0.4rem
+      background: transparent
+      border: 1px solid colors.$dark-gray
+      color: colors.$subtext
+      border-radius: 999px
+      padding: 0.3rem 0.7rem
+      font-size: 0.75rem
+      font-weight: 600
+      cursor: pointer
+      font-family: inherit
+
+      svg
+        width: 0.9rem
+        height: 0.9rem
+        flex-shrink: 0
+
+      &:hover
+        color: colors.$white
+        border-color: colors.$gray
+
     .app-count
       font-size: 0.875rem
       color: colors.$subtext

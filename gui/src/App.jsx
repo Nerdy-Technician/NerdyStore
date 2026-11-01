@@ -2,7 +2,7 @@ import "./styles/main.sass";
 import "./App.sass";
 import { useEffect, useState, useCallback, useMemo } from "react";
 import { Icon } from "@mdi/react";
-import { mdiPackageVariant, mdiAdvertisements, mdiWeb, mdiMagnify, mdiScriptText, mdiLan, mdiPlayCircle, mdiCloud, mdiCodeBraces, mdiWrench, mdiApps, mdiDotsHorizontal, mdiChevronDown, mdiGamepadVariant, mdiConsoleLine, mdiPalette, mdiDocker, mdiStore, mdiHomeAutomation, mdiChartLine, mdiViewDashboard, mdiClipboardList, mdiBriefcase, mdiPencilRuler } from "@mdi/js";
+import { mdiPackageVariant, mdiAdvertisements, mdiWeb, mdiMagnify, mdiScriptText, mdiLan, mdiPlayCircle, mdiCloud, mdiCodeBraces, mdiWrench, mdiApps, mdiDotsHorizontal, mdiChevronDown, mdiGamepadVariant, mdiConsoleLine, mdiPalette, mdiDocker, mdiStore, mdiHomeAutomation, mdiChartLine, mdiViewDashboard, mdiClipboardList, mdiBriefcase, mdiPencilRuler, mdiServer } from "@mdi/js";
 import IconInput from "./components/IconInput";
 import SelectBox from "./components/SelectBox";
 import AppCard from "./components/AppCard";
@@ -10,6 +10,7 @@ import NextermCard from "./components/NextermCard";
 import Loader from "./components/Loader";
 import ServerUrlDialog from "./components/ServerUrlDialog";
 import { loadCategoriesIndex, loadCategoryApps, loadNextermData, loadSourceName, loadStoreVersion } from "./utils/api";
+import { DEFAULT_SOURCE_NAME, buildNexployDeployUrl, readSavedServerUrl, serverLabel } from "./utils/deployLink";
 import HomePage from "./components/HomePage";
 import ThemeCreator from "./components/ThemeCreator";
 
@@ -57,7 +58,8 @@ const App = () => {
     const [generatedAt, setGeneratedAt] = useState(null);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [appsCache, setAppsCache] = useState({});
-    const [sourceName, setSourceName] = useState("official");
+    const [sourceName, setSourceName] = useState(DEFAULT_SOURCE_NAME);
+    const [deployServer, setDeployServer] = useState(readSavedServerUrl);
     const [storeVersion, setStoreVersion] = useState(null);
 
     const [nextermData, setNextermData] = useState(null);
@@ -118,6 +120,11 @@ const App = () => {
         if (section) { setActiveSection(section); navigate(section); }
         setActiveView("store");
     };
+    const handleDeploy = (app) => {
+        setSelectedApp(app);
+        setDialogOpen(true);
+    };
+
     const handleCategoryChange = (category) => {
         setSelectedCategory(category);
         setMobileMenuOpen(false);
@@ -297,7 +304,13 @@ const App = () => {
                     <div className="store-content">
                         <div className="content-header">
                             <h2>{selectedCategory?.name || "Apps"}</h2>
-                            <span className="app-count">{filteredAndSortedApps.length} {filteredAndSortedApps.length === 1 ? 'app' : 'apps'}</span>
+                            <div className="header-actions">
+                                <button type="button" className="deploy-target" onClick={() => { setSelectedApp(null); setDialogOpen(true); }}>
+                                    <Icon path={mdiServer} />
+                                    <span>{deployServer ? serverLabel(deployServer) : "Set Nexploy server"}</span>
+                                </button>
+                                <span className="app-count">{filteredAndSortedApps.length} {filteredAndSortedApps.length === 1 ? 'app' : 'apps'}</span>
+                            </div>
                         </div>
                         <div className="store-filters">
                             <div className="search-wrapper"><IconInput type="text" placeholder="Search apps..." icon={mdiMagnify} value={searchQuery} setValue={setSearchQuery} /></div>
@@ -306,7 +319,9 @@ const App = () => {
                         <div className="store-results">
                             {loadingApps ? <div className="loading-container"><Loader size="medium" /></div> : filteredAndSortedApps.length > 0 ? (
                                 <div className="apps-grid">
-                                    {filteredAndSortedApps.map((app) => <AppCard key={app.id} app={app} baseUrl={baseUrl} onClick={() => { setSelectedApp(app); setDialogOpen(true); }} />)}
+                                    {filteredAndSortedApps.map((app) => (
+                                        <AppCard key={app.id} app={app} baseUrl={baseUrl} deployUrl={buildNexployDeployUrl(deployServer, sourceName, app.slug || app.id)} onDeploy={() => handleDeploy(app)} />
+                                    ))}
                                 </div>
                             ) : <div className="no-results"><Icon path={mdiMagnify} /><h3>No apps found</h3><p>Try adjusting your search</p></div>}
                         </div>
@@ -352,7 +367,7 @@ const App = () => {
                     </div>
                 </footer>
             </main>
-            <ServerUrlDialog open={dialogOpen} onClose={() => { setDialogOpen(false); setSelectedApp(null); }} app={selectedApp} sourceName={sourceName} />
+            {dialogOpen && <ServerUrlDialog open onClose={() => { setDialogOpen(false); setSelectedApp(null); }} app={selectedApp} sourceName={sourceName} onSaved={setDeployServer} />}
         </div>
     );
 };

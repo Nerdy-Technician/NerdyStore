@@ -125,8 +125,21 @@ for (const letter of readdirSync(APPS_DIR)) {
     }
 }
 
+// Curated stacks (nexploy/stacks.json): tag member apps with `stacks: [{ slug, badge, role }]`
+// and publish the stack definitions (only ids present in the catalog) in categories.json.
+const stacksPath = join(APPS_DIR, "stacks.json");
+const stackDefs = existsSync(stacksPath) ? JSON.parse(readFileSync(stacksPath, "utf8")).stacks || [] : [];
+const appsById = Object.fromEntries(Object.values(cats).flat().map(a => [a.id, a]));
+const stacks = stackDefs.map(s => {
+    const roles = (s.roles || []).map(r => ({ name: r.name, apps: (r.apps || []).filter(id => appsById[id]) })).filter(r => r.apps.length);
+    roles.forEach(r => r.apps.forEach(id => (appsById[id].stacks ??= []).push({ slug: s.slug, badge: s.badge || s.name, role: r.name })));
+    const count = roles.reduce((n, r) => n + r.apps.length, 0);
+    console.log(`  stack ${s.slug}: ${count} apps`);
+    return { slug: s.slug, name: s.name, badge: s.badge || s.name, description: s.description || "", ...(s.url ? { url: s.url } : {}), roles, count };
+}).filter(s => s.count);
+
 const categories = Object.keys(cats).sort().map(n => ({ name: n, count: cats[n].length, slug: slugify(n) }));
-writeFileSync(join(DIST_DIR, "categories.json"), JSON.stringify({ generatedAt: new Date().toISOString(), categories }, null, 2));
+writeFileSync(join(DIST_DIR, "categories.json"), JSON.stringify({ generatedAt: new Date().toISOString(), categories, stacks }, null, 2));
 Object.entries(cats).forEach(([n, apps]) => writeFileSync(join(DIST_DIR, "categories", `${slugify(n)}.json`), JSON.stringify({ name: n, apps: apps.sort((a, b) => a.name.localeCompare(b.name)) }, null, 2)));
 writeFileSync(join(DIST_DIR, "NPINDEX"), `#!NPINDEX1 ${sourceName}\n\n` + index.join("\n") + "\n");
 

@@ -1,0 +1,23 @@
+{
+  "$comment": "Curated app stacks. Each app id listed here gets a `stacks` badge on its store card and appears in the stack view. Add more app ids (or new stacks) to tag them; ids not present in the catalog are ignored at build time.",
+  "stacks": [
+    {
+      "slug": "jellyglance",
+      "name": "JellyGlance",
+      "badge": "Pairs with JellyGlance",
+      "url": "https://github.com/JellyGlance/Server",
+      "description": "The media stack JellyGlance plugs into: stats, requests, quality, subtitles and alerts across your Jellyfin server and *arr apps.",
+      "roles": [
+        { "name": "Media server", "apps": ["jellyfin"] },
+        { "name": "Library automation", "apps": ["sonarr", "radarr", "lidarr"] },
+        { "name": "Indexers", "apps": ["prowlarr", "jackett"] },
+        { "name": "Download clients", "apps": ["qbittorrent", "deluge", "transmission"] },
+        { "name": "Subtitles", "apps": ["bazarr"] },
+        { "name": "Requests", "apps": ["jellyseerr", "overseerr", "seerr", "ombi", "petio"] },
+        { "name": "Cleanup", "apps": ["cleanuparr", "reclaimerr"] },
+        { "name": "Alerts & webhooks", "apps": ["ntfy", "gotify", "home-assistant"] },
+        { "name": "Dashboard", "apps": ["jellyglance"] }
+      ]
+    }
+  ]
+}

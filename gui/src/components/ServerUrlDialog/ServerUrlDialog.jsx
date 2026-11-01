@@ -43,7 +43,7 @@ export const ServerUrlDialog = ({ open, onClose, app, sourceName, onSaved }) => 
                 <p className="dialog-description">
                     {app
                         ? "Opens this listing in Nexploy. That path is the store link Nexploy uses to start install."
-                        : "Listings deploy to /apps/source/slug on this server."}
+                        : "Listings deploy to /apps/<source>/<slug> on this server."}
                 </p>
                 <div className="input-wrapper" onKeyDown={(e) => {
                     if (e.key !== "Enter" || !canSubmit) return;
@@ -64,7 +64,7 @@ export const ServerUrlDialog = ({ open, onClose, app, sourceName, onSaved }) => 
                 <div className="dialog-actions">
                     <Button text="Cancel" type="secondary" onClick={onClose} />
                     {deployUrl ? (
-                        <a className="btn" href={deployUrl} target="_blank" rel="noopener noreferrer" onClick={() => { if (remember()) setTimeout(onClose, 0); }}>
+                        <a className="btn" href={deployUrl} target="_blank" rel="noopener noreferrer" aria-label={`Deploy ${app.name}`} onClick={() => { if (remember()) setTimeout(onClose, 0); }}>
                             <Icon path={mdiOpenInNew} /><span>Deploy</span>
                         </a>
                     ) : (

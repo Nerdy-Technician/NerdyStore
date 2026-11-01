@@ -14,7 +14,7 @@ export const AppCard = ({ app, baseUrl, deployUrl, onDeploy }) => (
         <div className="app-content"><p className="app-description">{app.description || "No description available"}</p></div>
         <div className="card-actions">
             {deployUrl ? (
-                <a className="deploy-btn" href={deployUrl} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                <a className="deploy-btn" href={deployUrl} target="_blank" rel="noopener noreferrer" aria-label={`Deploy ${app.name}`} onClick={(e) => e.stopPropagation()}>
                     <Icon path={mdiOpenInNew} /><span>Deploy</span>
                 </a>
             ) : (

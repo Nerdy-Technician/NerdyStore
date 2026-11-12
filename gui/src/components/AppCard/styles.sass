@@ -112,6 +112,7 @@
     margin-top: 0.85rem
     display: flex
     justify-content: flex-end
+    gap: 0.5rem
 
   .deploy-btn
     display: inline-flex
@@ -134,3 +135,23 @@
 
     &:hover
       filter: brightness(1.15)
+
+  .compose-btn
+    display: inline-flex
+    align-items: center
+    gap: 0.35rem
+    background: transparent
+    border: 1px solid colors.$dark-gray
+    color: colors.$subtext
+    border-radius: 0.4rem
+    padding: 0.35rem 0.7rem
+    font-size: 0.8rem
+    cursor: pointer
+
+    svg
+      width: 1rem
+      height: 1rem
+
+    &:hover
+      color: colors.$white
+      border-color: colors.$primary

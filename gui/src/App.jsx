@@ -2,7 +2,7 @@ import "./styles/main.sass";
 import "./App.sass";
 import { useEffect, useState, useCallback, useMemo } from "react";
 import { Icon } from "@mdi/react";
-import { mdiPackageVariant, mdiAdvertisements, mdiWeb, mdiMagnify, mdiScriptText, mdiLan, mdiPlayCircle, mdiCloud, mdiCodeBraces, mdiWrench, mdiApps, mdiDotsHorizontal, mdiChevronDown, mdiGamepadVariant, mdiConsoleLine, mdiPalette, mdiDocker, mdiStore, mdiHomeAutomation, mdiChartLine, mdiViewDashboard, mdiClipboardList, mdiBriefcase, mdiPencilRuler, mdiClose, mdiServer } from "@mdi/js";
+import { mdiPackageVariant, mdiAdvertisements, mdiWeb, mdiMagnify, mdiScriptText, mdiLan, mdiPlayCircle, mdiCloud, mdiCodeBraces, mdiWrench, mdiApps, mdiDotsHorizontal, mdiChevronDown, mdiGamepadVariant, mdiConsoleLine, mdiPalette, mdiDocker, mdiStore, mdiHomeAutomation, mdiChartLine, mdiViewDashboard, mdiClipboardList, mdiBriefcase, mdiPencilRuler, mdiClose, mdiServer, mdiLinkVariant } from "@mdi/js";
 import IconInput from "./components/IconInput";
 import SelectBox from "./components/SelectBox";
 import AppCard from "./components/AppCard";
@@ -16,6 +16,7 @@ import ThemeCreator from "./components/ThemeCreator";
 import NotFound from "./components/NotFound";
 import { matchesQuery, appSearchFields, nextermSearchFields } from "./utils/search";
 import { ALL_PLATFORMS, matchesPlatform, platformOptions } from "./utils/platforms";
+import { appInStack, groupByStackRole } from "./utils/stacks";
 
 const CATEGORY_ICONS = { scripts: mdiScriptText, networking: mdiLan, "media-servers": mdiPlayCircle, cloud: mdiCloud, development: mdiCodeBraces, utilities: mdiWrench, gaming: mdiGamepadVariant, all: mdiApps, other: mdiDotsHorizontal, "container-management": mdiDocker, "web-tools": mdiWeb, "ad-blockers": mdiAdvertisements, "home-automation": mdiHomeAutomation, monitoring: mdiChartLine, dashboard: mdiViewDashboard, inventory: mdiClipboardList, productivity: mdiBriefcase };
 const NEXTERM_ICONS = { all: mdiApps, scripts: mdiScriptText, snippets: mdiCodeBraces, themes: mdiPalette };
@@ -77,6 +78,8 @@ const App = () => {
     const [nextermSearch, setNextermSearch] = useState("");
     const [nextermSubcat, setNextermSubcat] = useState(null);
     const [appPlatform, setAppPlatform] = useState(ALL_PLATFORMS);
+    const [stacks, setStacks] = useState([]);
+    const [activeStack, setActiveStack] = useState(() => new URLSearchParams(window.location.search).get("stack"));
     const [nextermPlatform, setNextermPlatform] = useState(ALL_PLATFORMS);
 
     const baseUrl = "/";
@@ -86,6 +89,7 @@ const App = () => {
         loadStoreVersion(baseUrl).then((data) => setStoreVersion(data?.version || null)).catch(() => {});
         loadCategoriesIndex(baseUrl).then((data) => {
             setCategories(data.categories);
+            setStacks(data.stacks || []);
             setGeneratedAt(data.generatedAt);
             const { section, sub } = parsePath();
             const match = section === "nexploy" && sub && data.categories.find(c => c.slug === sub);
@@ -159,7 +163,15 @@ const App = () => {
     const nexployCategories = useMemo(() => [{ ...ALL_APPS, count: allApps.length }, ...categories], [categories, allApps.length]);
 
     const appPlatforms = useMemo(() => platformOptions(allApps), [allApps]);
-    const searchedApps = useMemo(() => allApps.filter((app) => matchesPlatform(app, appPlatform) && matchesQuery(appSearchFields(app), searchQuery)), [allApps, searchQuery, appPlatform]);
+    const currentStack = useMemo(() => stacks.find((s) => s.slug === activeStack) || null, [stacks, activeStack]);
+    const searchedApps = useMemo(() => allApps.filter((app) => matchesPlatform(app, appPlatform) && (!currentStack || appInStack(app, currentStack.slug)) && matchesQuery(appSearchFields(app), searchQuery)), [allApps, searchQuery, appPlatform, currentStack]);
+    const toggleStack = (slug) => {
+        const next = activeStack === slug ? null : slug;
+        setActiveStack(next);
+        const url = new URL(window.location.href);
+        if (next) url.searchParams.set("stack", next); else url.searchParams.delete("stack");
+        window.history.replaceState(null, "", url.pathname + url.search);
+    };
 
     const appMatchCounts = useMemo(() => {
         const counts = { [ALL_APPS.slug]: searchedApps.length };
@@ -174,8 +186,9 @@ const App = () => {
         return result;
     }, [searchedApps, selectedCategory, sortBy]);
 
-    const nexployFiltered = Boolean(searchQuery.trim()) || appPlatform !== ALL_PLATFORMS || (selectedCategory && selectedCategory.slug !== ALL_APPS.slug);
-    const clearNexployFilters = () => { setSearchQuery(""); setAppPlatform(ALL_PLATFORMS); setSelectedCategory(ALL_APPS); navigate("nexploy"); };
+    const stackGroups = useMemo(() => groupByStackRole(currentStack, filteredAndSortedApps), [currentStack, filteredAndSortedApps]);
+    const nexployFiltered = Boolean(searchQuery.trim()) || appPlatform !== ALL_PLATFORMS || Boolean(currentStack) || (selectedCategory && selectedCategory.slug !== ALL_APPS.slug);
+    const clearNexployFilters = () => { if (activeStack) toggleStack(activeStack); setSearchQuery(""); setAppPlatform(ALL_PLATFORMS); setSelectedCategory(ALL_APPS); navigate("nexploy"); };
 
     const allNextermItems = useMemo(() => nextermData ? Object.values(nextermData.items).flatMap((group) => group.items) : [], [nextermData]);
 
@@ -378,8 +391,33 @@ const App = () => {
                                 ))}
                             </div>
                         )}
+                        {stacks.length > 0 && (
+                            <div className="subcat-filters stack-filters" role="group" aria-label="Filter apps by stack">
+                                <span className="filter-label">Stack</span>
+                                {stacks.map((s) => (
+                                    <button key={s.slug} className={`subcat-pill stack-pill${activeStack === s.slug ? ' active' : ''}`} aria-pressed={activeStack === s.slug} onClick={() => toggleStack(s.slug)}>
+                                        <Icon path={mdiLinkVariant} size={0.6} /> {s.badge} ({s.count})
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+                        {currentStack && !loadingApps && (
+                            <div className="stack-intro">
+                                <h3>{currentStack.name} stack</h3>
+                                <p>{currentStack.description}{currentStack.url && <> <a href={currentStack.url} target="_blank" rel="noopener noreferrer">Learn more</a></>}</p>
+                            </div>
+                        )}
                         <div className="store-results">
-                            {loadingApps ? <div className="loading-container"><Loader size="medium" /></div> : filteredAndSortedApps.length > 0 ? (
+                            {currentStack && !loadingApps && stackGroups.length > 0 ? stackGroups.map((group) => (
+                                <section key={group.name} className="stack-group">
+                                    <h4 className="stack-group-title">{group.name} <span>{group.apps.length}</span></h4>
+                                    <div className="apps-grid">
+                                        {group.apps.map((app) => (
+                                            <AppCard key={app.id} app={app} baseUrl={baseUrl} deployUrl={buildNexployDeployUrl(deployServer, sourceName, app.slug || app.id)} onDeploy={() => handleDeploy(app)} />
+                                        ))}
+                                    </div>
+                                </section>
+                            )) : loadingApps ? <div className="loading-container"><Loader size="medium" /></div> : filteredAndSortedApps.length > 0 ? (
                                 <div className="apps-grid">
                                     {filteredAndSortedApps.map((app) => (
                                         <AppCard key={app.id} app={app} baseUrl={baseUrl} deployUrl={buildNexployDeployUrl(deployServer, sourceName, app.slug || app.id)} onDeploy={() => handleDeploy(app)} />

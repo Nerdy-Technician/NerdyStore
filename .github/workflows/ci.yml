@@ -37,7 +37,7 @@ jobs:
           cp nexploy/dist/nexterm.json gui/public/nexterm.json
           cp -r nexploy/dist/categories gui/public/categories
       - name: Test deploy deep links
-        run: node --test gui/src/utils/deployLink.test.js gui/src/utils/platforms.test.js
+        run: node --test gui/src/utils/deployLink.test.js gui/src/utils/platforms.test.js gui/src/utils/stacks.test.js
       - name: Install gui dependencies
         working-directory: gui
         run: npm ci

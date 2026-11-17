@@ -9,6 +9,7 @@ import AppCard from "./components/AppCard";
 import NextermCard from "./components/NextermCard";
 import Loader from "./components/Loader";
 import ServerUrlDialog from "./components/ServerUrlDialog";
+import ComposePreviewDialog from "./components/ComposePreviewDialog";
 import { loadCategoriesIndex, loadCategoryApps, loadNextermData, loadSourceName, loadStoreVersion } from "./utils/api";
 import { DEFAULT_SOURCE_NAME, buildNexployDeployUrl, readSavedServerUrl, serverLabel } from "./utils/deployLink";
 import HomePage from "./components/HomePage";
@@ -65,6 +66,7 @@ const App = () => {
     const [sortBy, setSortBy] = useState("name");
     const [selectedApp, setSelectedApp] = useState(null);
     const [dialogOpen, setDialogOpen] = useState(false);
+    const [previewApp, setPreviewApp] = useState(null);
     const [generatedAt, setGeneratedAt] = useState(null);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [sourceName, setSourceName] = useState(DEFAULT_SOURCE_NAME);
@@ -382,7 +384,7 @@ const App = () => {
                             {loadingApps ? <div className="loading-container"><Loader size="medium" /></div> : filteredAndSortedApps.length > 0 ? (
                                 <div className="apps-grid">
                                     {filteredAndSortedApps.map((app) => (
-                                        <AppCard key={app.id} app={app} baseUrl={baseUrl} deployUrl={buildNexployDeployUrl(deployServer, sourceName, app.slug || app.id)} onDeploy={() => handleDeploy(app)} />
+                                        <AppCard key={app.id} app={app} baseUrl={baseUrl} deployUrl={buildNexployDeployUrl(deployServer, sourceName, app.slug || app.id)} onDeploy={() => handleDeploy(app)} onPreview={() => setPreviewApp(app)} />
                                     ))}
                                 </div>
                             ) : <div className="no-results"><Icon path={mdiMagnify} /><h3>No apps found</h3><p>Try a different search or category</p>{nexployFiltered && <div className="subcat-filters"><button className="subcat-pill active" onClick={clearNexployFilters}>Clear filters</button></div>}</div>}
@@ -447,6 +449,7 @@ const App = () => {
                 </footer>
             </main>
             {dialogOpen && <ServerUrlDialog open onClose={() => { setDialogOpen(false); setSelectedApp(null); }} app={selectedApp} sourceName={sourceName} onSaved={setDeployServer} />}
+            {previewApp && <ComposePreviewDialog open app={previewApp} onClose={() => setPreviewApp(null)} />}
         </div>
     );
 };
